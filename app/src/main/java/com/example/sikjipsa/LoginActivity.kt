@@ -24,7 +24,7 @@ class LoginActivity : AppCompatActivity() {
     var googleSignInClient: GoogleSignInClient? = null
 //    구글 로그인 리퀘스트 코드
     var GOOGLE_LOGIN_CODE = 1004
-
+    var jeewon = 10
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
