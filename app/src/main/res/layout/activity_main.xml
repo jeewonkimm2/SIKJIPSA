@@ -31,12 +31,11 @@
     </LinearLayout>
 
     <FrameLayout
+        android:id="@+id/main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/main_content"
-        android:layout_below="@id/toolbar_division"
-        android:layout_above="@id/nav_division">
-    </FrameLayout>
+        android:layout_above="@id/nav_division"
+        android:layout_below="@id/toolbar_division"></FrameLayout>
 
     <LinearLayout
         android:id="@+id/nav_division"
