@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "157955960863",
+    "project_id": "sikjipsaapp",
+    "storage_bucket": "sikjipsaapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157955960863:android:e9b7628adc52e97cb6252a",
+        "android_client_info": {
+          "package_name": "com.example.sikjipsa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "157955960863-odev4ltqsgii5dcdllvb2bu2gumeu7pg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyjxBmJ0nwpZLZMOi4HhfISlZbddtodqU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "157955960863-odev4ltqsgii5dcdllvb2bu2gumeu7pg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
