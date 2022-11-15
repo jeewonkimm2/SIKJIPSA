@@ -2,23 +2,23 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#C89F9F">
+
 
     <TextView
         android:id="@+id/locationTxt"
         android:layout_width="163dp"
         android:layout_height="61dp"
+        android:layout_marginTop="4dp"
         android:gravity="center"
         android:text="LOCATION"
+
         android:textSize="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.049" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/temperatureTxt"
@@ -26,10 +26,125 @@
         android:layout_height="61dp"
         android:gravity="center"
         android:text="TEMPERATURE"
+
         android:textSize="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.14" />
+        app:layout_constraintTop_toBottomOf="@+id/locationTxt" />
+
+    <ScrollView
+        android:id="@+id/scrollSpace"
+        android:layout_width="409dp"
+        android:layout_height="448dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/temperatureTxt"
+
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/alarm1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:padding="25dp"
+                android:text="Alarm1"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/alarm2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:padding="25dp"
+                android:text="Alarm2"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/alarm3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:padding="25dp"
+                android:text="Alarm3"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/alarm4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:padding="25dp"
+                android:text="Alarm4"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/alarm5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:padding="25dp"
+                android:text="Alarm5"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/alarm6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:padding="25dp"
+                android:text="Alarm6"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/alarm7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:padding="25dp"
+                android:text="Alarm7"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/alarm8"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:padding="25dp"
+                android:text="Alarm8"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/alarm9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:padding="25dp"
+                android:text="Alarm9"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/alarm10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:padding="25dp"
+                android:text="Alarm10"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/alarm11"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:padding="25dp"
+                android:text="Alarm11"
+                android:textSize="20dp" />
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

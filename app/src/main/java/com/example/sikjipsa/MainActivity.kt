@@ -20,7 +20,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.sikjipsa.databinding.ActivityMainBinding
-import com.example.sikjipsa.databinding.FragmentGridBinding
+//import com.example.sikjipsa.databinding.FragmentGridBinding
 import com.example.sikjipsa.navigation.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
