@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "157955960863",
+    "firebase_url": "https://sikjipsaapp-default-rtdb.firebaseio.com",
     "project_id": "sikjipsaapp",
     "storage_bucket": "sikjipsaapp.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "157955960863-s9n08b5elsll3jr3h4e9crt90lsi54l6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sikjipsa",
+            "certificate_hash": "bc5e378a7cdefab449af1281f044a99cd111515a"
+          }
+        },
         {
           "client_id": "157955960863-odev4ltqsgii5dcdllvb2bu2gumeu7pg.apps.googleusercontent.com",
           "client_type": 3

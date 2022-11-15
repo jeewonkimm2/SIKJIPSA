@@ -14,21 +14,21 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_login.*
 
 
 class LoginActivity : AppCompatActivity() {
 
-//    lateinit var mAuth: FirebaseAuth
     lateinit var binding: ActivityLoginBinding
+//    DB객체
+    private lateinit var mDBRef: DatabaseReference
 
     private lateinit var auth: FirebaseAuth
     private var googleSignInClient: GoogleSignInClient? = null
     private var RC_SIGN_IN = 9001
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +38,12 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+//        인증 초기화
         auth = Firebase.auth
+
+//        DB 초기화
+        mDBRef = Firebase.database.reference
+
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
