@@ -24,7 +24,7 @@ class SearchActivity : AppCompatActivity() {
 //            startActivity(Intent(this, SearchImageActivity::class.java))
             val items = arrayOf("Camera", "Album")
             val builder = AlertDialog.Builder(this)
-                .setTitle("Select")
+                .setTitle("Import from")
                 .setItems(items){dialog,which->
                     when(items[which]){
                         "Camera" -> Log.d("ITM","Camera")

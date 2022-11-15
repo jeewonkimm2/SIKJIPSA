@@ -94,9 +94,9 @@ class LoginActivity : AppCompatActivity() {
                 firebaseAuthWithGoogle(accout)
                 val intent: Intent = Intent(this@LoginActivity, MainActivity::class.java)
                 startActivity(intent)
-                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Welcome!", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Check your information!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Something is wrong!", Toast.LENGTH_SHORT).show()
             }
         }
     }
