@@ -53,4 +53,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/sikjipsalogo" />
 
+    <ImageView
+        android:id="@+id/mainImg"
+        android:layout_width="50dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/keywordBtn"
+        app:srcCompat="@android:drawable/divider_horizontal_dim_dark" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
