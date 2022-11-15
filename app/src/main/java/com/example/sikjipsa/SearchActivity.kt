@@ -29,9 +29,9 @@ class SearchActivity : AppCompatActivity() {
                     when(items[which]){
                         "Camera" -> Log.d("ITM","Camera")
                         "Album" -> Log.d("ITM", "Album")
+//                        모델 넣고 결과값 추출해야함
                     }
                 }.show()
-
         }
 
         binding.keywordBtn.setOnClickListener {
