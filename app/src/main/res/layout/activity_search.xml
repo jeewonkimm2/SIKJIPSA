@@ -6,19 +6,7 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/image_load_btn3"
-        android:layout_width="211dp"
-        android:layout_height="61dp"
-        android:backgroundTint="#E1CD22"
-        android:text="Keyword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_load_btn"
-        app:layout_constraintVertical_bias="0.068" />
-
-    <Button
-        android:id="@+id/image_load_btn"
+        android:id="@+id/importBtn"
         android:layout_width="211dp"
         android:layout_height="61dp"
         android:backgroundTint="#E1CD22"
@@ -26,7 +14,43 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.101" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif"
+        android:text="Search"
+        android:textColor="@color/black"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/keywordBtn"
+        android:layout_width="211dp"
+        android:layout_height="61dp"
+        android:backgroundTint="#E1CD22"
+        android:text="Keyword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/importBtn"
+        app:layout_constraintVertical_bias="0.09" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="110dp"
+        android:layout_height="154dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.262" />
+        app:srcCompat="@drawable/sikjipsalogo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
