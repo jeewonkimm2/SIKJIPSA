@@ -16,6 +16,7 @@ import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.example.sikjipsa.databinding.ActivityMainBinding
 import com.example.sikjipsa.databinding.FragmentGridBinding
 import com.example.sikjipsa.navigation.*
@@ -59,12 +60,10 @@ class MainActivity : AppCompatActivity(){
                     return@setOnItemSelectedListener true
                 }
                 R.id.action_search -> {
-                    var gridFragment = GridFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.main_content,gridFragment).commit()
+                    startActivity(Intent(this,SearchActivity::class.java))
                     return@setOnItemSelectedListener true
                 }
                 R.id.action_add_photo -> {
-
                     if(ContextCompat.checkSelfPermission(this,android.Manifest.permission.READ_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED){
                         startActivity(Intent(this,AddPhotoActivity::class.java))
                     }
