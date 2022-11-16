@@ -30,10 +30,11 @@ import java.lang.Exception
 import java.net.URL
 import java.util.*
 import java.util.jar.Manifest
+
 //수오가 침
 //지원
 //후니
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
 
     val CITY: String = "seoul,kr"
     val API: String = "a5b5e79e80276333510e3446c4d3498b"
@@ -48,54 +49,67 @@ class MainActivity : AppCompatActivity(){
         //BottomNavigation
         initView()
         initBottomNavigation()
-        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),1)
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
+            1
+        )
     }
 
 
     //초기 화면 action_home
-    private fun initView(){
-        supportFragmentManager.beginTransaction().add(R.id.main_content,DetailViewFragment()).commit()
+    private fun initView() {
+        supportFragmentManager.beginTransaction().add(R.id.main_content, DetailViewFragment())
+            .commit()
 
-    }    private fun initBottomNavigation(){
-        binding.bottomNavigation.setOnItemSelectedListener { p0->
-            when(p0.itemId){
-                R.id.action_home->{
+    }
+
+    private fun initBottomNavigation() {
+        binding.bottomNavigation.setOnItemSelectedListener { p0 ->
+            when (p0.itemId) {
+                R.id.action_home -> {
                     var detailViewFragment = DetailViewFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.main_content,detailViewFragment).commit()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.main_content, detailViewFragment).commit()
                     return@setOnItemSelectedListener true
                 }
                 R.id.action_search -> {
-                    startActivity(Intent(this,SearchActivity::class.java))
+                    startActivity(Intent(this, SearchActivity::class.java))
                     return@setOnItemSelectedListener true
                 }
                 R.id.action_add_photo -> {
-                    if(ContextCompat.checkSelfPermission(this,android.Manifest.permission.READ_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED){
-                        startActivity(Intent(this,AddPhotoActivity::class.java))
+                    if (ContextCompat.checkSelfPermission(
+                            this,
+                            android.Manifest.permission.READ_EXTERNAL_STORAGE
+                        ) == PackageManager.PERMISSION_GRANTED
+                    ) {
+                        startActivity(Intent(this, AddPhotoActivity::class.java))
                     }
                     return@setOnItemSelectedListener true
                 }
                 R.id.action_favorite_alarm -> {
                     var alarmFragment = AlarmFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.main_content,alarmFragment).commit()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.main_content, alarmFragment).commit()
                     weatherTask().execute()
                     return@setOnItemSelectedListener true
                 }
                 R.id.action_account -> {
                     var userFragment = UserFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.main_content,userFragment).commit()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.main_content, userFragment).commit()
                     return@setOnItemSelectedListener true
                 }
 
-                else->false
+                else -> false
             }
         }
     }
 
 
-
     lateinit var binding: ActivityMainBinding
 
-    inner class weatherTask(): AsyncTask<String, Void, String>() {
+    inner class weatherTask() : AsyncTask<String, Void, String>() {
         override fun onPreExecute() {
             super.onPreExecute()
 
@@ -117,41 +131,40 @@ class MainActivity : AppCompatActivity(){
         override fun onPostExecute(result: String?) {
 
             super.onPostExecute(result)
-            try{
+            try {
                 val jsonObj = JSONObject(result)
-                val main  = jsonObj.getJSONObject("main")
+                val main = jsonObj.getJSONObject("main")
                 val sys = jsonObj.getJSONObject("sys")
                 val wind = jsonObj.getJSONObject("wind")
                 val weather = jsonObj.getJSONArray("weather").getJSONObject(0)
-                val updatedAt:Long = jsonObj.getLong("dt")
-                val updateAtText = "Updated at: "+ java.text.SimpleDateFormat(
+                val updatedAt: Long = jsonObj.getLong("dt")
+                val updateAtText = "Updated at: " + java.text.SimpleDateFormat(
                     "dd/mm/yyyy hh:mm a",
                     Locale.ENGLISH
                 ).format(
                     Date(updatedAt * 1000)
                 )
-                val temp = main.getString("temp")+"C"
-                val tempMin = "Min Temp: "+main.getString("temp_min")+"C"
-                val tempMax = "Max Temp: "+main.getString("temp_max")+"C"
+                val temp = main.getString("temp") + "C"
+                val tempMin = "Min Temp: " + main.getString("temp_min") + "C"
+                val tempMax = "Max Temp: " + main.getString("temp_max") + "C"
                 val pressure = main.getString("pressure")
                 val humidity = main.getString("humidity")
-                val sunrise:Long = sys.getLong("sunrise")
-                val sunset:Long = sys.getLong("sunset")
+                val sunrise: Long = sys.getLong("sunrise")
+                val sunset: Long = sys.getLong("sunset")
                 val windSpeed = wind.getString("speed")
                 val weatherDescription = weather.getString("description")
-                val address = jsonObj.getString("name")+", "+sys.getString("country")
+                val address = jsonObj.getString("name") + ", " + sys.getString("country")
 
 
 
 
                 findViewById<TextView>(R.id.locationTxt).text = address
                 findViewById<TextView>(R.id.temperatureTxt).text = temp
-            }catch (e: Exception){
+            } catch (e: Exception) {
 
             }
         }
     }
-
 
 
 }
