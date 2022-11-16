@@ -25,6 +25,7 @@ import com.example.sikjipsa.navigation.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
+import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 import java.lang.Exception
 import java.net.URL
@@ -54,6 +55,9 @@ class MainActivity : AppCompatActivity() {
             arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
             1
         )
+
+        //set default screen
+        bottom_navigation.selectedItemId = R.id.action_home
     }
 
 
