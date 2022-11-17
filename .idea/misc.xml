@@ -24,9 +24,13 @@
         <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1645" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1645" />
         <entry key="app/src/main/res/layout/activity_add_photo.xml" value="0.3880208333333333" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.35505981445312507" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.443011474609375" />
+        <entry key="app/src/main/res/layout/activity_search.xml" value="0.2781021118164062" />
+        <entry key="app/src/main/res/layout/activity_search_image.xml" value="0.34791666666666665" />
+        <entry key="app/src/main/res/layout/activity_search_keyword.xml" value="0.3880208333333333" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.1916708374023437" />
+        <entry key="app/src/main/res/layout/dialog_select_image.xml" value="0.28033447265625" />
         <entry key="app/src/main/res/layout/fragment_alarm.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/fragment_grid.xml" value="0.2078125" />

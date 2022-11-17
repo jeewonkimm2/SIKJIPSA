@@ -6,11 +6,11 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/importBtn"
+        android:id="@+id/main_btn"
         android:layout_width="211dp"
         android:layout_height="61dp"
         android:backgroundTint="#E1CD22"
-        android:text="Camera / Album"
+        android:text="Image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,14 +23,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="sans-serif"
-        android:text="Search"
+        android:text="@string/search"
         android:textColor="@color/black"
         android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/keywordBtn"
@@ -41,26 +40,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/importBtn"
+        app:layout_constraintTop_toBottomOf="@+id/main_btn"
         app:layout_constraintVertical_bias="0.09" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="110dp"
-        android:layout_height="154dp"
+        android:layout_width="214dp"
+        android:layout_height="163dp"
+        android:layout_margin="8dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/sikjipsalogo" />
+        app:layout_constraintTop_toBottomOf="@+id/keywordBtn" />
 
-    <ImageView
-        android:id="@+id/mainImg"
-        android:layout_width="50dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/keywordBtn"
-        app:srcCompat="@android:drawable/divider_horizontal_dim_dark" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

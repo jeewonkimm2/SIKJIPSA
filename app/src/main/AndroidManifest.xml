@@ -18,6 +18,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SIKJIPSA"
         tools:targetApi="31">
+
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.blacklog.takepicture.fileprovider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
+
         <activity
             android:name=".SearchKeywordActivity"
             android:exported="false" />

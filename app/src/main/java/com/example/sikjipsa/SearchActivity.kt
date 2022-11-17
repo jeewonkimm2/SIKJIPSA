@@ -1,117 +1,105 @@
 package com.example.sikjipsa
 
 import android.Manifest
-import android.content.ContentValues
+import android.app.Activity
+import android.content.ContentResolver
 import android.content.Intent
-import android.icu.text.SimpleDateFormat
+import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.ImageDecoder
+import android.graphics.drawable.Drawable
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
-import com.example.sikjipsa.databinding.ActivityLoginBinding
-import com.example.sikjipsa.databinding.ActivityMainBinding
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.toBitmap
 import com.example.sikjipsa.databinding.ActivitySearchBinding
-import com.example.sikjipsa.navigation.AddPhotoActivity
+import com.google.firebase.ml.modeldownloader.CustomModel
+import com.google.firebase.ml.modeldownloader.CustomModelDownloadConditions
+import com.google.firebase.ml.modeldownloader.DownloadType
+import com.google.firebase.ml.modeldownloader.FirebaseModelDownloader
+import kotlinx.android.synthetic.main.activity_add_photo.*
+import org.tensorflow.lite.Interpreter
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStreamReader
+import java.nio.ByteBuffer
+import java.nio.ByteOrder
 import java.util.*
 
 class SearchActivity : AppCompatActivity() {
+    var PICK_IMAGE_FROM_ALBUM = 0
+    var photoURI: Uri? = null
 
     //    사진부분
     private lateinit var binding: ActivitySearchBinding
 
-    //    파일 불러오기
-    private val getContentImage =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            uri.let {
-                binding.mainImg.setImageURI(uri)
-            }
-        }
+    val PERMISSIONS = arrayOf(
+        Manifest.permission.CAMERA,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE
+    )
 
-    //    카메라 실행 후
-    var pictureUri: Uri? = null
-    private val getTakePicture = registerForActivityResult(ActivityResultContracts.TakePicture()) {
-        if (it) {
-            pictureUri.let { binding.mainImg.setImageURI(pictureUri) }
-        }
-    }
+    val PERMISSIONS_REQUEST = 100
 
-    //    카메라 실행 후 결과 비트맵 이미지 얻기
-    private val getTakePicturePreview =
-        registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmap ->
-            bitmap.let {
-                binding.mainImg.setImageBitmap(bitmap)
-            }
-        }
-            val permissionList = arrayOf(
-                Manifest.permission.CAMERA,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            )
 
-            val requestMultiplePermission =
-                registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { results ->
-                    results.forEach {
-                        if (!it.value) {
-                            Toast.makeText(applicationContext, "권한 허용 필요", Toast.LENGTH_SHORT)
-                                .show()
-                            finish()
-                        }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_search)
+
+        binding = ActivitySearchBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.mainBtn.setOnClickListener {
+            var photoPickerIntent = Intent(Intent.ACTION_PICK)
+            photoPickerIntent.type = "image/*"
+            startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
+
+            fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+                super.onActivityResult(requestCode, resultCode, data)
+                if (requestCode == PICK_IMAGE_FROM_ALBUM) {
+                    if (resultCode == Activity.RESULT_OK) {
+                        photoURI = data?.data
+                        addphoto_image.setImageURI(photoURI)
+                    } else {
+                        finish()
                     }
                 }
-//여기까지
-
-            override fun onCreate(savedInstanceState: Bundle?) {
-                super.onCreate(savedInstanceState)
-                setContentView(R.layout.activity_search)
-
-                val binding = ActivitySearchBinding.inflate(layoutInflater)
-                setContentView(binding.root)
+            }
+        }
 
 
-//        사진부분
-                requestMultiplePermission.launch(permissionList)
+        var interpreter:Interpreter
+
+//        모델 다운, 인터프리터 초기화
+        val conditions = CustomModelDownloadConditions.Builder()
+            .requireWifi()  // Also possible: .requireCharging() and .requireDeviceIdle()
+            .build()
+        FirebaseModelDownloader.getInstance()
+            .getModel("flowerClassifier", DownloadType.LOCAL_MODEL_UPDATE_IN_BACKGROUND,
+                conditions)
+            .addOnSuccessListener { model: CustomModel? ->
+                // Download complete. Depending on your app, you could enable the ML
+                // feature, or switch from the local model to the remote model, etc.
+
+                // The CustomModel object contains the local path of the model file,
+                // which you can use to instantiate a TensorFlow Lite interpreter.
+                val modelFile = model?.file
+                if (modelFile != null) {
+
+                    Log.d("tflite","모델 import성공")
+
+//                    interpreter = Interpreter(modelFile)
+//                    val drawable = getResources().getDrawable(R.drawable.sunflower)
+//                    val bitmap = Bitmap.createScaledBitmap(drawable.toBitmap(), 224, 224, true)
 
 
-
-
-                binding.importBtn.setOnClickListener {
-//            startActivity(Intent(this, SearchImageActivity::class.java))
-                    val items = arrayOf("Camera", "Album")
-                    val builder = AlertDialog.Builder(this)
-                        .setTitle("Import from")
-                        .setItems(items) { dialog, which ->
-                            when (items[which]) {
-                                "Camera" ->
-                                    getTakePicture.launch(createImageFile())
-                                "Album" ->
-                                    getContentImage.launch("album/*")
-//                        모델 넣고 결과값 추출해야함
-                            }
-                        }.show()
                 }
-
-                //카메라 Bitmap얻음
-//                val bitmap = getTakePicturePreview.launch(null)
-//                Log.d("bitmap","$bitmap")
-
-
-                binding.keywordBtn.setOnClickListener {
-                    startActivity(Intent(this, SearchKeywordActivity::class.java))
-                }
-
             }
 
-    private fun createImageFile(): Uri? {
-        val now = SimpleDateFormat("yyMMdd_HHmmss").format(Date())
-        val content = ContentValues().apply {
-            put(MediaStore.Images.Media.DISPLAY_NAME, "img_$now.jpg")
-            put(MediaStore.Images.Media.MIME_TYPE, "image/jpg")
-        }
-        return contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, content)
-    }
-        }
 
+
+
+    }
+}
