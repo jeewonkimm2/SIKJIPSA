@@ -43,7 +43,6 @@ class SearchActivity : AppCompatActivity() {
 
     val PERMISSIONS_REQUEST = 100
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
@@ -70,7 +69,7 @@ class SearchActivity : AppCompatActivity() {
         }
 
 
-        var interpreter:Interpreter
+        var interpreter:Interpreter?=null
 
 //        모델 다운, 인터프리터 초기화
         val conditions = CustomModelDownloadConditions.Builder()
@@ -80,24 +79,60 @@ class SearchActivity : AppCompatActivity() {
             .getModel("flowerClassifier", DownloadType.LOCAL_MODEL_UPDATE_IN_BACKGROUND,
                 conditions)
             .addOnSuccessListener { model: CustomModel? ->
-                // Download complete. Depending on your app, you could enable the ML
-                // feature, or switch from the local model to the remote model, etc.
-
-                // The CustomModel object contains the local path of the model file,
-                // which you can use to instantiate a TensorFlow Lite interpreter.
                 val modelFile = model?.file
                 if (modelFile != null) {
 
-                    Log.d("tflite","모델 import성공")
+                    Log.d("tflite성공","모델 import성공")
 
-//                    interpreter = Interpreter(modelFile)
-//                    val drawable = getResources().getDrawable(R.drawable.sunflower)
-//                    val bitmap = Bitmap.createScaledBitmap(drawable.toBitmap(), 224, 224, true)
-
-
+                    interpreter = Interpreter(modelFile)
                 }
             }
+        val drawable = getResources().getDrawable(R.drawable.sunflower)
+        val bitmap = Bitmap.createScaledBitmap(drawable.toBitmap(), 224, 224, true)
+        val input = ByteBuffer.allocateDirect(224*224*3*4).order(ByteOrder.nativeOrder())
+        for (y in 0 until 224) {
+            for (x in 0 until 224) {
+                val px = bitmap.getPixel(x, y)
 
+                // Get channel values from the pixel value.
+                val r = Color.red(px)
+                val g = Color.green(px)
+                val b = Color.blue(px)
+
+                // Normalize channel values to [-1.0, 1.0]. This requirement depends on the model.
+                // For example, some models might require values to be normalized to the range
+                // [0.0, 1.0] instead.
+                val rf = (r - 127) / 255f
+                val gf = (g - 127) / 255f
+                val bf = (b - 127) / 255f
+
+                input.putFloat(rf)
+                input.putFloat(gf)
+                input.putFloat(bf)
+            }
+        }
+
+        val bufferSize = 1000 * java.lang.Float.SIZE / java.lang.Byte.SIZE
+        val modelOutput = ByteBuffer.allocateDirect(bufferSize).order(ByteOrder.nativeOrder())
+        interpreter?.run(input, modelOutput)
+
+        modelOutput.rewind()
+        val probabilities = modelOutput.asFloatBuffer()
+        Log.d("tflite성공인가","${probabilities.get()}")
+        try {
+//            라벨 읽기
+//            reader.readLine() : 라벨읽음
+            val reader = BufferedReader(
+                InputStreamReader(assets.open("labels.txt")))
+            Log.d("tflite성공인가","${reader.readLine()}")
+//            for (i in probabilities.capacity()) {
+//                val label: String = reader.readLine()
+//                val probability = probabilities.get(i)
+//                println("$label: $probability")
+//            }
+        } catch (e: IOException) {
+            // File not found?
+        }
 
 
 
