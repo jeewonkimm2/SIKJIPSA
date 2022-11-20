@@ -102,13 +102,13 @@ class SearchActivity : AppCompatActivity() {
                 // Normalize channel values to [-1.0, 1.0]. This requirement depends on the model.
                 // For example, some models might require values to be normalized to the range
                 // [0.0, 1.0] instead.
-                val rf = (r - 127) / 255f
-                val gf = (g - 127) / 255f
-                val bf = (b - 127) / 255f
+                val rf = (r - 127) / 255
+                val gf = (g - 127) / 255
+                val bf = (b - 127) / 255
 
-                input.putFloat(rf)
-                input.putFloat(gf)
-                input.putFloat(bf)
+                input.putInt(rf)
+                input.putInt(gf)
+                input.putInt(bf)
             }
         }
 
@@ -118,13 +118,34 @@ class SearchActivity : AppCompatActivity() {
 
         modelOutput.rewind()
         val probabilities = modelOutput.asFloatBuffer()
-        Log.d("tflite성공인가","${probabilities.get()}")
+        Log.d("tflite성공인가","${probabilities.get(0)}")
+        Log.d("tflite성공인가","${probabilities.get(1)}")
+        Log.d("tflite성공인가","${probabilities.get(2)}")
+        Log.d("tflite성공인가","${probabilities.get(3)}")
+        Log.d("tflite성공인가","${probabilities.get(4)}")
+        Log.d("tflite성공인가","${probabilities.get(5)}")
+        Log.d("tflite성공인가","${probabilities.get(6)}")
+        Log.d("tflite성공인가","${probabilities.get(7)}")
+        Log.d("tflite성공인가","${probabilities.get(8)}")
+        Log.d("tflite성공인가","${probabilities.get(9)}")
+        Log.d("tflite성공인가","${probabilities.get(10)}")
+        Log.d("tflite성공인가","${probabilities.get(11)}")
+        Log.d("tflite성공인가","${probabilities.get(12)}")
+        Log.d("tflite성공인가","${probabilities.get(13)}")
+        Log.d("tflite성공인가","${probabilities.get(14)}")
+        Log.d("tflite성공인가","${probabilities.get(15)}")
+        Log.d("tflite성공인가","${probabilities.get(16)}")
+        Log.d("tflite성공인가","${probabilities.get(17)}")
+        Log.d("tflite성공인가","${probabilities.get(18)}")
+
+
         try {
 //            라벨 읽기
 //            reader.readLine() : 라벨읽음
             val reader = BufferedReader(
                 InputStreamReader(assets.open("labels.txt")))
-            Log.d("tflite성공인가","${reader.readLine()}")
+//            Log.d("tflite성공인가","${reader.readLine()}")
+//            Log.d("tflite성공인가","${probabilities.capacity()}")
 //            for (i in probabilities.capacity()) {
 //                val label: String = reader.readLine()
 //                val probability = probabilities.get(i)
