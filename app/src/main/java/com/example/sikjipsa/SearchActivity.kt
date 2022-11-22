@@ -78,63 +78,120 @@ class SearchActivity : AppCompatActivity() {
 //        1 output(s):
 //        [ 1 18] <class 'numpy.uint8'>
 
-        var interpreter:Interpreter?=null
+//        var interpreter:Interpreter?=null
+//
+////        모델 다운, 인터프리터 초기화
+//        val conditions = CustomModelDownloadConditions.Builder()
+//            .requireWifi()  // Also possible: .requireCharging() and .requireDeviceIdle()
+//            .build()
+//        FirebaseModelDownloader.getInstance()
+//            .getModel("flowerClassifier", DownloadType.LOCAL_MODEL_UPDATE_IN_BACKGROUND,
+//                conditions)
+//            .addOnSuccessListener { model: CustomModel? ->
+//                val modelFile = model?.file
+//                if (modelFile != null) {
+//                    Log.d("tflite성공","모델 import성공")
+//                    interpreter = Interpreter(modelFile)
+//                }
+//            }
 
-//        모델 다운, 인터프리터 초기화
+
+        val drawable = getResources().getDrawable(R.drawable.monstera)
+        val bitmap = Bitmap.createScaledBitmap(drawable.toBitmap(), 224, 224, true)
+
+//        여기서부터새로시작
+        val input = Array(1) { Array(224) { Array(224) { IntArray(3) } } }
+        val output = Array(1) { IntArray(18) }
+
+
+
+//        val batchNum = 0
+//            for (x in 0 until 223) {
+//                for (y in 0 until 223) {
+//                    val pixel: Int = bitmap.getPixel(x, y)
+//                    input[batchNum][x][y][0] = Color.red(pixel)
+//                    input[batchNum][x][y][1] = Color.green(pixel)
+//                    input[batchNum][x][y][2] = Color.blue(pixel)
+//                }
+//            }
+//            ----여기까진 문제 없음
+
+
+
+
+        val batchNum = 0
+        for (x in 0 until 223) {
+            for (y in 0 until 223) {
+                val pixel: Int = bitmap.getPixel(x, y)
+                input[batchNum][x][y][0] = Color.red(pixel)
+                input[batchNum][x][y][1] = Color.green(pixel)
+                input[batchNum][x][y][2] = Color.blue(pixel)
+            }
+        }
+
+        //        var interpreter: Interpreter?=null
         val conditions = CustomModelDownloadConditions.Builder()
             .requireWifi()  // Also possible: .requireCharging() and .requireDeviceIdle()
             .build()
         FirebaseModelDownloader.getInstance()
             .getModel("flowerClassifier", DownloadType.LOCAL_MODEL_UPDATE_IN_BACKGROUND,
                 conditions)
-            .addOnSuccessListener { model: CustomModel? ->
+            .addOnSuccessListener {
+                    model: CustomModel? ->
                 val modelFile = model?.file
+                var interpreter:Interpreter?=null
                 if (modelFile != null) {
                     Log.d("tflite성공","모델 import성공")
                     interpreter = Interpreter(modelFile)
+//                    interpreter.run(input,output)
+//                    Log.d("tflite성공","interpreter run성공")
+//                    for(i in 0 until 17){
+//                        Log.d("tflite성공","${output[0][i]}")
+//                    }
+
                 }
             }
 
 
-        val drawable = getResources().getDrawable(R.drawable.monstera)
-        val bitmap = Bitmap.createScaledBitmap(drawable.toBitmap(), 224, 224, true)
-        Log.d("typecheck","${bitmap.javaClass.name}")
-//        android.graphics.Bitmap
-        val input = ByteBuffer.allocateDirect(224*224*3*4).order(ByteOrder.nativeOrder())
-        for (y in 0 until 224) {
-            for (x in 0 until 224) {
-                val px = bitmap.getPixel(x, y)
 
-                // Get channel values from the pixel value.
-                val r:Int = Color.red(px)
-                val g:Int = Color.green(px)
-                val b:Int = Color.blue(px)
-
-                // Normalize channel values to [-1.0, 1.0]. This requirement depends on the model.
-                // For example, some models might require values to be normalized to the range
-                // [0.0, 1.0] instead.
-//                val rf = (r - 127) / 255
-//                val gf = (g - 127) / 255
-//                val bf = (b - 127) / 255
+//        Log.d("typecheck","${bitmap.javaClass.name}")
+////        android.graphics.Bitmap
+//        val input = ByteBuffer.allocateDirect(224*224*3*4).order(ByteOrder.nativeOrder())
 //
-//                input.putInt(rf)
-//                input.putInt(gf)
-//                input.putInt(bf)
-                input.putInt(r)
-                input.putInt(g)
-                input.putInt(b)
+//        for (y in 0 until 224) {
+//            for (x in 0 until 224) {
+//                val px = bitmap.getPixel(x, y)
+//
+//                // Get channel values from the pixel value.
+//                val r:Int = Color.red(px)
+//                val g:Int = Color.green(px)
+//                val b:Int = Color.blue(px)
+//
+//                // Normalize channel values to [-1.0, 1.0]. This requirement depends on the model.
+//                // For example, some models might require values to be normalized to the range
+//                // [0.0, 1.0] instead.
+////                val rf = (r - 127) / 255
+////                val gf = (g - 127) / 255
+////                val bf = (b - 127) / 255
+////
+////                input.putInt(rf)
+////                input.putInt(gf)
+////                input.putInt(bf)
+//                input.putInt(r)
+//                input.putInt(g)
+//                input.putInt(b)
+//
+//            }
+//        }
 
-            }
-        }
 
-
-        val bufferSize = 18 * Integer.SIZE / java.lang.Byte.SIZE
-        val modelOutput = ByteBuffer.allocateDirect(bufferSize).order(ByteOrder.nativeOrder())
-        interpreter?.run(input, modelOutput)
-        Log.d("inputhh","$input $modelOutput")
-        for(i in 0 until 72){
-            Log.d("inputhh","${modelOutput[i]}")
-        }
+//        val bufferSize = 18 * Integer.SIZE / java.lang.Byte.SIZE
+//        val modelOutput = ByteBuffer.allocateDirect(bufferSize).order(ByteOrder.nativeOrder())
+//        interpreter?.run(input, modelOutput)
+//        Log.d("inputhh","$input $modelOutput")
+//        for(i in 0 until 72){
+//            Log.d("inputhh","${modelOutput[i]}")
+//        }
 
 
 
