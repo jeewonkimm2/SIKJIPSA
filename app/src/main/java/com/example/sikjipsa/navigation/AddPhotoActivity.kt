@@ -110,6 +110,8 @@ class AddPhotoActivity: AppCompatActivity() {
             // 설명 넣어주기
             contentDTO.explain = addphoto_edit_explain.text.toString()
 
+            //좋아요도 넣어주기
+
             // 타임스태프 넣어주기
             contentDTO.timestamp = System.currentTimeMillis()
 
