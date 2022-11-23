@@ -1,7 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#557732"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/profile"
+        android:layout_width="107dp"
+        android:layout_height="108dp"
+        android:layout_marginStart="88dp"
+
+
+        android:layout_marginTop="80dp"
+        android:src="@drawable/jihoon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/editBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
+
+        android:layout_marginEnd="115dp"
+        android:backgroundTint="#AADB91"
+        android:text="edit"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profile"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="122dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="103dp"
+        android:layout_marginEnd="94dp"
+        android:text="jigglypuff"
+        android:textAlignment="center"
+
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/myplantBtn"
+        android:layout_width="265dp"
+        android:layout_height="73dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#AADB91"
+        android:text="My Plant"
+
+        app:layout_constraintBottom_toTopOf="@+id/mypostBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/mypostBtn"
+        android:layout_width="265dp"
+        android:layout_height="73dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="#AADB91"
+        android:text="My Post"
+        app:layout_constraintBottom_toTopOf="@+id/saveBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/saveBtn"
+        android:layout_width="265dp"
+        android:layout_height="73dp"
+        android:layout_marginBottom="64dp"
+        android:backgroundTint="#AADB91"
+        android:text="Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
