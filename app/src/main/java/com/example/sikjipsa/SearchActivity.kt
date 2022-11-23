@@ -66,7 +66,6 @@ class SearchActivity : AppCompatActivity() {
                 if (requestCode == PICK_IMAGE_FROM_ALBUM) {
                     if (resultCode == RESULT_OK) {
                         photoURI = data?.data
-                        addphoto_image.setImageURI(photoURI)
                     } else {
                         finish()
                     }
