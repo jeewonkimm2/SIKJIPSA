@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         //BottomNavigation
         initView()
         initBottomNavigation()
+
         ActivityCompat.requestPermissions(
             this,
             arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
