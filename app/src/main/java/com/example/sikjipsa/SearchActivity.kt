@@ -74,14 +74,22 @@ class SearchActivity : AppCompatActivity() {
         }
 
 
+
         binding.keywordBtn.setOnClickListener {
             binding.keywordBtn.visibility = GONE
             binding.keywordTxt.visibility = VISIBLE
             binding.searchBtn.visibility = VISIBLE
-
-
+        }
+        binding.searchBtn.setOnClickListener {
+            val intent: Intent = Intent(this@SearchActivity,SearchKeywordActivity::class.java)
+            intent.putExtra("keyword","${binding.keywordTxt.text}")
+            //        passing keyword
+            startActivity(intent)
 
         }
+
+
+
 
 
 //        모델 입력 출력 결과
