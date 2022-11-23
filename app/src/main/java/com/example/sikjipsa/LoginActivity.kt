@@ -1,10 +1,10 @@
 package com.example.sikjipsa
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.sikjipsa.databinding.ActivityLoginBinding
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -59,6 +59,7 @@ class LoginActivity : AppCompatActivity() {
             val email = binding.registerEmail.text.toString()
             val password = binding.registerPassword.text.toString()
             login(email, password)
+
         }
 
 //        Register Button
@@ -66,6 +67,8 @@ class LoginActivity : AppCompatActivity() {
             val intent: Intent = Intent(this@LoginActivity,SignUpActivity::class.java)
             startActivity(intent)
         }
+
+
 
 
     }

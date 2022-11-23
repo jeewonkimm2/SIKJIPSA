@@ -45,6 +45,8 @@ class SignUpActivity : AppCompatActivity() {
 //            }
 
         }
+
+
     }
 //    회원가입 : password 최소 6자
     private fun signUp(name: String, email: String, password: String){
@@ -57,6 +59,10 @@ class SignUpActivity : AppCompatActivity() {
                 startActivity(intent)
 //                DB추가
                 addUserToDatabase(name, email, mAuth.currentUser?.uid!!)
+
+
+                     //profile이란 이름의 하위 데이터베이스
+
             } else {
                 // fail
                 Toast.makeText(this, "Something is wrong", Toast.LENGTH_SHORT).show()
