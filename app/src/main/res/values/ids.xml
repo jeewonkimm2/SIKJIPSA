@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="detailviewitem_favorite_imageview" type="id" />
+    <item name="detailviewitem_comment" type="id" />
+</resources>
