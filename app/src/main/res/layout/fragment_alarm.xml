@@ -11,7 +11,7 @@
         android:id="@+id/locationTxt"
         android:layout_width="163dp"
         android:layout_height="61dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="160dp"
         android:gravity="center"
         android:text="LOCATION"
 
@@ -24,127 +24,112 @@
         android:id="@+id/temperatureTxt"
         android:layout_width="163dp"
         android:layout_height="61dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="TEMPERATURE"
 
+        android:text="TEMPERATURE"
         android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/locationTxt" />
 
-    <ScrollView
-        android:id="@+id/scrollSpace"
-        android:layout_width="409dp"
-        android:layout_height="448dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/temperatureTxt"
+    <TextView
+        android:id="@+id/weatherTxt"
+        android:layout_width="142dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="134dp"
+        android:layout_marginTop="92dp"
+        android:layout_marginEnd="135dp"
+        android:layout_marginBottom="14dp"
+        android:gravity="center"
+        android:text="Description"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/locationTxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        tools:ignore="MissingConstraints">
+    <TextView
+        android:id="@+id/sunriseTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="107dp"
+        android:text="Sunrise"
+        app:layout_constraintEnd_toStartOf="@+id/sunsetTxt"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/temperatureTxt" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+    <TextView
+        android:id="@+id/sunsetTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="104dp"
+        android:text="Sunset"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/temperatureTxt" />
 
-            <TextView
-                android:id="@+id/alarm1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:padding="25dp"
-                android:text="Alarm1"
-                android:textSize="20dp" />
+    <TextView
+        android:id="@+id/humidityTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="62dp"
+        android:text="Humidity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sunriseTime" />
 
-            <TextView
-                android:id="@+id/alarm2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:padding="25dp"
-                android:text="Alarm2"
-                android:textSize="20dp" />
+    <TextView
+        android:id="@+id/windTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="62dp"
+        android:layout_marginEnd="108dp"
+        android:text="Wind"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sunsetTime" />
 
-            <TextView
-                android:id="@+id/alarm3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:padding="25dp"
-                android:text="Alarm3"
-                android:textSize="20dp" />
+    <TextView
+        android:id="@+id/sunriseTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="12dp"
+        android:text="time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sunriseTxt" />
 
-            <TextView
-                android:id="@+id/alarm4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:padding="25dp"
-                android:text="Alarm4"
-                android:textSize="20dp" />
+    <TextView
+        android:id="@+id/sunsetTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="90dp"
+        android:text="time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sunsetTxt" />
 
-            <TextView
-                android:id="@+id/alarm5"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:padding="25dp"
-                android:text="Alarm5"
-                android:textSize="20dp" />
+    <TextView
+        android:id="@+id/humidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="123dp"
+        android:layout_marginTop="8dp"
+        android:text="humid"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/humidityTxt" />
 
-            <TextView
-                android:id="@+id/alarm6"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:padding="25dp"
-                android:text="Alarm6"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/alarm7"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:padding="25dp"
-                android:text="Alarm7"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/alarm8"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:padding="25dp"
-                android:text="Alarm8"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/alarm9"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:padding="25dp"
-                android:text="Alarm9"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/alarm10"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:padding="25dp"
-                android:text="Alarm10"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/alarm11"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:padding="25dp"
-                android:text="Alarm11"
-                android:textSize="20dp" />
-        </LinearLayout>
-    </ScrollView>
+    <TextView
+        android:id="@+id/wind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="105dp"
+        android:text="wind"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/windTxt" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
