@@ -161,9 +161,13 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
+                findViewById<TextView>(R.id.weatherTxt).text = weatherDescription
                 findViewById<TextView>(R.id.locationTxt).text = address
                 findViewById<TextView>(R.id.temperatureTxt).text = temp
+                findViewById<TextView>(R.id.sunriseTime).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunrise * 1000))
+                findViewById<TextView>(R.id.sunsetTime).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunset * 1000))
+                findViewById<TextView>(R.id.humidity).text = humidity
+                findViewById<TextView>(R.id.wind).text = windSpeed
             } catch (e: Exception) {
 
             }
