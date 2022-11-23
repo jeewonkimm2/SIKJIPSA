@@ -36,12 +36,13 @@ class SignUpActivity : AppCompatActivity() {
             val name = binding.nameEdit.text.toString()
             val email = binding.registerEmail.text.toString()
             val password = binding.registerPassword.text.toString()
+            val nickname = binding.registerNickname.text.toString()
 
-            if(email.isNotEmpty()&&password.isNotEmpty()){
-                Log.d("ITM", "에러")
-                signUp(name,email,password)
-
-            }
+//            if(email.isNotEmpty()&&password.isNotEmpty()){
+//                Log.d("ITM", "에러")
+//                signUp(name,email,password)
+//
+//            }
 
         }
     }
@@ -64,7 +65,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun addUserToDatabase(name: String, email: String, uId: String){
-        mDBRef.child("user").child(uId).setValue(User(name,email,uId))
+//        mDBRef.child("user").child(uId).setValue(User(name,email,uId))
     }
 
 

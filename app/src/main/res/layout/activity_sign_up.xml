@@ -13,11 +13,14 @@
         android:layout_above="@+id/signin_layout"
         android:layout_alignParentTop="true"
         android:src="@drawable/sikjipsalogo" />
-    <LinearLayout android:id="@+id/signin_layout"
+
+    <LinearLayout
+        android:id="@+id/signin_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="vertical">
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -61,6 +64,31 @@
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+            <EditText
+                android:id="@+id/register_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nickname"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <Button
+            android:id="@+id/pic"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="#228933"
+            android:text="Profile Picture" />
+
         <Button
             android:id="@+id/signup"
             android:layout_width="match_parent"
@@ -72,6 +100,6 @@
             android:text="Register" />
 
 
-
     </LinearLayout>
+
 </RelativeLayout>
