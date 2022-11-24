@@ -67,13 +67,7 @@ class LoginActivity : AppCompatActivity() {
             val intent: Intent = Intent(this@LoginActivity,SignUpActivity::class.java)
             startActivity(intent)
         }
-
-
-
-
     }
-
-
 
 
     private fun initGoogleLoginButton() {
