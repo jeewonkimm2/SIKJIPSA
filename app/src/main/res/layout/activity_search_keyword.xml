@@ -6,11 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".SearchKeywordActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="83dp"
-        tools:layout_editor_absoluteY="94dp" />
+    <Button
+        android:id="@+id/button"
+        android:layout_width="427dp"
+        android:layout_height="418dp"
+        android:layout_marginStart="91dp"
+        android:layout_marginTop="308dp"
+        android:layout_marginEnd="226dp"
+        android:backgroundTint="#E1CD22"
+        android:text="GOOGLE"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.276"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
