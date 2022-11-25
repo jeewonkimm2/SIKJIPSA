@@ -34,7 +34,7 @@ import java.util.jar.Manifest
 
 //수오가 침
 //지원
-//후니
+//후니test
 //지원브랜치테스트
 class MainActivity : AppCompatActivity() {
 
