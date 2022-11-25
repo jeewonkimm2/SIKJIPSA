@@ -9,10 +9,14 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sikjipsa.R
+import com.example.sikjipsa.User
 import com.example.sikjipsa.model.ContentDTO
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.activity_add_photo.*
@@ -28,6 +32,12 @@ class AddPhotoActivity: AppCompatActivity() {
     var auth: FirebaseAuth? = null
     var firestore: FirebaseFirestore? = null
 
+//--------지원수정----------
+    //    DB객체
+    private lateinit var mDBRef: DatabaseReference
+//--------지원수정----------
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_photo)
@@ -36,6 +46,9 @@ class AddPhotoActivity: AppCompatActivity() {
         storage = FirebaseStorage.getInstance()
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
+
+        //        DB 초기화
+        mDBRef = Firebase.database.reference
 
 /*        //open the album
         var launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
@@ -115,6 +128,10 @@ class AddPhotoActivity: AppCompatActivity() {
 
             // 값 넘겨주기
             firestore?.collection("images")?.document()?.set(contentDTO)
+
+//            지원 디비 넣는 거 수정중, 유저 클래스 수정 필
+            mDBRef.child("contentText").setValue(contentDTO.explain)
+
 
             setResult(Activity.RESULT_OK)
             finish()

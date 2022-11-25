@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.example.sikjipsa.databinding.ActivitySignUpBinding
+import com.example.sikjipsa.model.ContentDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
