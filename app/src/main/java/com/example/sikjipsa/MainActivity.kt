@@ -70,6 +70,16 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+
+
+
+
+
+
+
+
+
     private fun initBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener { p0 ->
             when (p0.itemId) {

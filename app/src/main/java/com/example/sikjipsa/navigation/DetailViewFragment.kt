@@ -1,6 +1,7 @@
 package com.example.sikjipsa.navigation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,11 +10,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sikjipsa.R
+import com.example.sikjipsa.User
 import com.example.sikjipsa.model.ContentDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_detail.view.*
 import kotlinx.android.synthetic.main.item_detail.view.*
 
@@ -23,8 +29,14 @@ class DetailViewFragment : Fragment() {
     var firestore: FirebaseFirestore? = null
     var imagesSnapshot: ListenerRegistration? = null
     var mainView: View? = null
+    //    Firebase 객체
+    lateinit var mAuth: FirebaseAuth
+    //    DB객체
+    private lateinit var mDBRef: DatabaseReference
+
     //수오가 추가(유저 아이디)
     var uid : String? = null
+    var nickname : String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,9 +44,15 @@ class DetailViewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         var view = LayoutInflater.from(activity).inflate(R.layout.fragment_detail, container, false)
+        mDBRef = FirebaseDatabase.getInstance().reference
         user = FirebaseAuth.getInstance().currentUser
-        //수오가 추가(유저 아이디 값)
+//        수오가 추가(유저 아이디 값)
         uid = FirebaseAuth.getInstance().currentUser?.uid
+//        닉네임
+//        mDBRef.child("user").child(uid.toString()).get().addOnSuccessListener {
+//            nickname = it.getValue(User::class.java)?.nickname
+//            Log.d("nickname","$nickname")
+//        }
         firestore = FirebaseFirestore.getInstance()
         //RecyclerView와 어댑터 연결
         mainView = LayoutInflater.from(activity).inflate(R.layout.fragment_detail, container, false)
@@ -77,12 +95,16 @@ class DetailViewFragment : Fragment() {
         }
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
+
             var viewholder = (holder as CustomViewHolder).itemView
             //id
             viewholder.detailviewitem_explain_textview.text = contentDTOs!![position].userId
 
             //Image (Glide)
             Glide.with(holder.itemView.context).load(contentDTOs!![position].imageUrl).into(viewholder.detailviewitem_imageview_content)
+
+            viewholder.detailviewitem_profile_textview.text = uid
 
             //Explain
             viewholder.detailviewitem_explain_textview.text = contentDTOs!![position].explain

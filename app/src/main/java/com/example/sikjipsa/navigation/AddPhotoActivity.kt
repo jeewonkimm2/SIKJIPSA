@@ -20,6 +20,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.activity_add_photo.*
+import kotlinx.android.synthetic.main.item_detail.*
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -121,6 +122,7 @@ class AddPhotoActivity: AppCompatActivity() {
 
             // 유저 아이디 넣어주기
             contentDTO.userId = auth?.currentUser?.email
+
 
             // 설명 넣어주기
             contentDTO.explain = addphoto_edit_explain.text.toString()
