@@ -1,6 +1,8 @@
 package com.example.sikjipsa.model
 
 //게시글 컨텐츠
+
+
 data class ContentDTO(
     var explain : String? = null, //컨텐츠의 설명관리
     var imageUrl : String? = null, //이미지의 주소관리

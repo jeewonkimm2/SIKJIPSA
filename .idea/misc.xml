@@ -18,12 +18,10 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1645" />
         <entry key="app/src/main/res/drawable/ic_baseline_access_alarm_24.xml" value="0.1645" />
         <entry key="app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.1645" />
-        <entry key="app/src/main/res/drawable/ic_baseline_add_a_photo_24.xml" value="0.1635" />
         <entry key="app/src/main/res/drawable/ic_baseline_chat_24.xml" value="0.1645" />
         <entry key="app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.1645" />
         <entry key="app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1645" />
         <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1645" />
-        <entry key="app/src/main/res/drawable/ic_baseline_wb_sunny_24.xml" value="0.1635" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1645" />
         <entry key="app/src/main/res/layout/activity_add_photo.xml" value="0.3880208333333333" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.35505981445312507" />
@@ -31,15 +29,13 @@
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.2781021118164062" />
         <entry key="app/src/main/res/layout/activity_search_image.xml" value="0.34791666666666665" />
         <entry key="app/src/main/res/layout/activity_search_keyword.xml" value="0.3880208333333333" />
-        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.1916708374023437" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.27522491455078124" />
         <entry key="app/src/main/res/layout/dialog_select_image.xml" value="0.28033447265625" />
         <entry key="app/src/main/res/layout/fragment_alarm.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/fragment_grid.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/item_detail.xml" value="0.2546875" />
-        <entry key="app/src/main/res/layout/notification.xml" value="0.2537037037037037" />
-        <entry key="app/src/main/res/layout/notification_layout.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/menu/bottom_navigation_main.xml" value="0.35959167480468746" />
       </map>
     </option>
