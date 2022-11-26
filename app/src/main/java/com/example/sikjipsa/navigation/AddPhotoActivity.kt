@@ -44,14 +44,11 @@ class AddPhotoActivity: AppCompatActivity() {
 
         //storage init
         storage = FirebaseStorage.getInstance()
-        auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
 
-        //        DB 초기화
-        mDBRef = Firebase.database.reference
 
-/*        //open the album
-        var launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+
                 result->
             if(result.resultCode == PICK_IMAGE_FROM_ALBUM){
                 if(result.resultCode == Activity.RESULT_OK){
@@ -74,9 +71,9 @@ class AddPhotoActivity: AppCompatActivity() {
             photoPickerIntent.type = "image/*"
             launch(photoPickerIntent)
         }
-*/
+*/*/
 
-*/        //버튼 이벤트
+        //버튼 이벤트
         addphoto_btn_upload.setOnClickListener {
             contentUpload()
         }
@@ -95,7 +92,6 @@ class AddPhotoActivity: AppCompatActivity() {
             }
         }
 
-
     }
 
 
@@ -106,9 +102,11 @@ class AddPhotoActivity: AppCompatActivity() {
         val storageRef = storage?.reference?.child("images")?.child(imageFileName)
 
         //파일 업로드
-        storageRef?.putFile(photoUri!!)?.continueWithTask{task: Task<UploadTask.TaskSnapshot> ->
+        storageRef?.putFile(photoUri!!)?.continueWithTask { task:Task<UploadTask.TaskSnapshot> ->
             return@continueWithTask storageRef.downloadUrl
         }?.addOnSuccessListener { uri->
+            Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
+
             var contentDTO = ContentDTO()
 
             // 이미지 주소 넣어주기
@@ -122,8 +120,6 @@ class AddPhotoActivity: AppCompatActivity() {
 
             // 설명 넣어주기
             contentDTO.explain = addphoto_edit_explain.text.toString()
-
-            //좋아요도 넣어주기
 
             // 타임스태프 넣어주기
             contentDTO.timestamp = System.currentTimeMillis()

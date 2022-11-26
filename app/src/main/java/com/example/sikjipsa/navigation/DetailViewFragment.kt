@@ -23,6 +23,8 @@ class DetailViewFragment : Fragment() {
     var firestore: FirebaseFirestore? = null
     var imagesSnapshot: ListenerRegistration? = null
     var mainView: View? = null
+    //수오가 추가(유저 아이디)
+    var uid : String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +33,8 @@ class DetailViewFragment : Fragment() {
     ): View? {
         var view = LayoutInflater.from(activity).inflate(R.layout.fragment_detail, container, false)
         user = FirebaseAuth.getInstance().currentUser
+        //수오가 추가(유저 아이디 값)
+        uid = FirebaseAuth.getInstance().currentUser?.uid
         firestore = FirebaseFirestore.getInstance()
         //RecyclerView와 어댑터 연결
         mainView = LayoutInflater.from(activity).inflate(R.layout.fragment_detail, container, false)
@@ -89,6 +93,21 @@ class DetailViewFragment : Fragment() {
             //ProfileImage
             Glide.with(holder.itemView.context).load(contentDTOs!![position].imageUrl).into(viewholder.detailviewitem_profile_image)
 
+            //code when the button is clicked
+            viewholder.detailviewitem_favorite_imageview.setOnClickListener{
+                favoriteEvent(position)
+            }
+
+            //code when page load
+            if(contentDTOs!![position].favorites.containsKey(uid)){
+                //좋아요 클릭된 경우
+                viewholder.detailviewitem_favorite_imageview.setImageResource(R.drawable.ic_baseline_favorite_24)
+
+           }else{
+               //좋아요 클릭 안된 경우
+                viewholder.detailviewitem_favorite_imageview.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+            }
+
 
             /*//나중거
             firestore?.collection("profileImages")
@@ -140,8 +159,27 @@ class DetailViewFragment : Fragment() {
                 viewholder.detailviewitem_favorite_imageView.setImageResource(R.drawable.ic_favorite_border)
             }*/
         }
+        fun favoriteEvent(position: Int){
+            var tsDoc = firestore?.collection("images")?.document(contentUidList[position])
+            firestore?.runTransaction { transaction->
+                var uid = FirebaseAuth.getInstance().currentUser?.uid
+                var contentDTO = transaction.get(tsDoc!!).toObject(ContentDTO::class.java)
 
-        //지원이가..? 지우는 건가...??
+                if(contentDTO!!.favorites.containsKey(uid)){
+                    //이미 좋아요가 되어있을 때 좋아요 취소
+                    contentDTO?.favoriteCount = contentDTO?.favoriteCount - 1
+                    contentDTO?.favorites.remove(uid)
+
+                }else {
+                    //좋아요 넣기
+                    contentDTO?.favoriteCount = contentDTO?.favoriteCount + 1
+                    contentDTO?.favorites[uid!!] = true
+                }
+                transaction.set(tsDoc,contentDTO)
+            }
+
+        }
+        //밑에 코드 나중에 지우기 (안쓰면)
 /*    inner class DetailViewRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
         var contentDTOs: ArrayList<ContentDTO> = arrayListOf()
