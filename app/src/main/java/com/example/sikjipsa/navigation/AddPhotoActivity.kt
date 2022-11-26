@@ -48,7 +48,11 @@ class AddPhotoActivity: AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
 
+        //        DB 초기화
+        mDBRef = Firebase.database.reference
 
+/*        //open the album
+        var launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
                 result->
             if(result.resultCode == PICK_IMAGE_FROM_ALBUM){
                 if(result.resultCode == Activity.RESULT_OK){
