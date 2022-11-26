@@ -90,7 +90,7 @@ class AddPhotoActivity: AppCompatActivity() {
         if(requestCode == PICK_IMAGE_FROM_ALBUM){
             if (resultCode == Activity.RESULT_OK){
                 photoUri = data?.data
-                addphoto_image.setImageURI(photoUri)
+//                addphoto_image.setImageURI(photoUri)
             }
             else{
                 finish()
@@ -133,17 +133,15 @@ class AddPhotoActivity: AppCompatActivity() {
             // 값 넘겨주기
             firestore?.collection("images")?.document()?.set(contentDTO)
 
-//            지원 디비 넣는 거 수정중, 유저 클래스 수정 필
-            mDBRef.child("contentText").setValue(contentDTO.explain)
 
-
-            setResult(Activity.RESULT_OK)
+            setResult(RESULT_OK)
             finish()
+            }
 
 
         }
 
     }
 
-}
+
 
