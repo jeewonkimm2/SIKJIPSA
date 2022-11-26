@@ -193,6 +193,7 @@ class DetailViewFragment : Fragment() {
         }
         fun favoriteEvent(position: Int){
             var tsDoc = firestore?.collection("images")?.document(contentUidList[position])
+
             firestore?.runTransaction { transaction->
                 var uid = FirebaseAuth.getInstance().currentUser?.uid
                 var contentDTO = transaction.get(tsDoc!!).toObject(ContentDTO::class.java)

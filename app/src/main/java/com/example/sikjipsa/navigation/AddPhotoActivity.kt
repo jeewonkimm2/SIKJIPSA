@@ -104,7 +104,9 @@ class AddPhotoActivity: AppCompatActivity() {
     fun contentUpload(){
         var timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
         val imageFileName = "JPEG_" + timestamp + "_.png"
-        val storageRef = storage?.reference?.child("images")?.child(imageFileName)
+//        val storageRef = storage?.reference?.child("images")?.child(imageFileName)
+        val storageRef = storage?.reference?.child("images")?.child("${auth?.currentUser?.uid.toString()},${timestamp.toString()}")
+
 
         //파일 업로드
         storageRef?.putFile(photoUri!!)?.continueWithTask { task:Task<UploadTask.TaskSnapshot> ->
@@ -131,7 +133,7 @@ class AddPhotoActivity: AppCompatActivity() {
             contentDTO.timestamp = System.currentTimeMillis()
 
             // 값 넘겨주기
-            firestore?.collection("images")?.document()?.set(contentDTO)
+            firestore?.collection("images")?.document("${contentDTO.uid.toString()}${contentDTO.timestamp.toString()}")?.set(contentDTO)
 
 
             setResult(RESULT_OK)
