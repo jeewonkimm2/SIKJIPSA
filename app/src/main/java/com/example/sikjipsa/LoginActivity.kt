@@ -12,6 +12,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
@@ -67,6 +68,12 @@ class LoginActivity : AppCompatActivity() {
             val intent: Intent = Intent(this@LoginActivity,SignUpActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    //수오 자동 로그인
+    override fun onStart() {
+        super.onStart()
+        moveMainPage(auth?.currentUser)
     }
 
 
@@ -127,7 +134,14 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
+    //수오 자동로그인 유지
+    fun moveMainPage(user: FirebaseUser?){
+        if(user != null){
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
 
+        }
+    }
 
 
 }

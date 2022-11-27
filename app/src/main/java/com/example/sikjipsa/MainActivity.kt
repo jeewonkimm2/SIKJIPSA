@@ -33,7 +33,7 @@ import java.net.URL
 import java.util.*
 import java.util.jar.Manifest
 
-//수오가 침
+//수오 브랜치 재확인
 //지원
 //후니test
 //지원브랜치테스트
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
             1
         )
 
-        //set default screen
+        //set default screen (메인 화면에 DetailViewFragment 뜨도록)
         bottom_navigation.selectedItemId = R.id.action_home
     }
 
