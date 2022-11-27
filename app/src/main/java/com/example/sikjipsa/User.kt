@@ -9,11 +9,10 @@ data class User(
     var email: String,
     var uId: String,
     var nickname: String,
-    var pic: String
-
+//    var pic: String
 )
 
 
 //{
-//    constructor(): this("","","","",null)
+//    constructor(): this("","","","")
 //}

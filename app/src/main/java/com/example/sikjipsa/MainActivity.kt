@@ -19,6 +19,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.example.sikjipsa.databinding.ActivityMainBinding
 //import com.example.sikjipsa.databinding.FragmentGridBinding
 import com.example.sikjipsa.navigation.*
@@ -70,6 +71,16 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+
+
+
+
+
+
+
+
+
     private fun initBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener { p0 ->
             when (p0.itemId) {
@@ -95,15 +106,21 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.action_favorite_alarm -> {
                     var alarmFragment = AlarmFragment()
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_content, alarmFragment).commit()
+                    val toBack = supportFragmentManager.beginTransaction()
                     weatherTask().execute()
+                    toBack.replace(R.id.main_content, alarmFragment)
+                    toBack.addToBackStack(null)
+                    toBack.commit()
                     return@setOnItemSelectedListener true
                 }
                 R.id.action_account -> {
                     var userFragment = UserFragment()
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_content, userFragment).commit()
+                    val toBack = supportFragmentManager.beginTransaction()
+                    toBack.replace(R.id.main_content, userFragment)
+                    toBack.addToBackStack(null)
+                    toBack.commit()
+
+
                     return@setOnItemSelectedListener true
                 }
 

@@ -20,6 +20,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.activity_add_photo.*
+import kotlinx.android.synthetic.main.item_detail.*
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -31,11 +32,9 @@ class AddPhotoActivity: AppCompatActivity() {
     var photoUri: Uri? = null
     var auth: FirebaseAuth? = null
     var firestore: FirebaseFirestore? = null
-
-//--------지원수정----------
     //    DB객체
     private lateinit var mDBRef: DatabaseReference
-//--------지원수정----------
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,8 +45,6 @@ class AddPhotoActivity: AppCompatActivity() {
         storage = FirebaseStorage.getInstance()
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
-
-
         //        DB 초기화
         mDBRef = Firebase.database.reference
 
@@ -89,7 +86,7 @@ class AddPhotoActivity: AppCompatActivity() {
         if(requestCode == PICK_IMAGE_FROM_ALBUM){
             if (resultCode == Activity.RESULT_OK){
                 photoUri = data?.data
-                addphoto_image.setImageURI(photoUri)
+//                addphoto_image.setImageURI(photoUri)
             }
             else{
                 finish()
@@ -103,7 +100,9 @@ class AddPhotoActivity: AppCompatActivity() {
     fun contentUpload(){
         var timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
         val imageFileName = "JPEG_" + timestamp + "_.png"
-        val storageRef = storage?.reference?.child("images")?.child(imageFileName)
+//        val storageRef = storage?.reference?.child("images")?.child(imageFileName)
+        val storageRef = storage?.reference?.child("images")?.child("${auth?.currentUser?.uid.toString()},${timestamp.toString()}")
+
 
         //파일 업로드
         storageRef?.putFile(photoUri!!)?.continueWithTask { task:Task<UploadTask.TaskSnapshot> ->
@@ -129,19 +128,20 @@ class AddPhotoActivity: AppCompatActivity() {
             contentDTO.timestamp = System.currentTimeMillis()
 
             // 값 넘겨주기
-            firestore?.collection("images")?.document()?.set(contentDTO)
-
-//            지원 디비 넣는 거 수정중, 유저 클래스 수정 필
+            firestore?.collection("images")?.document("${contentDTO.uid.toString()}${contentDTO.timestamp.toString()}")?.set(contentDTO)
+            
+            //            지원 디비 넣는 거 수정중, 유저 클래스 수정 필
             mDBRef.child("contentText").setValue(contentDTO.explain)
 
 
-            setResult(Activity.RESULT_OK)
+            setResult(RESULT_OK)
             finish()
+            }
 
 
         }
 
     }
 
-}
+
 

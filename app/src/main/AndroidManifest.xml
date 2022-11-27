@@ -18,22 +18,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SIKJIPSA"
         tools:targetApi="31">
+        <activity
+            android:name=".EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".editprofile"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/notification" />
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <!--
+ Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/black" />
 
-
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.blacklog.takepicture.fileprovider"
-            android:grantUriPermissions="true"
-            android:exported="false">
+            android:exported="false"
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/filepaths" />
@@ -64,7 +71,6 @@
             android:name=".MainActivity"
             android:exported="true" />
         <activity android:name=".navigation.AddPhotoActivity" />
-
 
         <service
             android:name=".MyFirebaseMessagingService"
