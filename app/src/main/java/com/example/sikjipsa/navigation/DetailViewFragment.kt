@@ -32,13 +32,15 @@ class DetailViewFragment : Fragment() {
     var imagesSnapshot: ListenerRegistration? = null
     var mainView: View? = null
     //    Firebase 객체
-    lateinit var mAuth: FirebaseAuth
+//    lateinit var mAuth: FirebaseAuth
+    var auth = FirebaseAuth.getInstance()
     //    DB객체
     private lateinit var mDBRef: DatabaseReference
 
     //수오가 추가(유저 아이디)
     var uid : String? = null
     var nickname : String? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,6 +52,7 @@ class DetailViewFragment : Fragment() {
         user = FirebaseAuth.getInstance().currentUser
 //        수오가 추가(유저 아이디 값)
         uid = FirebaseAuth.getInstance().currentUser?.uid
+
 
 //        nickname 지원추가
         mDBRef.child("user").child(uid.toString()).child("nickname").get().addOnSuccessListener {

@@ -28,6 +28,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_wb_sunny_24.xml" value="0.1635" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1645" />
         <entry key="app/src/main/res/layout/activity_add_photo.xml" value="0.3880208333333333" />
+        <entry key="app/src/main/res/layout/activity_editprofile.xml" value="0.37037037037037035" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.35505981445312507" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.443011474609375" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.2781021118164062" />

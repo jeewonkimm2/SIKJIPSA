@@ -32,11 +32,9 @@ class AddPhotoActivity: AppCompatActivity() {
     var photoUri: Uri? = null
     var auth: FirebaseAuth? = null
     var firestore: FirebaseFirestore? = null
-
-//--------지원수정----------
     //    DB객체
     private lateinit var mDBRef: DatabaseReference
-//--------지원수정----------
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,8 +45,6 @@ class AddPhotoActivity: AppCompatActivity() {
         storage = FirebaseStorage.getInstance()
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
-
-
         //        DB 초기화
         mDBRef = Firebase.database.reference
 

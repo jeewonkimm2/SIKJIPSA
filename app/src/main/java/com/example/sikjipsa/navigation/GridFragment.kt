@@ -21,12 +21,6 @@ class GridFragment : Fragment(){
 
         val binding = FragmentGridBinding.inflate(layoutInflater)
 
-//        binding.imageLoadBtn.setOnClickListener{
-//            activity?.let {
-//                val intent = Intent(getActivity(), SearchActivity::class.java)
-//                startActivity(intent)
-//            }
-//        }
 
         return binding.root
 
