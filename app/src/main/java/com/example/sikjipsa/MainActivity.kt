@@ -120,6 +120,10 @@ class MainActivity : AppCompatActivity() {
                     toBack.addToBackStack(null)
                     toBack.commit()
 
+                    //********* 알람 실행은 우선 됨
+//                    startActivity(Intent(this, WateringActivity::class.java))
+                    //********* 레이아웃 조정 필요
+
 
                     return@setOnItemSelectedListener true
                 }
