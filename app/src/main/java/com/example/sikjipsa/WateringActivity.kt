@@ -56,8 +56,8 @@ class WateringActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener
     private fun startAlarm(c: Calendar) {
         var alarmManager: AlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
         var intent = Intent(this, AlertReceiver:: class.java)
-        var curTime = DateFormat.getTimeInstance(DateFormat.SHORT).format(c.time)
-        intent.putExtra("time", curTime)
+//        var curTime = DateFormat.getTimeInstance(DateFormat.SHORT).format(c.time)
+//        intent.putExtra("time", curTime)
         var pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0)
         if(c.before(Calendar.getInstance())){
             c.add(Calendar.DATE, 1)

@@ -9,8 +9,8 @@ import kotlin.coroutines.coroutineContext
 class AlertReceiver: BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         val notificationHelper: NotificationHelper = NotificationHelper(context)
-        var time = intent?.extras?.getString("time")
-        val nb: NotificationCompat.Builder = notificationHelper.getChannelNotification(time)
+//        var time = intent?.extras?.getString("time")
+        val nb: NotificationCompat.Builder = notificationHelper.getChannelNotification()
 
         notificationHelper.getManager().notify(1, nb.build())
     }

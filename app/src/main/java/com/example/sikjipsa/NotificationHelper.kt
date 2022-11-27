@@ -35,10 +35,10 @@ class NotificationHelper(base: Context?) : ContextWrapper(base) {
         return getSystemService(NOTIFICATION_SERVICE) as NotificationManager
     }
 
-    fun getChannelNotification(time: String?): NotificationCompat.Builder{
+    fun getChannelNotification(): NotificationCompat.Builder{
         return NotificationCompat.Builder(applicationContext, cID,)
-            .setContentTitle(time)
-            .setContentText("Contents")
+            .setContentTitle("Alarm")
+            .setContentText("Watering Time~!")
             .setSmallIcon(R.drawable.ic_launcher_background)
     }
 }
