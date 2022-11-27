@@ -22,7 +22,7 @@
         <ImageView
             android:id="@+id/detailviewitem_profile_image"
             android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_height="28dp"
             android:layout_margin="7.5dp"
             tools:src="@mipmap/ic_launcher" />
 

@@ -7,7 +7,7 @@ data class ContentDTO(
     var explain : String? = null, //컨텐츠의 설명관리
     var imageUrl : String? = null, //이미지의 주소관리
     var uid : String? = null, //어느 유저가 올린건지
-    var userId : String? = null, //올린 이미지의 유저
+    var userId : String? = null, //올린 유저의 이미지 관리
     var timestamp : Long? = null, //몇시 몇분에 컨텐츠를 올렸는지
     var favoriteCount : Int = 0, //좋아요의 갯수
     var favorites : MutableMap<String, Boolean> = HashMap()){ //중복 좋아요 방지

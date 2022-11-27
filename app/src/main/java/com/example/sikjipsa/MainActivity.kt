@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             1
         )
 
-        //set default screen
+        //set default screen (메인 화면에 DetailViewFragment 뜨도록)
         bottom_navigation.selectedItemId = R.id.action_home
     }
 

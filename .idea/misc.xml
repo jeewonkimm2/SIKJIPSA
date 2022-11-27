@@ -4,10 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/0308s/AndroidStudioProjects/SIKJIPSA/app/src/main/res/layout/activity_add_photo.xml" value="0.22708333333333333" />
+        <entry key="..\:/Users/0308s/AndroidStudioProjects/SIKJIPSA/app/src/main/res/layout/activity_login.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/0308s/AndroidStudioProjects/SIKJIPSA/app/src/main/res/layout/activity_main.xml" value="0.23385416666666667" />
+        <entry key="..\:/Users/0308s/AndroidStudioProjects/SIKJIPSA/app/src/main/res/layout/activity_search.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/0308s/AndroidStudioProjects/SIKJIPSA/app/src/main/res/layout/activity_sign_up.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/0308s/AndroidStudioProjects/SIKJIPSA/app/src/main/res/layout/dialog_select_image.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/0308s/AndroidStudioProjects/SIKJIPSA/app/src/main/res/layout/fragment_detail.xml" value="0.14739583333333334" />
         <entry key="..\:/Users/0308s/AndroidStudioProjects/SIKJIPSA/app/src/main/res/layout/fragment_user.xml" value="0.23385416666666667" />
         <entry key="..\:/Users/0308s/AndroidStudioProjects/SIKJIPSA/app/src/main/res/layout/item_detail.xml" value="0.14739583333333334" />
+        <entry key="..\:/Users/0308s/AndroidStudioProjects/SIKJIPSA/app/src/main/res/menu/bottom_navigation_main.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/0308s/Mobile Programming/SIKJIPSA/app/src/main/res/layout/activity_add_photo.xml" value="0.24479166666666666" />
         <entry key="..\:/Users/0308s/Mobile Programming/SIKJIPSA/app/src/main/res/layout/activity_main.xml" value="0.24583333333333332" />
         <entry key="..\:/Users/0308s/Mobile Programming/SIKJIPSA/app/src/main/res/layout/activity_sign_up.xml" value="0.24583333333333332" />
