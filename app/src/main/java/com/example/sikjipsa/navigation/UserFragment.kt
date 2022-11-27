@@ -8,13 +8,25 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
+import com.example.sikjipsa.LoginActivity
 import com.example.sikjipsa.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.fragment_user.view.*
 import kotlinx.android.synthetic.main.fragment_user.*
 
-
-class UserFragment : Fragment() {
-
+class UserFragment : Fragment(){
+    //수오 유저 로그아웃
+    var fragmentView: View? = null
+    var firestore: FirebaseFirestore? = null
+    var uid : String? = null
+    private lateinit var auth: FirebaseAuth
+    var currentUserId: String? = null
+    
+    
     private var editBtn: Button? = null
+
+
 
 
     override fun onCreateView(
@@ -22,8 +34,23 @@ class UserFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view = LayoutInflater.from(activity).inflate(R.layout.fragment_user, container, false)
 
+        //지훈 mypage view이름 수오가 fragmentView로 바꿈
+        fragmentView = LayoutInflater.from(activity).inflate(R.layout.fragment_user,container,false)
+        //수오
+        firestore = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
+        currentUserId = auth.currentUser?.uid
+
+        //if(uid == currentUserId){
+            //내 계정일 때는 로그아웃
+            fragmentView?.button_signout?.setOnClickListener{
+                auth.signOut()
+                startActivity(Intent(activity, LoginActivity::class.java))
+                activity?.finish()
+            }
+        //}
+        
 //        프로필편집 화면 전환
         editBtn = view.findViewById(com.example.sikjipsa.R.id.editBtn)
 //        editBtn.setOnClickListener {
@@ -32,6 +59,7 @@ class UserFragment : Fragment() {
 //            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
 //            startActivity(intent)
 //        }
-        return view
+        return fragmentView
+
     }
 }

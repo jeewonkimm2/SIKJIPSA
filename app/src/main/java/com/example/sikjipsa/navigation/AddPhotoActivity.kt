@@ -41,7 +41,7 @@ class AddPhotoActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_photo)
 
-        //storage init
+        //storage initiate
         storage = FirebaseStorage.getInstance()
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
@@ -118,11 +118,10 @@ class AddPhotoActivity: AppCompatActivity() {
             // 유저 uid 넣어주기
             contentDTO.uid = auth?.currentUser?.uid
 
-            // 유저 아이디 넣어주기
+            // 유저 아이디 넣어주기(이메일)
             contentDTO.userId = auth?.currentUser?.email
 
-
-            // 설명 넣어주기
+            // 유저가 입력한 설명(글) 넣어주기
             contentDTO.explain = addphoto_edit_explain.text.toString()
 
             // 타임스태프 넣어주기
@@ -130,6 +129,9 @@ class AddPhotoActivity: AppCompatActivity() {
 
             // 값 넘겨주기
             firestore?.collection("images")?.document("${contentDTO.uid.toString()}${contentDTO.timestamp.toString()}")?.set(contentDTO)
+            
+            //            지원 디비 넣는 거 수정중, 유저 클래스 수정 필
+            mDBRef.child("contentText").setValue(contentDTO.explain)
 
 
             setResult(RESULT_OK)
