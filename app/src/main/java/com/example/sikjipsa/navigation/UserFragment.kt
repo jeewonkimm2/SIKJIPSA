@@ -52,7 +52,7 @@ class UserFragment : Fragment(){
         //}
         
 //        프로필편집 화면 전환
-        editBtn = view.findViewById(com.example.sikjipsa.R.id.editBtn)
+        editBtn = fragmentView?.findViewById(com.example.sikjipsa.R.id.editBtn)
 //        editBtn.setOnClickListener {
 //            val intent =
 //                Intent(activity, EditProfileActivity::class.java) //fragment라서 activity intent와는 다른 방식
