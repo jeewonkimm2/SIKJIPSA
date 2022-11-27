@@ -52,7 +52,7 @@ class DetailViewFragment : Fragment() {
         user = FirebaseAuth.getInstance().currentUser
 //        수오가 추가(유저 아이디 값)
         uid = FirebaseAuth.getInstance().currentUser?.uid
-
+        firestore = FirebaseFirestore.getInstance()
 
 //        nickname 지원추가
         mDBRef.child("user").child(uid.toString()).child("nickname").get().addOnSuccessListener {
@@ -60,18 +60,24 @@ class DetailViewFragment : Fragment() {
             Log.d("nickname","$nickname")
         }
 
-        firestore = FirebaseFirestore.getInstance()
+
         //RecyclerView와 어댑터 연결
         mainView = LayoutInflater.from(activity).inflate(R.layout.fragment_detail, container, false)
 
         view.detailviewfragment_recyclerview.adapter = DetailViewRecyclerViewAdapter()
         view.detailviewfragment_recyclerview.layoutManager = LinearLayoutManager(activity)
+
+        //게시글 역순으로 출력
+        (view.detailviewfragment_recyclerview.layoutManager as LinearLayoutManager).reverseLayout = true
+        (view.detailviewfragment_recyclerview.layoutManager as LinearLayoutManager).stackFromEnd = true
+        //최상단으로 출력
+        view.detailviewfragment_recyclerview?.smoothScrollToPosition(0)
         return view
     }
 
     inner class DetailViewRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-        var contentDTOs: ArrayList<ContentDTO> = arrayListOf()
-        var contentUidList: ArrayList<String> = arrayListOf()
+        var contentDTOs: ArrayList<ContentDTO> = arrayListOf() //게시글 담음
+        var contentUidList: ArrayList<String> = arrayListOf()  //사용자 uid 담음
 
         init {
             firestore?.collection("images")?.orderBy("timestamp")
@@ -103,15 +109,15 @@ class DetailViewFragment : Fragment() {
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-
+            //holder 값을 CustomViewHolder에 캐스팅
             var viewholder = (holder as CustomViewHolder).itemView
-            //id
-            viewholder.detailviewitem_explain_textview.text = contentDTOs!![position].userId
+            //id > 여기가 총체적 난국이여... 게시글을 등록할 때 해당하는 유저가 들어가려면 그냥 닉네임으로 넣는게 아닌 것 같음.. 모르겠음
+            //viewholder.detailviewitem_explain_textview.text = contentDTOs!![position].userId
+            viewholder.detailviewitem_profile_textview.text = nickname
+            //viewholder.detailviewitem_profile_textview.text = contentDTOs[position].nickname
 
             //Image (Glide)
             Glide.with(holder.itemView.context).load(contentDTOs!![position].imageUrl).into(viewholder.detailviewitem_imageview_content)
-
-            viewholder.detailviewitem_profile_textview.text = nickname
 
             //Explain
             viewholder.detailviewitem_explain_textview.text = contentDTOs!![position].explain
@@ -215,35 +221,5 @@ class DetailViewFragment : Fragment() {
             }
 
         }
-        //밑에 코드 나중에 지우기 (안쓰면)
-/*    inner class DetailViewRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
-
-        var contentDTOs: ArrayList<ContentDTO> = arrayListOf()
-        var contentUidList : ArrayList<String> = arrayListOf()
-
-        init {
-
-
-            firestore?.collection("images")?.orderBy("timestamp")?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-                contentDTOs.clear()
-                contentUidList.clear()
-                //Sometimes, This code return null of querySnapshot when it signout
-                if(querySnapshot == null) return@addSnapshotListener
-
-                for(snapshot in querySnapshot!!.documents){
-                    var item = snapshot.toObject(ContentDTO::class.java)
-                    contentDTOs.add(item!!)
-                    contentUidList.add(snapshot.id)
-                }
-                notifyDataSetChanged()
-            }
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            TODO("Not yet implemented")
-        }
-
-*/
-
     }
 }

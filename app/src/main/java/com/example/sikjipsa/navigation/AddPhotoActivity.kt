@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sikjipsa.R
+import com.example.sikjipsa.SignUpActivity
 import com.example.sikjipsa.User
 import com.example.sikjipsa.model.ContentDTO
 import com.google.android.gms.tasks.Task
@@ -20,6 +21,8 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.activity_add_photo.*
+import kotlinx.android.synthetic.main.activity_sign_up.*
+import kotlinx.android.synthetic.main.activity_sign_up.view.*
 import kotlinx.android.synthetic.main.item_detail.*
 import java.io.File
 import java.text.SimpleDateFormat
@@ -104,12 +107,13 @@ class AddPhotoActivity: AppCompatActivity() {
         val storageRef = storage?.reference?.child("images")?.child("${auth?.currentUser?.uid.toString()},${timestamp.toString()}")
 
 
-        //파일 업로드
+        //서버 stoarge(DB)에 파일 업로드
         storageRef?.putFile(photoUri!!)?.continueWithTask { task:Task<UploadTask.TaskSnapshot> ->
             return@continueWithTask storageRef.downloadUrl
         }?.addOnSuccessListener { uri->
             Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
 
+            //
             var contentDTO = ContentDTO()
 
             // 이미지 주소 넣어주기

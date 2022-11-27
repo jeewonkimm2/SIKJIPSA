@@ -60,7 +60,7 @@
             android:backgroundTint="#228933"
             android:text="Email Login" />
 
-        <Button
+        <!--<Button
             android:id="@+id/facebooklogin_btn"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -68,7 +68,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="5dp"
             android:backgroundTint="#228933"
-            android:text="Facebook Login" />
+            android:text="Facebook Login" />-->
 
         <Button
             android:id="@+id/google_sign_in_button"

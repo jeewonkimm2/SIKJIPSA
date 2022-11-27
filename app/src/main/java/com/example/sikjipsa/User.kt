@@ -7,7 +7,7 @@ import android.net.Uri
 data class User(
     var name: String,
     var email: String,
-    var uId: String,
+    var uId: String?,
     var nickname: String,
 //    var pic: String
 )

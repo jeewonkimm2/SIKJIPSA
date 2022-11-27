@@ -135,7 +135,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     //수오 자동로그인 유지
-    fun moveMainPage(user: FirebaseUser?){
+   fun moveMainPage(user: FirebaseUser?){
         if(user != null){
             startActivity(Intent(this, MainActivity::class.java))
             finish()

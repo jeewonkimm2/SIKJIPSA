@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/0308s/AndroidStudioProjects/SIKJIPSA/app/src/main/res/layout/activity_add_photo.xml" value="0.22708333333333333" />
+        <entry key="..\:/Users/0308s/AndroidStudioProjects/SIKJIPSA/app/src/main/res/layout/activity_edit_profile.xml" value="0.24583333333333332" />
         <entry key="..\:/Users/0308s/AndroidStudioProjects/SIKJIPSA/app/src/main/res/layout/activity_login.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/0308s/AndroidStudioProjects/SIKJIPSA/app/src/main/res/layout/activity_main.xml" value="0.23385416666666667" />
         <entry key="..\:/Users/0308s/AndroidStudioProjects/SIKJIPSA/app/src/main/res/layout/activity_search.xml" value="0.23229166666666667" />
@@ -33,7 +34,6 @@
         <entry key="app/src/main/res/drawable/ic_baseline_wb_sunny_24.xml" value="0.1635" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1645" />
         <entry key="app/src/main/res/layout/activity_add_photo.xml" value="0.3880208333333333" />
-        <entry key="app/src/main/res/layout/activity_editprofile.xml" value="0.37037037037037035" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.35505981445312507" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.443011474609375" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.2781021118164062" />
@@ -46,9 +46,9 @@
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/fragment_grid.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.2078125" />
-        <entry key="app/src/main/res/layout/item_detail.xml" value="0.29584350585937497" />
+        <entry key="app/src/main/res/layout/item_detail.xml" value="0.2546875" />
         <entry key="app/src/main/res/layout/notification.xml" value="0.2537037037037037" />
-        <entry key="app/src/main/res/layout/notification_layout.xml" value="0.4346394856770833" />
+        <entry key="app/src/main/res/layout/notification_layout.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/menu/bottom_navigation_main.xml" value="0.35959167480468746" />
       </map>
     </option>

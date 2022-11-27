@@ -20,7 +20,7 @@ class UserFragment : Fragment(){
     var fragmentView: View? = null
     var firestore: FirebaseFirestore? = null
     var uid : String? = null
-    private lateinit var auth: FirebaseAuth
+    var auth: FirebaseAuth? = null
     var currentUserId: String? = null
     
     
@@ -40,12 +40,12 @@ class UserFragment : Fragment(){
         //수오
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
-        currentUserId = auth.currentUser?.uid
+        currentUserId = auth?.currentUser?.uid
 
         //if(uid == currentUserId){
             //내 계정일 때는 로그아웃
             fragmentView?.button_signout?.setOnClickListener{
-                auth.signOut()
+                auth?.signOut()
                 startActivity(Intent(activity, LoginActivity::class.java))
                 activity?.finish()
             }
