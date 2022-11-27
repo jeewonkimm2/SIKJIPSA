@@ -1,7 +1,6 @@
 package com.example.sikjipsa
 
 import android.Manifest
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -19,9 +18,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
-import kotlinx.android.synthetic.main.activity_add_photo.*
-import kotlinx.android.synthetic.main.activity_sign_up.*
-import java.text.SimpleDateFormat
 import java.util.*
 
 class SignUpActivity : AppCompatActivity() {
@@ -68,7 +64,8 @@ class SignUpActivity : AppCompatActivity() {
 
         firestore = FirebaseFirestore.getInstance()
 
-        currentuser = mAuth.currentUser!!
+        //등록 과정에서 충돌나는거 해결(수오) 여기서 밑에 코드 선언하면 null이어서 등록이 안됨
+        //currentuser = mAuth.currentUser!!
 
 
         binding.pic.setOnClickListener {
@@ -131,7 +128,7 @@ class SignUpActivity : AppCompatActivity() {
 
 
     private fun addUserToDatabase(name: String, email: String, uid:String,nickname:String){
-        var uid = currentuser.uid
+/*        var uid = currentuser.uid
         mDBRef.child("user").child(uid).setValue(User(name,email,uid,nickname))
 //        Uploading profile picture on storage
         val storageRef = storage?.reference?.child("profilepic")?.child(uid)
@@ -141,5 +138,19 @@ class SignUpActivity : AppCompatActivity() {
 //                    Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
             setResult(RESULT_OK)
         }
+*/
+
+        //기존 지원이 코드 위에거에서 수오가 재수정함
+        var uid = mAuth.currentUser?.uid
+        mDBRef.child("user").child(uid.toString()).setValue(User(name,email,uid,nickname))
+//        Uploading profile picture on storage
+        val storageRef = storage?.reference?.child("profilepic")?.child(uid.toString())
+        storageRef?.putFile(photoURI!!)?.continueWithTask { task:Task<UploadTask.TaskSnapshot> ->
+            return@continueWithTask storageRef.downloadUrl
+        }?.addOnSuccessListener { uri->
+//                    Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
+            setResult(RESULT_OK)
+        }
+
     }
 }
