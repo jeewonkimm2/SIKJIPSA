@@ -56,7 +56,6 @@
         android:layout_marginBottom="10dp"
         android:backgroundTint="#AADB91"
         android:text="My Plant"
-
         app:layout_constraintBottom_toTopOf="@+id/mypostBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
@@ -67,29 +66,27 @@
         android:id="@+id/mypostBtn"
         android:layout_width="265dp"
         android:layout_height="73dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="149dp"
         android:backgroundTint="#AADB91"
         android:text="My Post"
-        app:layout_constraintBottom_toTopOf="@+id/saveBtn"
-        app:layout_constraintEnd_toEndOf="parent"
 
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/saveBtn"
-        android:layout_width="265dp"
-        android:layout_height="73dp"
-        android:layout_marginBottom="64dp"
-        android:backgroundTint="#AADB91"
-        android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
+
+    <Switch
+        android:id="@+id/wateringSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="94dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="208dp"
+        android:text="Watering?"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mypostBtn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
