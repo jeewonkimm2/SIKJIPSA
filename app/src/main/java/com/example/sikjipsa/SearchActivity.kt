@@ -5,8 +5,11 @@ import android.annotation.SuppressLint
 import android.app.SearchManager
 import android.content.Intent
 import android.graphics.*
+import android.graphics.Bitmap.createScaledBitmap
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.provider.MediaStore.Images.Media.getBitmap
 import android.util.Log
 import android.view.View.*
@@ -29,7 +32,8 @@ import java.util.*
 
 class SearchActivity : AppCompatActivity() {
     var PICK_IMAGE_FROM_ALBUM = 0
-    var photoURI: Uri? = null
+
+
 
     //    사진부분
     private lateinit var binding: ActivitySearchBinding
@@ -55,9 +59,13 @@ class SearchActivity : AppCompatActivity() {
 
         binding.imageBtn.setOnClickListener {
 
+
+
+
             var photoPickerIntent = Intent(Intent.ACTION_PICK)
             photoPickerIntent.type = "image/*"
             startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
+
 
             val conditions = CustomModelDownloadConditions.Builder()
                 .requireWifi()
@@ -73,12 +81,13 @@ class SearchActivity : AppCompatActivity() {
                         Log.d("probabilities","model import done")
 
                         val plant = getResources().getDrawable(R.drawable.monstera)
-                        Log.d("probabilities","$plant")
+//                        Log.d("probabilities","$plant")
 
+                        Log.d("probabilities","picture import done")
+
+                        Log.d("probabilities","photoURI $photoURI")
                         val bitmap = Bitmap.createScaledBitmap(plant.toBitmap(), 224, 224, true)
-//                        val bitmap = Bitmap.createScaledBitmap(비트맵들어가야함, 224, 224, true)
 
-                        Log.d("probabilities","$bitmap")
                         Log.d("probabilities","picture import done")
                         val input = ByteBuffer.allocateDirect(224*224*3*4).order(ByteOrder.nativeOrder())
                         for (y in 0 until 224) {
@@ -125,9 +134,9 @@ class SearchActivity : AppCompatActivity() {
                                     bestProb = probability
                                     bestLabel = label
                                 }
-                                Log.d("probabilities","$label: $probability")
+//                                Log.d("probabilities","$label: $probability")
                             }
-                            Log.d("probabilities","It is $bestLabel")
+//                            Log.d("probabilities","It is $bestLabel")
                             probFromModel = bestProb
                             keywordFromModel = bestLabel
 
@@ -178,20 +187,45 @@ class SearchActivity : AppCompatActivity() {
 
     }
 
+    var photoURI: Uri? = null
+    var bitmapFinal:Bitmap? = null
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PICK_IMAGE_FROM_ALBUM) {
-            if (resultCode == RESULT_OK) {
-                photoURI = data?.data
+    super.onActivityResult(requestCode, resultCode, data)
+    if (requestCode == PICK_IMAGE_FROM_ALBUM) {
+        if (resultCode == AppCompatActivity.RESULT_OK) {
+            photoURI = data?.data
 
+            try{
+                photoURI?.let{
+                    if(Build.VERSION.SDK_INT<28){
+                        val bitmap = MediaStore.Images.Media.getBitmap(
+                            contentResolver,
+                            photoURI
+                        )
+//                            Log.d("probabilities","1 : $bitmap")
+                        bitmapFinal = bitmap
+//                            Log.d("probabilities","result 1 : $bitmapFinal")
 
+                    }else{
+                        val source = ImageDecoder.createSource(contentResolver,
+                            photoURI!!
+                        )
+                        val bitmap = ImageDecoder.decodeBitmap(source)
+//                            Log.d("probabilities","2 : $bitmap")
+                        bitmapFinal = bitmap
+//                            Log.d("probabilities","result 2 : $bitmapFinal")
+                    }
 
+                }
 
-                Log.d("probabilities","$photoURI")
-            } else {
-                finish()
+            }catch(e:Exception){
+                e.printStackTrace()
             }
+        } else {
+            finish()
         }
+    }
     }
 }
 
