@@ -36,9 +36,11 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1645" />
         <entry key="app/src/main/res/layout/activity_add_photo.xml" value="0.3880208333333333" />
         <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.15185185185185185" />
+        <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.2082051282051282" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.35505981445312507" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.443011474609375" />
         <entry key="app/src/main/res/layout/activity_myplant.xml" value="0.20208333333333334" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25171661376953125" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.2781021118164062" />
         <entry key="app/src/main/res/layout/activity_search_image.xml" value="0.34791666666666665" />
         <entry key="app/src/main/res/layout/activity_search_keyword.xml" value="0.3880208333333333" />
