@@ -4,16 +4,10 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.SearchManager
 import android.content.Intent
-import android.content.res.Resources
 import android.graphics.*
-import android.graphics.Bitmap.createBitmap
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.provider.MediaStore.Images.Media.getBitmap
-import android.util.Base64.NO_WRAP
-import android.util.Base64.encodeToString
 import android.util.Log
 import android.view.View.*
 import androidx.appcompat.app.AppCompatActivity
@@ -28,12 +22,10 @@ import kotlinx.android.synthetic.main.activity_add_photo.*
 import kotlinx.android.synthetic.main.activity_main.*
 import org.tensorflow.lite.Interpreter
 import java.io.*
-import java.lang.Byte
-import java.lang.Float
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.util.*
-import android.util.Base64.encodeToString
+
 
 class SearchActivity : AppCompatActivity() {
     var PICK_IMAGE_FROM_ALBUM = 0
@@ -83,12 +75,8 @@ class SearchActivity : AppCompatActivity() {
                         val plant = getResources().getDrawable(R.drawable.monstera)
                         Log.d("probabilities","$plant")
 
-//                        val flower = androidx.core.graphics.createBitmap(224, 224, photoURI)
-//                        val bitmap = Bitmap.createScaledBitmap(getBitmap(contentResolver,photoURI), 224, 224, true)
-
                         val bitmap = Bitmap.createScaledBitmap(plant.toBitmap(), 224, 224, true)
-
-
+//                        val bitmap = Bitmap.createScaledBitmap(비트맵들어가야함, 224, 224, true)
 
                         Log.d("probabilities","$bitmap")
                         Log.d("probabilities","picture import done")
@@ -195,6 +183,9 @@ class SearchActivity : AppCompatActivity() {
         if (requestCode == PICK_IMAGE_FROM_ALBUM) {
             if (resultCode == RESULT_OK) {
                 photoURI = data?.data
+
+
+
 
                 Log.d("probabilities","$photoURI")
             } else {
