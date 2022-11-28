@@ -6,14 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import com.example.sikjipsa.LoginActivity
 import com.example.sikjipsa.R
+import com.example.sikjipsa.WateringActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_user.view.*
-import kotlinx.android.synthetic.main.fragment_user.*
 
 class UserFragment : Fragment(){
     //수오 유저 로그아웃
@@ -25,6 +24,7 @@ class UserFragment : Fragment(){
     
     
     private var editBtn: Button? = null
+    private var watering: Button? = null
 
 
 
@@ -53,13 +53,24 @@ class UserFragment : Fragment(){
         
 //        프로필편집 화면 전환
         editBtn = fragmentView?.findViewById(com.example.sikjipsa.R.id.editBtn)
+
 //        editBtn.setOnClickListener {
 //            val intent =
 //                Intent(activity, EditProfileActivity::class.java) //fragment라서 activity intent와는 다른 방식
 //            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
 //            startActivity(intent)
 //        }
+
+
+        watering = fragmentView?.findViewById(R.id.wateringBtn)
+        watering?.setOnClickListener{
+            startActivity(Intent(context, WateringActivity::class.java))
+        }
+
+
+
         return fragmentView
+
 
     }
 }

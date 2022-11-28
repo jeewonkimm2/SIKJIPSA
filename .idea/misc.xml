@@ -24,6 +24,7 @@
         <entry key="..\:/Users/0308s/Mobile Programming/SIKJIPSA/app/src/main/res/layout/item_detail.xml" value="0.264" />
         <entry key="..\:/Users/0308s/Mobile Programming/SIKJIPSA/app/src/main/res/menu/bottom_navigation_main.xml" value="0.24583333333333332" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1645" />
+        <entry key="app/src/main/res/drawable/background_white_ring.xml" value="0.163" />
         <entry key="app/src/main/res/drawable/ic_baseline_access_alarm_24.xml" value="0.1645" />
         <entry key="app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.1645" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_a_photo_24.xml" value="0.1635" />
@@ -42,6 +43,7 @@
         <entry key="app/src/main/res/layout/activity_search_keyword.xml" value="0.3880208333333333" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.1916708374023437" />
         <entry key="app/src/main/res/layout/activity_watering.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/activity_watering_v2.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dialog_select_image.xml" value="0.28033447265625" />
         <entry key="app/src/main/res/layout/fragment_alarm.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.2078125" />
@@ -51,6 +53,7 @@
         <entry key="app/src/main/res/layout/notification.xml" value="0.2537037037037037" />
         <entry key="app/src/main/res/layout/notification_layout.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/menu/bottom_navigation_main.xml" value="0.35959167480468746" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.163" />
       </map>
     </option>
   </component>
