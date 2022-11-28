@@ -28,7 +28,7 @@
             android:name=".EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".editprofile"
+            android:name=".myPlantActivity"
             android:exported="false" />
 
         <meta-data

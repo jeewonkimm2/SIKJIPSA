@@ -1,4 +1,4 @@
-package com.example.sikjipsa.navigation
+package com.example.sikjipsa
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
