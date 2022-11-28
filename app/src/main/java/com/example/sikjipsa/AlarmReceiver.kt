@@ -10,7 +10,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 
-class AlarmReceiver_v2: BroadcastReceiver() {
+class AlarmReceiver: BroadcastReceiver() {
 
     companion object {
         const val NOTIFICATION_ID = 100
@@ -39,8 +39,8 @@ class AlarmReceiver_v2: BroadcastReceiver() {
     private fun notifyNotification(context: Context){
         with(NotificationManagerCompat.from(context)){
             val build = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
-                .setContentTitle("알림")
-                .setContentText("일어날 시간입니다.")
+                .setContentTitle("SIKJIPSA")
+                .setContentText("Watering Time~~~!!!")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
 

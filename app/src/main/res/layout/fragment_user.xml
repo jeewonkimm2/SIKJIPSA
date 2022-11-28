@@ -77,6 +77,23 @@
         tools:ignore="MissingConstraints" />
 
     <Button
+        android:id="@+id/wateringBtn"
+        android:layout_width="265dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="10dp"
+
+        android:layout_marginEnd="73dp"
+        android:layout_marginBottom="62dp"
+        android:backgroundTint="#AADB91"
+        android:text="Watering"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mypostBtn"
+        tools:ignore="MissingConstraints" />
+
+    <Button
         android:id="@+id/button_signout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -87,20 +104,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile"
         tools:ignore="MissingConstraints" />
-
-    <Switch
-        android:id="@+id/wateringSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="94dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="208dp"
-        android:text="Watering?"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mypostBtn" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

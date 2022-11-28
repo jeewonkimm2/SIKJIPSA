@@ -6,9 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
-import android.widget.Switch
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.sikjipsa.LoginActivity
 import com.example.sikjipsa.R
@@ -16,7 +13,6 @@ import com.example.sikjipsa.WateringActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_user.view.*
-import kotlinx.android.synthetic.main.fragment_user.*
 
 class UserFragment : Fragment(){
     //수오 유저 로그아웃
@@ -28,7 +24,7 @@ class UserFragment : Fragment(){
     
     
     private var editBtn: Button? = null
-    private var watering: Switch? = null
+    private var watering: Button? = null
 
 
 
@@ -66,20 +62,9 @@ class UserFragment : Fragment(){
 //        }
 
         //Working on...
-        watering = fragmentView?.findViewById(R.id.wateringSwitch)
-        watering?.setOnCheckedChangeListener{CompoundButton, onSwitch ->
-
-            //  스위치가 켜지면
-            if (onSwitch){
-                startActivity(Intent(context, WateringActivity::class.java))
-                Toast.makeText(context, "switch on", Toast.LENGTH_SHORT).show()
-            }
-
-            //  스위치가 꺼지면
-            else{
-                startActivity(Intent(context, WateringActivity::class.java))
-                Toast.makeText(context, "switch off", Toast.LENGTH_SHORT).show()
-            }
+        watering = fragmentView?.findViewById(R.id.wateringBtn)
+        watering?.setOnClickListener{
+            startActivity(Intent(context, WateringActivity::class.java))
         }
         //Working on...
 

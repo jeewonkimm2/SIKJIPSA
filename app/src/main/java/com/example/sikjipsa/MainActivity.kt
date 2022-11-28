@@ -120,9 +120,6 @@ class MainActivity : AppCompatActivity() {
                     toBack.addToBackStack(null)
                     toBack.commit()
 
-                    //******* incomplete
-//                    startActivity(Intent(this, WateringActivity_v2::class.java))
-                    //*******
                     return@setOnItemSelectedListener true
                 }
 
