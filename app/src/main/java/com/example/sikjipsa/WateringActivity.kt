@@ -14,7 +14,7 @@ import java.util.*
 class WateringActivity: AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_watering_v2)
+        setContentView(R.layout.activity_watering)
 
         initOnOffButton()
         initChangeAlarmTimeButton()

@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import com.example.sikjipsa.LoginActivity
-import com.example.sikjipsa.R
-import com.example.sikjipsa.WateringActivity
+import com.example.sikjipsa.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_user.view.*
@@ -24,6 +22,7 @@ class UserFragment : Fragment(){
     
     
     private var editBtn: Button? = null
+    private var plantBtn: Button? = null
     private var watering: Button? = null
 
 
@@ -52,17 +51,18 @@ class UserFragment : Fragment(){
         //}
         
 //        프로필편집 화면 전환
-        editBtn = fragmentView?.findViewById(com.example.sikjipsa.R.id.editBtn)
-
-//        editBtn.setOnClickListener {
-//            val intent =
-//                Intent(activity, EditProfileActivity::class.java) //fragment라서 activity intent와는 다른 방식
-//            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-//            startActivity(intent)
-//        }
-
-
+        editBtn = fragmentView?.findViewById(R.id.editBtn)
+        plantBtn = fragmentView?.findViewById(R.id.myplantBtn)
         watering = fragmentView?.findViewById(R.id.wateringBtn)
+
+        editBtn?.setOnClickListener {
+            startActivity(Intent(context, EditProfileActivity::class.java))
+        }
+
+        plantBtn?.setOnClickListener{
+            startActivity(Intent(context, myPlantActivity::class.java))
+        }
+
         watering?.setOnClickListener{
             startActivity(Intent(context, WateringActivity::class.java))
         }
