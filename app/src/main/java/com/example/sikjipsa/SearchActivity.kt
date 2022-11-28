@@ -81,11 +81,13 @@ class SearchActivity : AppCompatActivity() {
                         Log.d("probabilities","model import done")
 
                         val plant = getResources().getDrawable(R.drawable.monstera)
+                        Log.d("probabilities","$plant")
 
 //                        val flower = androidx.core.graphics.createBitmap(224, 224, photoURI)
 //                        val bitmap = Bitmap.createScaledBitmap(getBitmap(contentResolver,photoURI), 224, 224, true)
 
                         val bitmap = Bitmap.createScaledBitmap(plant.toBitmap(), 224, 224, true)
+
 
 
                         Log.d("probabilities","$bitmap")

@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -39,7 +40,6 @@ class AddPhotoActivity: AppCompatActivity() {
     private lateinit var mDBRef: DatabaseReference
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_photo)
@@ -51,31 +51,12 @@ class AddPhotoActivity: AppCompatActivity() {
         //        DB 초기화
         mDBRef = Firebase.database.reference
 
-/*        //open the album
-        var launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-                result->
-            if(result.resultCode == PICK_IMAGE_FROM_ALBUM){
-                if(result.resultCode == Activity.RESULT_OK){
-                    //This is path to the selected image
-                    photoUri = result.data?.data
-                    addphoto_image.setImageURI(photoUri)
-                }else{
-                    finish()
-
-                }
-            }
-        }
-*/
 
         //open the album
         var photoPickerIntent= Intent(Intent.ACTION_PICK)
         photoPickerIntent.type = "image/*"
         startActivityForResult(photoPickerIntent,PICK_IMAGE_FROM_ALBUM)
-/*        with(launcher) {
-            photoPickerIntent.type = "image/*"
-            launch(photoPickerIntent)
-        }
-*/*/
+
 
         //버튼 이벤트
         addphoto_btn_upload.setOnClickListener {
@@ -128,14 +109,20 @@ class AddPhotoActivity: AppCompatActivity() {
             // 유저가 입력한 설명(글) 넣어주기
             contentDTO.explain = addphoto_edit_explain.text.toString()
 
+            var nickname:String
+//            닉네임 추가 수정중
+            mDBRef.child("user").child(auth?.currentUser?.uid.toString()).child("nickname").get().addOnSuccessListener {
+                nickname = it.value.toString()
+                Log.d("debugnickname","$nickname")
+                contentDTO.nickname = nickname
+                Log.d("debugnickname","${contentDTO.nickname}")
+            }
+
             // 타임스태프 넣어주기
             contentDTO.timestamp = System.currentTimeMillis()
 
             // 값 넘겨주기
             firestore?.collection("images")?.document("${contentDTO.uid.toString()}${contentDTO.timestamp.toString()}")?.set(contentDTO)
-            
-            //            지원 디비 넣는 거 수정중, 유저 클래스 수정 필
-            mDBRef.child("contentText").setValue(contentDTO.explain)
 
 
             setResult(RESULT_OK)

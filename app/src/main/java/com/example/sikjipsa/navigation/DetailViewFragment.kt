@@ -113,8 +113,8 @@ class DetailViewFragment : Fragment() {
             var viewholder = (holder as CustomViewHolder).itemView
             //id > 여기가 총체적 난국이여... 게시글을 등록할 때 해당하는 유저가 들어가려면 그냥 닉네임으로 넣는게 아닌 것 같음.. 모르겠음
             //viewholder.detailviewitem_explain_textview.text = contentDTOs!![position].userId
-            viewholder.detailviewitem_profile_textview.text = nickname
-            //viewholder.detailviewitem_profile_textview.text = contentDTOs[position].nickname
+
+            viewholder.detailviewitem_profile_textview.text = contentDTOs!![position].nickname
 
             //Image (Glide)
             Glide.with(holder.itemView.context).load(contentDTOs!![position].imageUrl).into(viewholder.detailviewitem_imageview_content)
