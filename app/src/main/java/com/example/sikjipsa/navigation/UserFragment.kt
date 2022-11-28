@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.example.sikjipsa.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.fragment_user.*
 import kotlinx.android.synthetic.main.fragment_user.view.*
 
 class UserFragment : Fragment(){
@@ -24,6 +25,9 @@ class UserFragment : Fragment(){
     private var editBtn: Button? = null
     private var plantBtn: Button? = null
     private var watering: Button? = null
+    private var mypostBtn: Button? = null
+
+
 
 
 
@@ -54,6 +58,7 @@ class UserFragment : Fragment(){
         editBtn = fragmentView?.findViewById(R.id.editBtn)
         plantBtn = fragmentView?.findViewById(R.id.myplantBtn)
         watering = fragmentView?.findViewById(R.id.wateringBtn)
+        mypostBtn = fragmentView?.findViewById(R.id.mypostBtn)
 
         editBtn?.setOnClickListener {
             startActivity(Intent(context, EditProfileActivity::class.java))
@@ -61,6 +66,10 @@ class UserFragment : Fragment(){
 
         plantBtn?.setOnClickListener{
             startActivity(Intent(context, myPlantActivity::class.java))
+        }
+
+        mypostBtn?.setOnClickListener {
+            startActivity(Intent(context, MyPostActivity::class.java))
         }
 
         watering?.setOnClickListener{
