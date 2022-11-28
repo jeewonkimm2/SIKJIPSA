@@ -61,12 +61,12 @@ class UserFragment : Fragment(){
 //            startActivity(intent)
 //        }
 
-        //Working on...
+
         watering = fragmentView?.findViewById(R.id.wateringBtn)
         watering?.setOnClickListener{
             startActivity(Intent(context, WateringActivity::class.java))
         }
-        //Working on...
+
 
 
         return fragmentView
