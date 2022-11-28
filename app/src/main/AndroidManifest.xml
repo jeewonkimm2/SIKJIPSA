@@ -22,6 +22,9 @@
         <activity
             android:name=".WateringActivity"
             android:exported="false"/>
+        <activity
+            android:name=".WateringActivity_v2"
+            android:exported="false"/>
 
         <activity
             android:name=".EditProfileActivity"
@@ -86,6 +89,9 @@
             </intent-filter>
         </service>
         <receiver android:name=".AlertReceiver"/>
+        <receiver android:name=".AlarmReceiver_v2"
+            android:exported="false"/>
+
 
 
     </application>

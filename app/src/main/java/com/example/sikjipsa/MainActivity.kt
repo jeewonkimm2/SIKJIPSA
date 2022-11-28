@@ -114,17 +114,15 @@ class MainActivity : AppCompatActivity() {
                     return@setOnItemSelectedListener true
                 }
                 R.id.action_account -> {
-//                    var userFragment = UserFragment()
-//                    val toBack = supportFragmentManager.beginTransaction()
-//                    toBack.replace(R.id.main_content, userFragment)
-//                    toBack.addToBackStack(null)
-//                    toBack.commit()
+                    var userFragment = UserFragment()
+                    val toBack = supportFragmentManager.beginTransaction()
+                    toBack.replace(R.id.main_content, userFragment)
+                    toBack.addToBackStack(null)
+                    toBack.commit()
 
-                    //********* 알람 실행은 우선 됨
-                    startActivity(Intent(this, WateringActivity::class.java))
-                    //********* 레이아웃 조정 필요/
-
-
+                    //******* incomplete
+//                    startActivity(Intent(this, WateringActivity_v2::class.java))
+                    //*******
                     return@setOnItemSelectedListener true
                 }
 
