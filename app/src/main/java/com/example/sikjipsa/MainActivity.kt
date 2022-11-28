@@ -1,37 +1,22 @@
 package com.example.sikjipsa
 
-import android.app.AlertDialog
-import android.content.ContentValues
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.icu.text.SimpleDateFormat
-import android.net.Uri
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
-import android.util.Log
-import android.view.MenuItem
-import android.widget.Button
 import android.widget.TextView
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import com.example.sikjipsa.databinding.ActivityMainBinding
 //import com.example.sikjipsa.databinding.FragmentGridBinding
 import com.example.sikjipsa.navigation.*
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
-import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 import java.lang.Exception
 import java.net.URL
 import java.util.*
-import java.util.jar.Manifest
 
 //수오 브랜치 재확인
 //지원
@@ -105,10 +90,10 @@ class MainActivity : AppCompatActivity() {
                     return@setOnItemSelectedListener true
                 }
                 R.id.action_favorite_alarm -> {
-                    var alarmFragment = AlarmFragment()
+                    var weatherFragment = WeatherFragment()
                     val toBack = supportFragmentManager.beginTransaction()
                     weatherTask().execute()
-                    toBack.replace(R.id.main_content, alarmFragment)
+                    toBack.replace(R.id.main_content, weatherFragment)
                     toBack.addToBackStack(null)
                     toBack.commit()
                     return@setOnItemSelectedListener true
