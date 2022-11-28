@@ -16,14 +16,14 @@ import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AlarmFragment : Fragment(){
+class WeatherFragment : Fragment(){
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view = LayoutInflater.from(activity).inflate(R.layout.fragment_alarm,container,false)
+        var view = LayoutInflater.from(activity).inflate(R.layout.fragment_weather,container,false)
 
         return view
     }

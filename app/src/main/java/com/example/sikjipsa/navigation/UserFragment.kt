@@ -67,8 +67,6 @@ class UserFragment : Fragment(){
             startActivity(Intent(context, WateringActivity::class.java))
         }
 
-
-
         return fragmentView
 
 
