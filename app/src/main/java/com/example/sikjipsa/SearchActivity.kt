@@ -153,19 +153,20 @@ class SearchActivity : AppCompatActivity() {
                             interpreter = Interpreter(modelFile)
                             Log.d("probabilities", "model import done")
 
-                            val plant = getResources().getDrawable(R.drawable.monstera)
-                            Log.d("probabilities","$plant")
+//                            val plant = getResources().getDrawable(R.drawable.monstera)
+//                            Log.d("probabilities","$plant")
 
-                            Log.d("probabilities","picture import done")
-
-                            Log.d("probabilities","${photoURI}")
-                            Log.d("probabilities","${bitmapFinal}")
+                            Log.d("probabilities","photoURI ${photoURI}")
+                            Log.d("probabilities","bitmapFinal ${bitmapFinal}")
 
 
-                            val bitmap = Bitmap.createScaledBitmap(plant.toBitmap(), 224, 224, true)
+                            var softwareBitmap = bitmapFinal!!.copy(Bitmap.Config.ARGB_8888,true)
+                            val bitmap = Bitmap.createScaledBitmap(softwareBitmap, 224, 224, true)
 
                             Log.d("probabilities","picture import done")
                             val input = ByteBuffer.allocateDirect(224*224*3*4).order(ByteOrder.nativeOrder())
+                            Log.d("probabilities","picture import done with buffer")
+
                             for (y in 0 until 224) {
                                 for (x in 0 until 224) {
                                     val px = bitmap.getPixel(x, y)
@@ -183,6 +184,7 @@ class SearchActivity : AppCompatActivity() {
                                     input.putFloat(rf)
                                     input.putFloat(gf)
                                     input.putFloat(bf)
+                                    Log.d("probabilities","rgb working")
                                 }
                             }
 
@@ -212,7 +214,7 @@ class SearchActivity : AppCompatActivity() {
                                     }
 //                                Log.d("probabilities","$label: $probability")
                                 }
-//                            Log.d("probabilities","It is $bestLabel")
+                            Log.d("probabilities","It is $bestLabel")
                                 probFromModel = bestProb
                                 keywordFromModel = bestLabel
 
