@@ -84,9 +84,10 @@ class DetailViewForMyPostFragment : Fragment() {
 //        지원 : 필터링 추가필 !!
 
         init {
-            Log.d("UID","${uid.toString()}")
-            firestore?.collection("images")?.whereEqualTo("uid","${uid.toString()}")
+            Log.d("uidcheck","${uid.toString()}")
+            firestore?.collection("images")?.whereEqualTo("uid","${uid}")
                 ?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+                    Log.d("uidcheck","$querySnapshot")
                     contentDTOs.clear()
                     contentUidList.clear()
                     if (querySnapshot == null) return@addSnapshotListener

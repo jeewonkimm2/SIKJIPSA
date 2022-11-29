@@ -35,12 +35,11 @@
         <entry key="app/src/main/res/drawable/ic_baseline_wb_sunny_24.xml" value="0.1635" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1645" />
         <entry key="app/src/main/res/layout/activity_add_photo.xml" value="0.3880208333333333" />
-        <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.15185185185185185" />
         <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.2082051282051282" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.35505981445312507" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.443011474609375" />
-        <entry key="app/src/main/res/layout/activity_myplant.xml" value="0.20208333333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25171661376953125" />
+        <entry key="app/src/main/res/layout/activity_my_post.xml" value="0.18703703703703703" />
+        <entry key="app/src/main/res/layout/activity_myplant.xml" value="0.20208333333333334" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.2781021118164062" />
         <entry key="app/src/main/res/layout/activity_search_image.xml" value="0.34791666666666665" />
         <entry key="app/src/main/res/layout/activity_search_keyword.xml" value="0.3880208333333333" />
@@ -55,7 +54,7 @@
         <entry key="app/src/main/res/layout/item_detail.xml" value="0.2546875" />
         <entry key="app/src/main/res/layout/notification.xml" value="0.2537037037037037" />
         <entry key="app/src/main/res/layout/notification_layout.xml" value="0.24114583333333334" />
-        <entry key="app/src/main/res/menu/bottom_navigation_main.xml" value="0.35959167480468746" />
+        <entry key="app/src/main/res/menu/bottom_navigation_main.xml" value="0.16596374511718753" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.163" />
       </map>
     </option>

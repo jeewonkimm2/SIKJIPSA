@@ -32,7 +32,7 @@ class MyPostActivity : AppCompatActivity() {
 
         //BottomNavigation
         initView()
-        initBottomNavigation()
+//        initBottomNavigation()
 
         ActivityCompat.requestPermissions(
             this,
@@ -41,7 +41,7 @@ class MyPostActivity : AppCompatActivity() {
         )
 
         //set default screen (메인 화면에 DetailViewFragment 뜨도록)
-        bottom_navigation.selectedItemId = R.id.action_home
+//        bottom_navigation.selectedItemId = R.id.action_home
     }
 
 
@@ -49,7 +49,6 @@ class MyPostActivity : AppCompatActivity() {
     private fun initView() {
         supportFragmentManager.beginTransaction().add(R.id.main_content, DetailViewForMyPostFragment())
             .commit()
-
     }
 
 
