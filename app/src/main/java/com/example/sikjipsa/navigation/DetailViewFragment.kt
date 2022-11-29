@@ -125,11 +125,9 @@ class DetailViewFragment : Fragment() {
             //Likes
             viewholder.detailviewitem_favoritecounter_textview.text = "Likes "+ contentDTOs!![position].favoriteCount
 
-            //ProfileImage jeewon fix
-//            Glide.with(holder.itemView.context).load(contentDTOs!![position].imageUrl).into(viewholder.detailviewitem_profile_image)
+            //ProfileImage
             val fs = FirebaseStorage.getInstance()
-            fs.getReference().child("profilepic").child(uid.toString()).downloadUrl.addOnSuccessListener {
-                Log.d("uid","${uid.toString()}")
+            fs.getReference().child("profilepic").child(contentDTOs!![position].uid.toString()).downloadUrl.addOnSuccessListener {
                 var imageUrl = it
                 Glide.with(holder.itemView.context).load(imageUrl).apply(RequestOptions().circleCrop()).into(viewholder.detailviewitem_profile_image)
             }
@@ -150,23 +148,8 @@ class DetailViewFragment : Fragment() {
             }
 
 
+
             /*//나중거
-            firestore?.collection("profileImages")
-                ?.document(contentDTOs[position].uid!!)
-                ?.get()
-                ?.addOnCompleteListener { task ->
-                    if(task.isSuccessful){
-
-                        var url = task.result?.get("image")
-
-                        if (url != null) {
-                            Glide.with(holder.itemView.context).load(url)
-                                .apply(RequestOptions().circleCrop())
-                                .into(viewholder.detailviewitem_profile_image)
-                        }
-
-                    }
-                }
 
             // 좋아요 버튼에 이벤트 추가
             viewholder.detailviewitem_favorite_imageView.setOnClickListener {
@@ -189,16 +172,9 @@ class DetailViewFragment : Fragment() {
                 intent.putExtra("contentUid",contentUidList[position])
                 intent.putExtra("destinationUid",contentDTOs[position].uid)
                 startActivity(intent)
-            }
-
-            if(contentDTOs!![position].favorites.containsKey(uid)){
-                // 좋아요 버튼이 눌려 있을 때
-                viewholder.detailviewitem_favorite_imageView.setImageResource(R.drawable.ic_favorite)
-            }
-            else{
-                // 좋아요 버튼이 눌려 있지 않을 때
-                viewholder.detailviewitem_favorite_imageView.setImageResource(R.drawable.ic_favorite_border)
             }*/
+
+
         }
         fun favoriteEvent(position: Int){
             var tsDoc = firestore?.collection("images")?.document(contentUidList[position])
