@@ -25,8 +25,6 @@ import kotlinx.android.synthetic.main.fragment_detail.view.*
 import kotlinx.android.synthetic.main.item_detail.view.*
 
 
-//storage 필터 적용 필
-
 class DetailViewForMyPostFragment : Fragment() {
 
     var user: FirebaseUser? = null
@@ -81,8 +79,6 @@ class DetailViewForMyPostFragment : Fragment() {
         var contentDTOs: ArrayList<ContentDTO> = arrayListOf() //게시글 담음
         var contentUidList: ArrayList<String> = arrayListOf()  //사용자 uid 담음
 
-//        지원 : 필터링 추가필 !!
-
         init {
             Log.d("uidcheck","${uid.toString()}")
             firestore?.collection("images")?.whereEqualTo("uid","${uid}")
@@ -101,6 +97,7 @@ class DetailViewForMyPostFragment : Fragment() {
                     notifyDataSetChanged()
                 }
         }
+
 
         override fun onCreateViewHolder(p0: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             var view = LayoutInflater.from(p0.context).inflate(R.layout.item_detail, p0, false)
@@ -131,11 +128,9 @@ class DetailViewForMyPostFragment : Fragment() {
             //Likes
             viewholder.detailviewitem_favoritecounter_textview.text = "Likes "+ contentDTOs!![position].favoriteCount
 
-            //ProfileImage jeewon fix
-//            Glide.with(holder.itemView.context).load(contentDTOs!![position].imageUrl).into(viewholder.detailviewitem_profile_image)
+            //ProfileImage
             val fs = FirebaseStorage.getInstance()
-            fs.getReference().child("profilepic").child(uid.toString()).downloadUrl.addOnSuccessListener {
-                Log.d("uid","${uid.toString()}")
+            fs.getReference().child("profilepic").child(contentDTOs!![position].uid.toString()).downloadUrl.addOnSuccessListener {
                 var imageUrl = it
                 Glide.with(holder.itemView.context).load(imageUrl).apply(RequestOptions().circleCrop()).into(viewholder.detailviewitem_profile_image)
             }
@@ -150,29 +145,14 @@ class DetailViewForMyPostFragment : Fragment() {
                 //좋아요 클릭된 경우
                 viewholder.detailviewitem_favorite_imageview.setImageResource(R.drawable.ic_baseline_favorite_24)
 
-           }else{
-               //좋아요 클릭 안된 경우
+            }else{
+                //좋아요 클릭 안된 경우
                 viewholder.detailviewitem_favorite_imageview.setImageResource(R.drawable.ic_baseline_favorite_border_24)
             }
 
 
+
             /*//나중거
-            firestore?.collection("profileImages")
-                ?.document(contentDTOs[position].uid!!)
-                ?.get()
-                ?.addOnCompleteListener { task ->
-                    if(task.isSuccessful){
-
-                        var url = task.result?.get("image")
-
-                        if (url != null) {
-                            Glide.with(holder.itemView.context).load(url)
-                                .apply(RequestOptions().circleCrop())
-                                .into(viewholder.detailviewitem_profile_image)
-                        }
-
-                    }
-                }
 
             // 좋아요 버튼에 이벤트 추가
             viewholder.detailviewitem_favorite_imageView.setOnClickListener {
@@ -195,16 +175,9 @@ class DetailViewForMyPostFragment : Fragment() {
                 intent.putExtra("contentUid",contentUidList[position])
                 intent.putExtra("destinationUid",contentDTOs[position].uid)
                 startActivity(intent)
-            }
-
-            if(contentDTOs!![position].favorites.containsKey(uid)){
-                // 좋아요 버튼이 눌려 있을 때
-                viewholder.detailviewitem_favorite_imageView.setImageResource(R.drawable.ic_favorite)
-            }
-            else{
-                // 좋아요 버튼이 눌려 있지 않을 때
-                viewholder.detailviewitem_favorite_imageView.setImageResource(R.drawable.ic_favorite_border)
             }*/
+
+
         }
         fun favoriteEvent(position: Int){
             var tsDoc = firestore?.collection("images")?.document(contentUidList[position])
