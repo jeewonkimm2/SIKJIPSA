@@ -11,6 +11,7 @@ data class ContentDTO(
     var timestamp : Long? = null, //몇시 몇분에 컨텐츠를 올렸는지
     var favoriteCount : Int = 0, //좋아요의 갯수
     var nickname : String? = null,
+    var profile : String? = null, //프로필 이미지
     var favorites : MutableMap<String, Boolean> = HashMap()){ //중복 좋아요 방지
     //댓글 관리용
     data class Comment(var uid : String? = null, //uid를 관리하는

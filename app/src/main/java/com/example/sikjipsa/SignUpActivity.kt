@@ -98,6 +98,7 @@ class SignUpActivity : AppCompatActivity() {
         if (requestCode == PICK_IMAGE_FROM_ALBUM) {
             if (resultCode == RESULT_OK) {
                 photoURI = data?.data
+
             } else {
                 Log.d("Type","fail")
                 finish()
@@ -149,6 +150,9 @@ class SignUpActivity : AppCompatActivity() {
             return@continueWithTask storageRef.downloadUrl
         }?.addOnSuccessListener { uri->
 //                    Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
+            //프로필 이미지를 ContentDTO에 넣기
+            var contentDTO = ContentDTO()
+            contentDTO.profile = uri.toString()
             setResult(RESULT_OK)
         }
 
