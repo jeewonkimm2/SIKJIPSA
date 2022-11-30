@@ -46,8 +46,5 @@ class MyPostActivity : AppCompatActivity() {
 
 
 
-
-
-
 }
 
