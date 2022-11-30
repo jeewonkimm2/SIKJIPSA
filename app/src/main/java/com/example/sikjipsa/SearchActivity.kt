@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.View.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
 import com.example.sikjipsa.databinding.ActivityMyPostBinding
 import com.example.sikjipsa.databinding.ActivitySearchBinding
 import com.example.sikjipsa.navigation.SearchResultFragment
@@ -54,40 +55,54 @@ class SearchActivity : AppCompatActivity() {
 
 
 
-//        binding.imageBtn.setOnClickListener {
-//
-//            var photoPickerIntent = Intent(Intent.ACTION_PICK)
-//            photoPickerIntent.type = "image/*"
-//            startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
-//
-//            binding.imageBtn.visibility = INVISIBLE
-//            binding.GOOGLEImg.visibility = VISIBLE
-//            binding.SIKJIPSAImg.visibility = VISIBLE
-//        }
+        binding.imageBtn.setOnClickListener {
+
+            var photoPickerIntent = Intent(Intent.ACTION_PICK)
+            photoPickerIntent.type = "image/*"
+            startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
+
+            binding.imageBtn.visibility = INVISIBLE
+            binding.GOOGLEImg.visibility = VISIBLE
+            binding.SIKJIPSAImg.visibility = VISIBLE
+        }
 
 
 
 
-//        binding.keywordBtn.setOnClickListener {
-//            binding.keywordBtn.visibility = GONE
-//            binding.keywordTxt.visibility = VISIBLE
-//            binding.searchBtn.visibility = VISIBLE
-//        }
-//        binding.searchBtn.setOnClickListener {
-//            binding.keywordTxt.visibility = INVISIBLE
-//            binding.searchBtn.visibility = INVISIBLE
-//            binding.GOOGLE.visibility = VISIBLE
-//            binding.SIKJIPSA.visibility = VISIBLE
-//        }
+        binding.keywordBtn.setOnClickListener {
+            binding.keywordBtn.visibility = GONE
+            binding.keywordTxt.visibility = VISIBLE
+            binding.searchBtn.visibility = VISIBLE
+        }
+        binding.searchBtn.setOnClickListener {
+            binding.keywordTxt.visibility = INVISIBLE
+            binding.searchBtn.visibility = INVISIBLE
+            binding.GOOGLE.visibility = VISIBLE
+            binding.SIKJIPSA.visibility = VISIBLE
+        }
 
-//        binding.GOOGLE.setOnClickListener {
-//            var intent = Intent(Intent.ACTION_WEB_SEARCH)
-//            intent.putExtra(SearchManager.QUERY,"${binding.keywordTxt.text}")
-//            startActivity(intent)
-//        }
+        binding.GOOGLE.setOnClickListener {
+            var intent = Intent(Intent.ACTION_WEB_SEARCH)
+            intent.putExtra(SearchManager.QUERY,"${binding.keywordTxt.text}")
+            startActivity(intent)
+        }
+
+
 
 
         binding.SIKJIPSA.setOnClickListener {
+            binding.GOOGLE.visibility = GONE
+            binding.SIKJIPSA.visibility = GONE
+            binding.imageBtn.visibility = GONE
+            binding.search.visibility = GONE
+
+            var fragment = SearchResultFragment()
+            var bundle = Bundle()
+            bundle.putString("keyword","${binding.keywordTxt.text}")
+            fragment.arguments = bundle //fragment의 arguments에 데이터를 담은 bundle을 넘겨줌
+            supportFragmentManager!!.beginTransaction()
+                .replace(R.id.main_content, fragment)
+                .commit()
 
                     initView()
 

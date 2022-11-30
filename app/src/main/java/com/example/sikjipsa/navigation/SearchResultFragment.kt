@@ -60,6 +60,10 @@ class SearchResultFragment : Fragment() {
             Log.d("nickname","$nickname")
         }
 
+        var a: String? = arguments?.getString("keyword")
+        Log.d("afterreceive","result is $a")
+
+
 
         //RecyclerView와 어댑터 연결
         mainView = LayoutInflater.from(activity).inflate(R.layout.fragment_detail, container, false)
