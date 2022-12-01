@@ -44,22 +44,32 @@
 
     <Button
         android:id="@+id/onOffButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="265dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="73dp"
+        android:layout_marginEnd="73dp"
+        android:layout_marginBottom="44dp"
         android:backgroundTint="#AADB91"
         android:text="Set an Alarm"
+        android:theme="@style/ThemeOverlay.Material3.Button"
         app:layout_constraintBottom_toTopOf="@id/changeAlarmTimeButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/changeAlarmTimeButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="265dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="73dp"
+        android:layout_marginEnd="73dp"
+        android:layout_marginBottom="60dp"
         android:backgroundTint="#AADB91"
         android:text="Set the time for Watering"
+        android:theme="@style/ThemeOverlay.Material3.Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
 

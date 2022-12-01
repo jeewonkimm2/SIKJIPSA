@@ -87,7 +87,8 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:backgroundTint="#228933"
-            android:text="Profile Picture" />
+            android:text="Profile Picture"
+            android:theme="@style/ThemeOverlay.Material3.Button"/>
 
         <Button
             android:id="@+id/signup"
@@ -97,7 +98,8 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="80dp"
             android:backgroundTint="#228933"
-            android:text="Register" />
+            android:text="Register"
+            android:theme="@style/ThemeOverlay.Material3.Button"/>
 
 
     </LinearLayout>
