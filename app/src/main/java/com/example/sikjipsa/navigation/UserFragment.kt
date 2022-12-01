@@ -5,10 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.inline.InlineContentView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -23,6 +27,7 @@ import kotlinx.android.synthetic.main.fragment_detail.view.*
 import kotlinx.android.synthetic.main.fragment_user.*
 import kotlinx.android.synthetic.main.fragment_user.view.*
 import kotlinx.android.synthetic.main.item_detail.view.*
+import java.lang.System.load
 
 class UserFragment : Fragment(){
     //수오 유저 로그아웃
@@ -35,10 +40,11 @@ class UserFragment : Fragment(){
 
 
     private var editBtn: Button? = null
-    private var plantBtn: Button? = null
     private var watering: Button? = null
     private var mypostBtn: Button? = null
     private var name: String? = null
+    private var editpic: Button? = null
+    private var editnickname: Button? = null
 //    private var profile: ImageView? = null
 
 
@@ -80,26 +86,44 @@ class UserFragment : Fragment(){
         name = fragmentView?.findViewById<TextView>(R.id.name).toString()
 //        profile = fragmentView?.findViewById<ImageView>(R.id.profile)
         editBtn = fragmentView?.findViewById(R.id.editBtn)
-        plantBtn = fragmentView?.findViewById(R.id.myplantBtn)
         watering = fragmentView?.findViewById(R.id.wateringBtn)
         mypostBtn = fragmentView?.findViewById(R.id.mypostBtn)
+        editpic = fragmentView?.findViewById(R.id.editpic)
+        editnickname = fragmentView?.findViewById(R.id.editnickname)
 
         //ProfileImage
-/*        val fs = FirebaseStorage.getInstance()
-        fs.getReference().child("profilepic").downloadUrl.addOnSuccessListener { it ->
+        val fs = FirebaseStorage.getInstance()
+
+
+
+        fs.getReference().child("profilepic").child(uid.toString()).downloadUrl.addOnSuccessListener { it ->
             var imageUrl = it
-            profile?.setImageURI(imageUrl)
-        }*/
+            Glide.with(this).load(imageUrl).into(profile)
+        }
 
 
 
         editBtn?.setOnClickListener {
-            startActivity(Intent(context, EditProfileActivity::class.java))
+//            startActivity(Intent(context, EditProfileActivity::class.java))
+            editBtn?.visibility = INVISIBLE
+            editpic?.visibility = VISIBLE
+            editnickname?.visibility = VISIBLE
         }
 
-        plantBtn?.setOnClickListener{
-            startActivity(Intent(context, myPlantActivity::class.java))
+
+
+        editpic?.setOnClickListener {
+
+
+
         }
+
+
+        editnickname?.setOnClickListener {
+
+
+        }
+
 
         mypostBtn?.setOnClickListener {
             startActivity(Intent(context, MyPostActivity::class.java))
@@ -109,79 +133,12 @@ class UserFragment : Fragment(){
             startActivity(Intent(context, WateringActivity::class.java))
         }
 
-/*        var contentDTOs: ArrayList<ContentDTO> = arrayListOf() //게시글 담음
-        var contentUidList: ArrayList<String> = arrayListOf()  //사용자 uid 담음
-
-            firestore?.collection("images")?.orderBy("timestamp")
-                ?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-                    contentDTOs.clear()
-                    contentUidList.clear()
-                    if (querySnapshot == null) return@addSnapshotListener
-
-                    for (snapshot in querySnapshot!!.documents) {
-                        var item = snapshot.toObject(ContentDTO::class.java)
-                        contentDTOs.add(item!!)
-                        contentUidList.add(snapshot.id)
-                    }
-                }*/
-
-
 
         return fragmentView
 
 
     }
 
-/*    inner class DetailViewRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-        var contentDTOs: ArrayList<ContentDTO> = arrayListOf() //게시글 담음
-        var contentUidList: ArrayList<String> = arrayListOf()  //사용자 uid 담음
 
-        init {
-            firestore?.collection("images")?.orderBy("timestamp")
-                ?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-                    contentDTOs.clear()
-                    contentUidList.clear()
-                    if (querySnapshot == null) return@addSnapshotListener
 
-                    for (snapshot in querySnapshot!!.documents) {
-                        var item = snapshot.toObject(ContentDTO::class.java)
-                        contentDTOs.add(item!!)
-                        contentUidList.add(snapshot.id)
-                    }
-                    // 새로고침
-                    notifyDataSetChanged()
-                }
-        }
-
-        override fun onCreateViewHolder(p0: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            var view = LayoutInflater.from(p0.context).inflate(R.layout.fragment_user, p0, false)
-            return CustomViewHolder(view)
-        }
-
-        inner class CustomViewHolder(view: View) : RecyclerView.ViewHolder(view)
-
-        override fun getItemCount(): Int {
-            return contentDTOs.size
-        }
-
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
-            //holder 값을 CustomViewHolder에 캐스팅
-            var viewholder = (holder as CustomViewHolder).itemView
-            //id > 여기가 총체적 난국이여... 게시글을 등록할 때 해당하는 유저가 들어가려면 그냥 닉네임으로 넣는게 아닌 것 같음.. 모르겠음
-            //viewholder.detailviewitem_profile_textview.text = contentDTOs!![position].userId
-            //viewholder.detailviewitem_profile_textview.text = contentDTOs!![position].nickname
-            viewholder.textView2.text = contentDTOs!![position].nickname
-
-            //ProfileImage
-            val fs = FirebaseStorage.getInstance()
-            fs.getReference().child("profilepic")
-                .child(contentDTOs!![position].uid.toString()).downloadUrl.addOnSuccessListener {
-                var imageUrl = it
-                Glide.with(holder.itemView.context).load(imageUrl)
-                    .apply(RequestOptions().circleCrop())
-                    .into(viewholder.profile)
-            }
-        }
-    }*/
 }

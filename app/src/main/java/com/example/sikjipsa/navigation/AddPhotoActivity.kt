@@ -70,13 +70,12 @@ class AddPhotoActivity: AppCompatActivity() {
         if(requestCode == PICK_IMAGE_FROM_ALBUM){
             if (resultCode == Activity.RESULT_OK){
                 photoUri = data?.data
-//                addphoto_image.setImageURI(photoUri)
+                addphoto_image.setImageURI(photoUri)
             }
             else{
                 finish()
             }
         }
-
     }
 
 

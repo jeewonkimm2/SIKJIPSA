@@ -11,10 +11,7 @@
         android:layout_width="107dp"
         android:layout_height="108dp"
         android:layout_marginStart="88dp"
-
-
         android:layout_marginTop="80dp"
-        android:src="@drawable/jihoon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
@@ -33,32 +30,49 @@
         app:layout_constraintTop_toBottomOf="@+id/name"
         tools:ignore="MissingConstraints" />
 
+    <Button
+        android:id="@+id/editpic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="#AADB91"
+        android:text="edit profile pic"
+        android:textColor="@android:color/white"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profile"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/editnickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="#AADB91"
+        android:text="edit nickname"
+        android:textColor="@android:color/white"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toEndOf="@+id/profile"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        tools:ignore="MissingConstraints" />
+
     <TextView
         android:id="@+id/name"
         android:layout_width="122dp"
         android:layout_height="37dp"
         android:layout_marginTop="103dp"
         android:layout_marginEnd="94dp"
-        android:text="jigglypuff"
         android:textAlignment="center"
-
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/myplantBtn"
-        android:layout_width="265dp"
-        android:layout_height="73dp"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="#AADB91"
-        android:text="My Plant"
-        app:layout_constraintBottom_toTopOf="@+id/mypostBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -68,10 +82,8 @@
         android:layout_marginBottom="149dp"
         android:backgroundTint="#AADB91"
         android:text="My Post"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
@@ -82,7 +94,6 @@
         android:layout_height="73dp"
         android:layout_marginStart="73dp"
         android:layout_marginTop="10dp"
-
         android:layout_marginEnd="73dp"
         android:layout_marginBottom="62dp"
         android:backgroundTint="#AADB91"
