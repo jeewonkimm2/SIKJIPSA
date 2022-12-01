@@ -6,6 +6,7 @@ import android.icu.text.SimpleDateFormat
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -13,6 +14,7 @@ import com.example.sikjipsa.databinding.ActivityMainBinding
 //import com.example.sikjipsa.databinding.FragmentGridBinding
 import com.example.sikjipsa.navigation.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_weather.*
 import org.json.JSONObject
 import java.lang.Exception
 import java.net.URL
@@ -162,9 +164,20 @@ class MainActivity : AppCompatActivity() {
                 val weatherDescription = weather.getString("description")
                 val address = jsonObj.getString("name") + ", " + sys.getString("country")
 
+//
+                when(weatherDescription){
+                    "clear sky" -> backg.setBackgroundResource(R.drawable.clearsky)
+                    "few clouds" -> backg.setBackgroundResource(R.drawable.fewclouds)
+                    "scattered clouds" -> backg.setBackgroundResource(R.drawable.scatteredclouds)
+                    "broken clouds" -> backg.setBackgroundResource(R.drawable.brokenclouds)
+                    "shower rain" -> backg.setBackgroundResource(R.drawable.showerrain)
+                    "rain" -> backg.setBackgroundResource(R.drawable.rain)
+                    "thunderstorm" -> backg.setBackgroundResource(R.drawable.thunderstorm)
+                    "snow" -> backg.setBackgroundResource(R.drawable.snow)
+                    "mist" -> backg.setBackgroundResource(R.drawable.mist)
+                }
 
 
-                findViewById<TextView>(R.id.weatherTxt).text = weatherDescription
                 findViewById<TextView>(R.id.locationTxt).text = address
                 findViewById<TextView>(R.id.temperatureTxt).text = temp
                 findViewById<TextView>(R.id.sunriseTime).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunrise * 1000))
