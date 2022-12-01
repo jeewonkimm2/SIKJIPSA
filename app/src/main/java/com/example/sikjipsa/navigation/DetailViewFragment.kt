@@ -1,5 +1,6 @@
 package com.example.sikjipsa.navigation
 
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
+import com.example.sikjipsa.CommentActivity
 import com.example.sikjipsa.R
 import com.example.sikjipsa.model.ContentDTO
 import com.google.firebase.auth.FirebaseAuth
@@ -145,31 +147,13 @@ class DetailViewFragment : Fragment() {
             }
 
 
-
-            /*//나중거
-
-            // 좋아요 버튼에 이벤트 추가
-            viewholder.detailviewitem_favorite_imageView.setOnClickListener {
-                favoriteEvent(position)
-            }
-
-            // 계정 이미지 눌렀을 때 (프로필로 이동)
-            viewholder.detailviewitem_profile_image.setOnClickListener {
-                profilemove(position)
-            }
-
-            // 계정 이름 눌렀을 때 (프로필로 이동)
-            viewholder.detailviewitem_profile_textView.setOnClickListener {
-                profilemove(position)
-            }
-
             // 댓글 버튼 눌렀을 때
-            viewholder.detailviewitem_comment_imageView.setOnClickListener { view ->
-                var intent = Intent(view.context,CommentActivity::class.java)
+            viewholder.detailviewitem_comment_imageview.setOnClickListener { view ->
+                var intent = Intent(view.context, CommentActivity::class.java)
                 intent.putExtra("contentUid",contentUidList[position])
-                intent.putExtra("destinationUid",contentDTOs[position].uid)
+                //intent.putExtra("destinationUid",contentDTOs[position].uid)
                 startActivity(intent)
-            }*/
+            }
 
 
         }
