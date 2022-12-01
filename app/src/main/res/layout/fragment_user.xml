@@ -40,24 +40,59 @@
         android:text="edit profile pic"
         android:textColor="@android:color/white"
         android:visibility="invisible"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profile"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/edittextnickname"
+        android:layout_width="127dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="10dp"
+        android:text="Nickname"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/profile"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
+
+    <Button
+        android:id="@+id/donebtn"
+        android:layout_width="73dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="#AADB91"
+        android:text="DONE"
+        android:textColor="@android:color/white"
+        android:textSize="10sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/profile"
         app:layout_constraintTop_toBottomOf="@+id/name"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/editnickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="193dp"
+        android:layout_height="49dp"
         android:layout_marginStart="13dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="10dp"
         android:backgroundTint="#AADB91"
         android:text="edit nickname"
         android:textColor="@android:color/white"
+        android:textSize="16sp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/profile"
         app:layout_constraintTop_toBottomOf="@+id/name"
         tools:ignore="MissingConstraints" />
@@ -115,6 +150,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile"
         tools:ignore="MissingConstraints" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

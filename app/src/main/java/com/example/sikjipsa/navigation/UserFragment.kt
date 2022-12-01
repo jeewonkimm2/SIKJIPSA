@@ -1,18 +1,23 @@
 package com.example.sikjipsa.navigation
 
+import android.app.Activity
+import android.app.Instrumentation
 import android.content.Intent
+import android.icu.text.SimpleDateFormat
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.INVISIBLE
-import android.view.View.VISIBLE
+import android.view.View.*
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.inline.InlineContentView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -23,6 +28,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.android.synthetic.main.activity_add_photo.*
 import kotlinx.android.synthetic.main.fragment_detail.view.*
 import kotlinx.android.synthetic.main.fragment_user.*
 import kotlinx.android.synthetic.main.fragment_user.view.*
@@ -37,6 +43,8 @@ class UserFragment : Fragment(){
     var auth: FirebaseAuth? = null
     var currentUserId: String? = null
     var mDBRef: DatabaseReference = FirebaseDatabase.getInstance().reference
+    var photoUri: Uri? = null
+
 
 
     private var editBtn: Button? = null
@@ -45,6 +53,8 @@ class UserFragment : Fragment(){
     private var name: String? = null
     private var editpic: Button? = null
     private var editnickname: Button? = null
+    private var edittextnickname:TextView? = null
+    private var donebtn: Button? = null
 //    private var profile: ImageView? = null
 
 
@@ -90,6 +100,8 @@ class UserFragment : Fragment(){
         mypostBtn = fragmentView?.findViewById(R.id.mypostBtn)
         editpic = fragmentView?.findViewById(R.id.editpic)
         editnickname = fragmentView?.findViewById(R.id.editnickname)
+        edittextnickname = fragmentView?.findViewById(R.id.edittextnickname)
+        donebtn = fragmentView?.findViewById(R.id.donebtn)
 
         //ProfileImage
         val fs = FirebaseStorage.getInstance()
@@ -105,18 +117,45 @@ class UserFragment : Fragment(){
 
         editBtn?.setOnClickListener {
 //            startActivity(Intent(context, EditProfileActivity::class.java))
-            editBtn?.visibility = INVISIBLE
+            editBtn?.visibility = GONE
             editpic?.visibility = VISIBLE
             editnickname?.visibility = VISIBLE
+
+            editnickname?.setOnClickListener {
+                editnickname?.visibility = GONE
+                edittextnickname?.visibility = VISIBLE
+                donebtn?.visibility = VISIBLE
+            }
+
+            donebtn?.setOnClickListener {
+                val newnick:String = edittextnickname?.text.toString()
+                mDBRef.child("user/${uid.toString()}/nickname").setValue("$newnick")
+                var nickname : String? = null
+
+                mDBRef.child("user").child(uid.toString()).child("nickname").get().addOnSuccessListener {
+                    nickname = it.value.toString()
+                    Log.d("nickname","$nickname")
+                    fragmentView?.name?.text = nickname
+                }
+            }
+
+            editpic?.setOnClickListener {
+
+            }
+
+            donebtn?.setOnClickListener {
+
+            }
+
+
+
         }
 
 
 
-        editpic?.setOnClickListener {
 
 
 
-        }
 
 
         editnickname?.setOnClickListener {
