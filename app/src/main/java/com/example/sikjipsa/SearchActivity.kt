@@ -16,6 +16,8 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.example.sikjipsa.databinding.ActivityMyPostBinding
 import com.example.sikjipsa.databinding.ActivitySearchBinding
+import com.example.sikjipsa.navigation.AddPhotoActivity
+import com.example.sikjipsa.navigation.DetailViewForMyPostFragment
 import com.example.sikjipsa.navigation.SearchResultFragment
 import com.google.firebase.ml.modeldownloader.CustomModel
 import com.google.firebase.ml.modeldownloader.CustomModelDownloadConditions
@@ -53,6 +55,33 @@ class SearchActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+        binding.SIKJIPSA.setOnClickListener {
+
+            binding.GOOGLE.visibility = GONE
+            binding.SIKJIPSA.visibility = GONE
+            binding.imageBtn.visibility = GONE
+            binding.search.visibility = GONE
+
+            initView()
+
+            var fragment = SearchResultFragment()
+            var bundle = Bundle()
+            bundle.putString("keyword","${binding.keywordTxt.text}")
+            fragment.arguments = bundle //fragment의 arguments에 데이터를 담은 bundle을 넘겨줌
+            supportFragmentManager!!.beginTransaction()
+                .replace(R.id.main_content,fragment)
+                .commit()
+
+
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
+            1
+        )
+
+        }
+
+
 
 
         binding.imageBtn.setOnClickListener {
@@ -64,6 +93,8 @@ class SearchActivity : AppCompatActivity() {
             binding.imageBtn.visibility = INVISIBLE
             binding.GOOGLEImg.visibility = VISIBLE
             binding.SIKJIPSAImg.visibility = VISIBLE
+
+
         }
 
 
@@ -90,29 +121,7 @@ class SearchActivity : AppCompatActivity() {
 
 
 
-        binding.SIKJIPSA.setOnClickListener {
-            binding.GOOGLE.visibility = GONE
-            binding.SIKJIPSA.visibility = GONE
-            binding.imageBtn.visibility = GONE
-            binding.search.visibility = GONE
 
-            var fragment = SearchResultFragment()
-            var bundle = Bundle()
-            bundle.putString("keyword","${binding.keywordTxt.text}")
-            fragment.arguments = bundle //fragment의 arguments에 데이터를 담은 bundle을 넘겨줌
-            supportFragmentManager!!.beginTransaction()
-                .replace(R.id.main_content, fragment)
-                .commit()
-
-                    initView()
-
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
-            1
-        )
-
-        }
 
     }
 
@@ -153,9 +162,6 @@ class SearchActivity : AppCompatActivity() {
                     }
 
                 }
-
-
-
 
 
                 val conditions = CustomModelDownloadConditions.Builder()
@@ -254,18 +260,42 @@ class SearchActivity : AppCompatActivity() {
                     }
 
 
-
-
-
-
-
             }catch(e:Exception){
                 e.printStackTrace()
             }
         } else {
             finish()
         }
+
     }
+    binding.GOOGLEImg.setOnClickListener {
+        var intent = Intent(Intent.ACTION_WEB_SEARCH)
+        intent.putExtra(SearchManager.QUERY,"$keywordFromModel")
+        startActivity(intent)
+    }
+
+    binding.SIKJIPSAImg.setOnClickListener {
+
+        binding.search.visibility = GONE
+        binding.SIKJIPSAImg.visibility = GONE
+        binding.GOOGLEImg.visibility = GONE
+        binding.searchBtn.visibility = GONE
+        binding.keywordTxt.visibility = GONE
+        binding.searchBtn.visibility = GONE
+        binding.keywordBtn.visibility = GONE
+
+        initView()
+
+        var fragment = SearchResultFragment()
+        var bundle = Bundle()
+        bundle.putString("keyword","$keywordFromModel")
+        fragment.arguments = bundle //fragment의 arguments에 데이터를 담은 bundle을 넘겨줌
+        supportFragmentManager!!.beginTransaction()
+            .replace(R.id.main_content,fragment)
+            .commit()
+    }
+
+
     }
 
 

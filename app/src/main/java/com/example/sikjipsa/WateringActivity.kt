@@ -48,7 +48,14 @@ class WateringActivity: AppCompatActivity(){
                 val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
                 val intent = Intent(this, AlarmReceiver::class.java)
                 val pendingIntent = PendingIntent.getBroadcast(this, ALARM_REQUEST_CODE,
-                    intent, PendingIntent.FLAG_UPDATE_CURRENT)
+                    intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+
+
+
+
+
+
+
 
                 alarmManager.setInexactRepeating(
                     AlarmManager.RTC_WAKEUP,
@@ -121,7 +128,7 @@ class WateringActivity: AppCompatActivity(){
             this,
             ALARM_REQUEST_CODE,
             Intent(this, AlarmReceiver::class.java),
-            PendingIntent.FLAG_NO_CREATE
+            PendingIntent.FLAG_NO_CREATE or PendingIntent.FLAG_IMMUTABLE
         )
 
         if ((pendingIntent == null) and alarmModel.onOff) {
@@ -154,7 +161,7 @@ class WateringActivity: AppCompatActivity(){
             this,
             ALARM_REQUEST_CODE,
             Intent(this, AlarmReceiver::class.java),
-            PendingIntent.FLAG_NO_CREATE
+            PendingIntent.FLAG_NO_CREATE or PendingIntent.FLAG_IMMUTABLE
         )
         pendingIntent?.cancel()
     }

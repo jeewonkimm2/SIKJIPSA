@@ -136,10 +136,10 @@
         android:layout_marginTop="400dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="35dp"
-        android:text='GOOGLE'
-        android:visibility="invisible"
         android:backgroundTint="#598A3C"
+        android:text='GOOGLE'
         android:textSize="24sp"
+        android:visibility="invisible"
         app:layout_constraintTop_toTopOf="parent" />
 
 
