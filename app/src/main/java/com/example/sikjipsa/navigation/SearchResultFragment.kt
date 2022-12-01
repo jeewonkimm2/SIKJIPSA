@@ -60,8 +60,8 @@ class SearchResultFragment : Fragment() {
             Log.d("nickname","$nickname")
         }
 
-        var a: String? = arguments?.getString("keyword")
-        Log.d("afterreceive","result is $a")
+//        var a: String? = arguments?.getString("keyword")
+//        Log.d("afterreceive","result is $a")
 
 
 
@@ -84,8 +84,9 @@ class SearchResultFragment : Fragment() {
         var contentUidList: ArrayList<String> = arrayListOf()  //사용자 uid 담음
 
         init {
-            Log.d("uidcheck","${uid.toString()}")
-            firestore?.collection("images")?.whereEqualTo("uid","${uid}")
+            var a: String? = arguments?.getString("keyword")
+
+            firestore?.collection("images")?.whereEqualTo("explain","$a")
                 ?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                     Log.d("uidcheck","$querySnapshot")
                     contentDTOs.clear()

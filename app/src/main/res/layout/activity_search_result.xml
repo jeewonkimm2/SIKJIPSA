@@ -34,20 +34,7 @@
         android:id="@+id/main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar_division">
-
-        <Button
-            android:id="@+id/registerBtn"
-            android:layout_width="210dp"
-            android:layout_height="89dp"
-            android:layout_gravity="center|bottom"
-            android:backgroundTint="#AADB91"
-            android:gravity="center"
-            android:text="Register"
-            android:textSize="20dp" />
-
-
-    </FrameLayout>
+        android:layout_below="@id/toolbar_division"></FrameLayout>
 
 
 </RelativeLayout>
