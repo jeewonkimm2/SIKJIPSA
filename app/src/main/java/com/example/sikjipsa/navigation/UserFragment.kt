@@ -127,29 +127,33 @@ class UserFragment : Fragment(){
                 donebtn?.visibility = VISIBLE
             }
 
-            donebtn?.setOnClickListener {
-                val newnick:String = edittextnickname?.text.toString()
-                mDBRef.child("user/${uid.toString()}/nickname").setValue("$newnick")
-                var nickname : String? = null
-
-                mDBRef.child("user").child(uid.toString()).child("nickname").get().addOnSuccessListener {
-                    nickname = it.value.toString()
-                    Log.d("nickname","$nickname")
-                    fragmentView?.name?.text = nickname
-                }
-            }
 
             editpic?.setOnClickListener {
 
             }
 
-            donebtn?.setOnClickListener {
 
+        }
+
+
+        donebtn?.setOnClickListener {
+            val newnick:String = edittextnickname?.text.toString()
+            mDBRef.child("user/${uid.toString()}/nickname").setValue("$newnick")
+            var nickname : String? = null
+
+            mDBRef.child("user").child(uid.toString()).child("nickname").get().addOnSuccessListener {
+                nickname = it.value.toString()
+                Log.d("nickname","$nickname")
+                fragmentView?.name?.text = nickname
             }
 
 
-
         }
+
+
+
+
+
 
 
 
