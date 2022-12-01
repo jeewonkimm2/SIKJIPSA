@@ -47,6 +47,7 @@ class DetailViewFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //RecyclerView와 어댑터 연결
         var view = LayoutInflater.from(activity).inflate(R.layout.fragment_detail, container, false)
         mDBRef = FirebaseDatabase.getInstance().reference
         user = FirebaseAuth.getInstance().currentUser
@@ -59,10 +60,6 @@ class DetailViewFragment : Fragment() {
             nickname = it.value.toString()
             Log.d("nickname","$nickname")
         }
-
-
-        //RecyclerView와 어댑터 연결
-        mainView = LayoutInflater.from(activity).inflate(R.layout.fragment_detail, container, false)
 
         view.detailviewfragment_recyclerview.adapter = DetailViewRecyclerViewAdapter()
         view.detailviewfragment_recyclerview.layoutManager = LinearLayoutManager(activity)
@@ -176,6 +173,7 @@ class DetailViewFragment : Fragment() {
 
 
         }
+        //좋아요
         fun favoriteEvent(position: Int){
             var tsDoc = firestore?.collection("images")?.document(contentUidList[position])
 
