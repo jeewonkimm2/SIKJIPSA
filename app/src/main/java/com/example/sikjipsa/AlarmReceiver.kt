@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 
@@ -21,6 +22,7 @@ class AlarmReceiver: BroadcastReceiver() {
 
         createNotificationChannel(context)
         notifyNotification(context)
+        Log.d("ITM", "onReceive")
     }
 
     private fun createNotificationChannel(context: Context) {
@@ -31,9 +33,10 @@ class AlarmReceiver: BroadcastReceiver() {
                 "기상 알림",
                 NotificationManager.IMPORTANCE_HIGH
             )
-
+            Log.d("ITM", "createNotificationChannel")
             NotificationManagerCompat.from(context).createNotificationChannel(notificationChannel)
         }
+        Log.d("ITM", "createNotificationChannel: FAILED")
     }
 
     private fun notifyNotification(context: Context){
@@ -45,6 +48,7 @@ class AlarmReceiver: BroadcastReceiver() {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
 
             notify(NOTIFICATION_ID, build.build())
+            Log.d("ITM", "notifyNotification")
         }
     }
 }

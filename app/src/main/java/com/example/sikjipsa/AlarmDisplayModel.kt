@@ -4,6 +4,9 @@ data class AlarmDisplayModel (
     val minute: Int,
     var onOff: Boolean
 ) {
+
+
+    //시: 분 가져오기
     val timeText: String
         get() {
             val h = "%02d".format(if(hour < 12) hour else hour - 12)
