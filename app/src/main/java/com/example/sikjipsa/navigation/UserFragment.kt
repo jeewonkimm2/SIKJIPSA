@@ -7,14 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.sikjipsa.*
 import com.example.sikjipsa.model.ContentDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.fragment_detail.view.*
 import kotlinx.android.synthetic.main.fragment_user.*
 import kotlinx.android.synthetic.main.fragment_user.view.*
@@ -35,6 +39,8 @@ class UserFragment : Fragment(){
     private var watering: Button? = null
     private var mypostBtn: Button? = null
     private var name: String? = null
+//    private var profile: ImageView? = null
+
 
 
     override fun onCreateView(
@@ -72,13 +78,18 @@ class UserFragment : Fragment(){
         
 //        프로필편집 화면 전환
         name = fragmentView?.findViewById<TextView>(R.id.name).toString()
+//        profile = fragmentView?.findViewById<ImageView>(R.id.profile)
         editBtn = fragmentView?.findViewById(R.id.editBtn)
         plantBtn = fragmentView?.findViewById(R.id.myplantBtn)
         watering = fragmentView?.findViewById(R.id.wateringBtn)
         mypostBtn = fragmentView?.findViewById(R.id.mypostBtn)
 
-        //fragmentView?.name?.text = "hi"
-
+        //ProfileImage
+/*        val fs = FirebaseStorage.getInstance()
+        fs.getReference().child("profilepic").downloadUrl.addOnSuccessListener { it ->
+            var imageUrl = it
+            profile?.setImageURI(imageUrl)
+        }*/
 
 
 
@@ -98,7 +109,7 @@ class UserFragment : Fragment(){
             startActivity(Intent(context, WateringActivity::class.java))
         }
 
-        var contentDTOs: ArrayList<ContentDTO> = arrayListOf() //게시글 담음
+/*        var contentDTOs: ArrayList<ContentDTO> = arrayListOf() //게시글 담음
         var contentUidList: ArrayList<String> = arrayListOf()  //사용자 uid 담음
 
             firestore?.collection("images")?.orderBy("timestamp")
@@ -112,7 +123,7 @@ class UserFragment : Fragment(){
                         contentDTOs.add(item!!)
                         contentUidList.add(snapshot.id)
                     }
-                }
+                }*/
 
 
 
