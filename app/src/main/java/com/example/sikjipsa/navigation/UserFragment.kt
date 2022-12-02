@@ -6,6 +6,7 @@ import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.inline.InlineContentView
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -43,8 +45,6 @@ class UserFragment : Fragment(){
     var auth: FirebaseAuth? = null
     var currentUserId: String? = null
     var mDBRef: DatabaseReference = FirebaseDatabase.getInstance().reference
-    var photoUri: Uri? = null
-
 
 
     private var editBtn: Button? = null
@@ -55,7 +55,29 @@ class UserFragment : Fragment(){
     private var editnickname: Button? = null
     private var edittextnickname:TextView? = null
     private var donebtn: Button? = null
-//    private var profile: ImageView? = null
+    private var imageUri : Uri? = null
+    private var profile: ImageView? = null
+
+
+
+    private val getContent =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            result: ActivityResult ->
+            if(result.resultCode == AppCompatActivity.RESULT_OK){
+                imageUri = result.data?.data
+                profile?.setImageURI(imageUri)
+                FirebaseStorage.getInstance().reference.child("profilepic").child(uid.toString()).delete().addOnSuccessListener {
+                    FirebaseStorage.getInstance().reference.child("profilepic").child(uid.toString()).putFile(imageUri!!).addOnCanceledListener {
+                        FirebaseStorage.getInstance().reference.child("profilepic").child(uid.toString()).downloadUrl.addOnSuccessListener {
+                            val photoUri:Uri = it
+                        }
+                    }
+                }
+            }
+        }
+
+
+
 
 
 
@@ -103,6 +125,8 @@ class UserFragment : Fragment(){
         edittextnickname = fragmentView?.findViewById(R.id.edittextnickname)
         donebtn = fragmentView?.findViewById(R.id.donebtn)
 
+        profile = fragmentView?.findViewById<ImageView>(R.id.profile)
+
         //ProfileImage
         val fs = FirebaseStorage.getInstance()
 
@@ -110,7 +134,7 @@ class UserFragment : Fragment(){
 
         fs.getReference().child("profilepic").child(uid.toString()).downloadUrl.addOnSuccessListener { it ->
             var imageUrl = it
-            Glide.with(this).load(imageUrl).into(profile)
+            Glide.with(this).load(imageUrl).into(profile!!)
         }
 
 
@@ -129,6 +153,10 @@ class UserFragment : Fragment(){
 
 
             editpic?.setOnClickListener {
+
+                val intentImage = Intent(Intent.ACTION_PICK)
+                intentImage.type = MediaStore.Images.Media.CONTENT_TYPE
+                getContent.launch(intentImage)
 
             }
 

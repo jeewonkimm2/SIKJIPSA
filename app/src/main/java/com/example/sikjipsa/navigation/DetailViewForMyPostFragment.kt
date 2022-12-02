@@ -1,5 +1,6 @@
 package com.example.sikjipsa.navigation
 
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
+import com.example.sikjipsa.CommentActivity
 import com.example.sikjipsa.R
 import com.example.sikjipsa.model.ContentDTO
 import com.google.firebase.auth.FirebaseAuth
@@ -150,6 +152,12 @@ class DetailViewForMyPostFragment : Fragment() {
                 viewholder.detailviewitem_favorite_imageview.setImageResource(R.drawable.ic_baseline_favorite_border_24)
             }
 
+            viewholder.detailviewitem_comment_imageview.setOnClickListener { view ->
+                var intent = Intent(view.context, CommentActivity::class.java)
+                intent.putExtra("contentUid",contentUidList[position])
+                //intent.putExtra("destinationUid",contentDTOs[position].uid)
+                startActivity(intent)
+            }
 
 
             /*//나중거
