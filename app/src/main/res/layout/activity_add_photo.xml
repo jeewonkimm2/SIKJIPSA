@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/editText"
             android:layout_toRightOf="@id/addphoto_image"
-            android:backgroundTint="#AADB91"
+            android:backgroundTint="#598A3C"
             android:text="UPLOAD"
             android:theme="@style/ThemeOverlay.Material3.Button" />
 

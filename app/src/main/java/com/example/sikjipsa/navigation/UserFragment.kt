@@ -47,7 +47,6 @@ class UserFragment : Fragment(){
     var mDBRef: DatabaseReference = FirebaseDatabase.getInstance().reference
 
 
-    private var editBtn: Button? = null
     private var watering: Button? = null
     private var mypostBtn: Button? = null
     private var name: String? = null
@@ -57,6 +56,7 @@ class UserFragment : Fragment(){
     private var donebtn: Button? = null
     private var imageUri : Uri? = null
     private var profile: ImageView? = null
+    private var hellouser: TextView? = null
 
 
 
@@ -77,10 +77,6 @@ class UserFragment : Fragment(){
         }
 
 
-
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -95,14 +91,26 @@ class UserFragment : Fragment(){
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
         uid = auth?.currentUser?.uid
-
         mDBRef = FirebaseDatabase.getInstance().reference
+        //        프로필편집 화면 전환
+        name = fragmentView?.findViewById<TextView>(R.id.name).toString()
+        watering = fragmentView?.findViewById(R.id.wateringBtn)
+        mypostBtn = fragmentView?.findViewById(R.id.mypostBtn)
+        editpic = fragmentView?.findViewById(R.id.editpic)
+        editnickname = fragmentView?.findViewById(R.id.editnickname)
+        edittextnickname = fragmentView?.findViewById(R.id.edittextnickname)
+        donebtn = fragmentView?.findViewById(R.id.donebtn)
+        profile = fragmentView?.findViewById<ImageView>(R.id.profile)
+        hellouser = fragmentView?.findViewById<TextView>(R.id.hellouser)
+
+
         var nickname : String? = null
         //        닉네임 정보 받아옴 -> jigglypuff설정필요
         mDBRef.child("user").child(uid.toString()).child("nickname").get().addOnSuccessListener {
             nickname = it.value.toString()
             Log.d("nickname","$nickname")
             fragmentView?.name?.text = nickname
+            fragmentView?.hellouser?.text = "Hello, $nickname!"
         }
 
         //if(uid == currentUserId){
@@ -114,55 +122,27 @@ class UserFragment : Fragment(){
             }
         //}
         
-//        프로필편집 화면 전환
-        name = fragmentView?.findViewById<TextView>(R.id.name).toString()
-//        profile = fragmentView?.findViewById<ImageView>(R.id.profile)
-        editBtn = fragmentView?.findViewById(R.id.editBtn)
-        watering = fragmentView?.findViewById(R.id.wateringBtn)
-        mypostBtn = fragmentView?.findViewById(R.id.mypostBtn)
-        editpic = fragmentView?.findViewById(R.id.editpic)
-        editnickname = fragmentView?.findViewById(R.id.editnickname)
-        edittextnickname = fragmentView?.findViewById(R.id.edittextnickname)
-        donebtn = fragmentView?.findViewById(R.id.donebtn)
 
-        profile = fragmentView?.findViewById<ImageView>(R.id.profile)
 
         //ProfileImage
         val fs = FirebaseStorage.getInstance()
-
-
-
         fs.getReference().child("profilepic").child(uid.toString()).downloadUrl.addOnSuccessListener { it ->
             var imageUrl = it
             Glide.with(this).load(imageUrl).into(profile!!)
         }
 
-
-
-        editBtn?.setOnClickListener {
-//            startActivity(Intent(context, EditProfileActivity::class.java))
-            editBtn?.visibility = GONE
-            editpic?.visibility = VISIBLE
-            editnickname?.visibility = VISIBLE
-
-            editnickname?.setOnClickListener {
-                editnickname?.visibility = GONE
-                edittextnickname?.visibility = VISIBLE
-                donebtn?.visibility = VISIBLE
-            }
-
-
-            editpic?.setOnClickListener {
-
-                val intentImage = Intent(Intent.ACTION_PICK)
-                intentImage.type = MediaStore.Images.Media.CONTENT_TYPE
-                getContent.launch(intentImage)
-
-            }
-
-
+        editpic?.setOnClickListener {
+            val intentImage = Intent(Intent.ACTION_PICK)
+            intentImage.type = MediaStore.Images.Media.CONTENT_TYPE
+            getContent.launch(intentImage)
         }
 
+        editnickname?.setOnClickListener {
+            editnickname?.visibility = INVISIBLE
+            edittextnickname?.visibility = VISIBLE
+            donebtn?.visibility = VISIBLE
+
+        }
 
         donebtn?.setOnClickListener {
             val newnick:String = edittextnickname?.text.toString()
@@ -173,27 +153,17 @@ class UserFragment : Fragment(){
                 nickname = it.value.toString()
                 Log.d("nickname","$nickname")
                 fragmentView?.name?.text = nickname
+                fragmentView?.hellouser?.text = "Hello, $nickname!"
             }
 
+            edittextnickname?.visibility = INVISIBLE
+            donebtn?.visibility = INVISIBLE
+            editnickname?.visibility = VISIBLE
+
+
 
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-        editnickname?.setOnClickListener {
-
-
-        }
 
 
         mypostBtn?.setOnClickListener {

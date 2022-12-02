@@ -6,44 +6,17 @@
     android:layout_height="match_parent">
 
 
-    <ImageView
-        android:id="@+id/profile"
-        android:layout_width="107dp"
-        android:layout_height="108dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="80dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
     <Button
-        android:id="@+id/editBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:layout_marginEnd="115dp"
-        android:backgroundTint="#AADB91"
-        android:text="edit"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profile"
-        app:layout_constraintTop_toBottomOf="@+id/name"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/editpic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:layout_marginEnd="10dp"
-        android:backgroundTint="#AADB91"
-        android:text="edit profile pic"
-        android:textColor="@android:color/white"
-        android:visibility="invisible"
+        android:id="@+id/button_signout"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="#598A3C"
+        android:text="SIGNOUT"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profile"
-        app:layout_constraintTop_toBottomOf="@+id/name"
+        app:layout_constraintStart_toStartOf="@+id/editnickname"
+        app:layout_constraintTop_toBottomOf="@+id/editnickname"
         tools:ignore="MissingConstraints" />
 
     <EditText
@@ -57,9 +30,57 @@
         android:textSize="20sp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.033"
         app:layout_constraintStart_toEndOf="@+id/profile"
         app:layout_constraintTop_toBottomOf="@+id/name" />
+
+    <Button
+        android:id="@+id/editnickname"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="#598A3C"
+        android:text="edit nickname"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editpic"
+        app:layout_constraintTop_toBottomOf="@+id/editpic"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="122dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="48dp"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/editpic"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="#598A3C"
+        android:text="edit profile pic"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.705"
+        app:layout_constraintStart_toEndOf="@+id/profile"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/donebtn"
@@ -68,7 +89,7 @@
         android:layout_marginStart="13dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="10dp"
-        android:backgroundTint="#AADB91"
+        android:backgroundTint="#598A3C"
         android:text="DONE"
         android:textColor="@android:color/white"
         android:textSize="10sp"
@@ -79,78 +100,59 @@
         app:layout_constraintTop_toBottomOf="@+id/name"
         tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/editnickname"
-        android:layout_width="193dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="10dp"
-        android:backgroundTint="#AADB91"
-        android:text="edit nickname"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/profile"
-        app:layout_constraintTop_toBottomOf="@+id/name"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="122dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="103dp"
-        android:layout_marginEnd="94dp"
-        android:textAlignment="center"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:id="@+id/profile"
+        android:layout_width="139dp"
+        android:layout_height="182dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="104dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/mypostBtn"
-        android:layout_width="265dp"
-        android:layout_height="73dp"
-        android:layout_marginBottom="149dp"
-        android:backgroundTint="#AADB91"
+        android:layout_width="406dp"
+        android:layout_height="136dp"
+        android:layout_marginBottom="156dp"
+        android:backgroundTint="#598A3C"
         android:text="My Post"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/wateringBtn"
-        android:layout_width="265dp"
-        android:layout_height="73dp"
+        android:layout_width="406dp"
+        android:layout_height="136dp"
         android:layout_marginStart="73dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="73dp"
         android:layout_marginBottom="62dp"
-        android:backgroundTint="#AADB91"
+        android:backgroundTint="#598A3C"
         android:text="Watering"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mypostBtn"
+        app:layout_constraintVertical_bias="0.019"
         tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/button_signout"
+    <TextView
+        android:id="@+id/hellouser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="4dp"
-        android:backgroundTint="#AADB91"
-        android:text="SIGNOUT"
+        android:layout_marginTop="16dp"
+        android:text="Hello"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile"
-        tools:ignore="MissingConstraints" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

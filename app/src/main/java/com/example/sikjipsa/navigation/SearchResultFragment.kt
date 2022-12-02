@@ -164,34 +164,6 @@ class SearchResultFragment : Fragment() {
                 startActivity(intent)
             }
 
-
-
-            /*//나중거
-
-            // 좋아요 버튼에 이벤트 추가
-            viewholder.detailviewitem_favorite_imageView.setOnClickListener {
-                favoriteEvent(position)
-            }
-
-            // 계정 이미지 눌렀을 때 (프로필로 이동)
-            viewholder.detailviewitem_profile_image.setOnClickListener {
-                profilemove(position)
-            }
-
-            // 계정 이름 눌렀을 때 (프로필로 이동)
-            viewholder.detailviewitem_profile_textView.setOnClickListener {
-                profilemove(position)
-            }
-
-            // 댓글 버튼 눌렀을 때
-            viewholder.detailviewitem_comment_imageView.setOnClickListener { view ->
-                var intent = Intent(view.context,CommentActivity::class.java)
-                intent.putExtra("contentUid",contentUidList[position])
-                intent.putExtra("destinationUid",contentDTOs[position].uid)
-                startActivity(intent)
-            }*/
-
-
         }
         fun favoriteEvent(position: Int){
             var tsDoc = firestore?.collection("images")?.document(contentUidList[position])
