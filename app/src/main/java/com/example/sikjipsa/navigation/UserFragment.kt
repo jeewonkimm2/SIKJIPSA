@@ -77,7 +77,7 @@ class UserFragment : Fragment(){
         auth = FirebaseAuth.getInstance()
         uid = auth?.currentUser?.uid
         mDBRef = FirebaseDatabase.getInstance().reference
-        //        프로필편집 화면 전환
+
         name = fragmentView?.findViewById<TextView>(R.id.name).toString()
         watering = fragmentView?.findViewById(R.id.wateringBtn)
         mypostBtn = fragmentView?.findViewById(R.id.mypostBtn)

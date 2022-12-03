@@ -31,12 +31,13 @@ import java.util.*
 
 
 class AddPhotoActivity: AppCompatActivity() {
+
     var PICK_IMAGE_FROM_ALBUM = 0
     var storage: FirebaseStorage? = null
     var photoUri: Uri? = null
     var auth: FirebaseAuth? = null
     var firestore: FirebaseFirestore? = null
-    //    DB객체
+    //    Realtime DB object
     private lateinit var mDBRef: DatabaseReference
 
     var nickname:String? = null
@@ -52,22 +53,22 @@ class AddPhotoActivity: AppCompatActivity() {
         storage = FirebaseStorage.getInstance()
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
-        //        DB 초기화
+        // DB object
         mDBRef = Firebase.database.reference
-
+        //Get nicknames in DB
         mDBRef.child("user").child(auth?.currentUser?.uid.toString()).child("nickname").get().addOnSuccessListener {
             nickname = it.value.toString()
             Log.d("debugnickname","$nickname")
         }
 
 
-        //open the album
+        //Open the album
         var photoPickerIntent= Intent(Intent.ACTION_PICK)
         photoPickerIntent.type = "image/*"
         startActivityForResult(photoPickerIntent,PICK_IMAGE_FROM_ALBUM)
 
 
-        //버튼 이벤트
+        //Run a function contentUpload() when a button is pressed
         addphoto_btn_upload.setOnClickListener {
             contentUpload()
         }
@@ -76,6 +77,7 @@ class AddPhotoActivity: AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        //Put pictures in addphoto_image if selected from album
         if(requestCode == PICK_IMAGE_FROM_ALBUM){
             if (resultCode == Activity.RESULT_OK){
                 photoUri = data?.data
@@ -88,43 +90,40 @@ class AddPhotoActivity: AppCompatActivity() {
     }
 
 
-    //사진을 Storage에 업로드
+    //Upload picture in Storage
     fun contentUpload(){
         var timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
-        val imageFileName = "JPEG_" + timestamp + "_.png"
-//        val storageRef = storage?.reference?.child("images")?.child(imageFileName)
         val storageRef = storage?.reference?.child("images")?.child("${auth?.currentUser?.uid.toString()},${timestamp.toString()}")
 
 
-        //서버 stoarge(DB)에 파일 업로드
+        //upload data in stoarge(DB)
         storageRef?.putFile(photoUri!!)?.continueWithTask { task:Task<UploadTask.TaskSnapshot> ->
             return@continueWithTask storageRef.downloadUrl
         }?.addOnSuccessListener { uri->
             Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
 
-            //
+            //Data Class Declaration
             var contentDTO = ContentDTO()
 
-            // 이미지 주소 넣어주기
+            //Enter Image Address
             contentDTO.imageUrl = uri.toString()
 
-            // 유저 uid 넣어주기
+            //Enter user uid
             contentDTO.uid = auth?.currentUser?.uid
 
-            // 유저 아이디 넣어주기(이메일)
+            //Enter user ID (email)
             contentDTO.userId = auth?.currentUser?.email
 
-            // 유저가 입력한 설명(글) 넣어주기
+            //Enter user-entered description (writing)
             contentDTO.explain = addphoto_edit_explain.text.toString()
 
-//            var nickname:String
-//            닉네임 추가 수정중
+            //Enter nickname
             contentDTO.nickname = nickname
 
-            // 타임스태프 넣어주기
+            //Enter timestamp
             contentDTO.timestamp = System.currentTimeMillis()
 
-            // 값 넘겨주기
+            //Hand over values to the Firestore
             firestore?.collection("images")?.document("${contentDTO.uid.toString()}${contentDTO.timestamp.toString()}")?.set(contentDTO)
 
 

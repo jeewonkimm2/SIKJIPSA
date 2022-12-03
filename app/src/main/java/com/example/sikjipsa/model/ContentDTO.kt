@@ -1,22 +1,22 @@
 package com.example.sikjipsa.model
 
-//게시글 컨텐츠
+//posting contents data class
 
 
 data class ContentDTO(
-    var explain : String? = null, //컨텐츠의 설명관리
-    var imageUrl : String? = null, //이미지의 주소관리
-    var uid : String? = null, //어느 유저가 올린건지
-    var userId : String? = null, //올린 유저의 이미지 관리
-    var timestamp : Long? = null, //몇시 몇분에 컨텐츠를 올렸는지
-    var favoriteCount : Int = 0, //좋아요의 갯수
-    var nickname : String? = null,
-    var profile : String? = null, //프로필 이미지
-    var favorites : MutableMap<String, Boolean> = HashMap()){ //중복 좋아요 방지
-    //댓글 관리용
-    data class Comment(var uid : String? = null, //uid를 관리하는
-                       var userId : String? = null, //이메일을 관리하는 유저 아이디
-                       var comment : String? = null, //코멘트를 관리해주는
-                       var timestamp: Long? = null) //몇시 몇분에 코멘트를 달았는지
+    var explain : String? = null, // Content description
+    var imageUrl : String? = null, // Manage the address of the image
+    var uid : String? = null, //uploaded user id
+    var userId : String? = null, //the email of the uploaded user
+    var timestamp : Long? = null, // time when the user uploaded the content
+    var favoriteCount : Int = 0, // the number of likes
+    var nickname : String? = null, // user's nickname
+    var profile : String? = null, //Profile Image
+    var favorites : MutableMap<String, Boolean> = HashMap()){ //Prevents duplicate likes
+    //Data classes for comment
+    data class Comment(var uid : String? = null, // managing uid
+                       var userId : String? = null, // managing e-mail
+                       var comment : String? = null, // managing comments
+                       var timestamp: Long? = null) //time when the user uploaded the comment
 
 }
