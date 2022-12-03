@@ -1,7 +1,6 @@
 package com.example.sikjipsa.navigation
 
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.Target
 import com.example.sikjipsa.CommentActivity
 import com.example.sikjipsa.R
 import com.example.sikjipsa.model.ContentDTO
@@ -31,11 +29,7 @@ class DetailViewForMyPostFragment : Fragment() {
 
     var user: FirebaseUser? = null
     var firestore: FirebaseFirestore? = null
-    var imagesSnapshot: ListenerRegistration? = null
     var mainView: View? = null
-    //    Firebase 객체
-//    lateinit var mAuth: FirebaseAuth
-    var auth = FirebaseAuth.getInstance()
     //    DB객체
     private lateinit var mDBRef: DatabaseReference
 
@@ -44,17 +38,17 @@ class DetailViewForMyPostFragment : Fragment() {
     var nickname : String? = null
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         var view = LayoutInflater.from(activity).inflate(R.layout.fragment_detail, container, false)
+        firestore = FirebaseFirestore.getInstance()
         mDBRef = FirebaseDatabase.getInstance().reference
         user = FirebaseAuth.getInstance().currentUser
-//        수오가 추가(유저 아이디 값)
         uid = FirebaseAuth.getInstance().currentUser?.uid
-        firestore = FirebaseFirestore.getInstance()
 
 //        nickname 지원추가
         mDBRef.child("user").child(uid.toString()).child("nickname").get().addOnSuccessListener {
@@ -95,7 +89,7 @@ class DetailViewForMyPostFragment : Fragment() {
                         contentDTOs.add(item!!)
                         contentUidList.add(snapshot.id)
                     }
-                    // 새로고침
+//                    Refresh
                     notifyDataSetChanged()
                 }
         }
@@ -117,9 +111,9 @@ class DetailViewForMyPostFragment : Fragment() {
             //holder 값을 CustomViewHolder에 캐스팅
             var viewholder = (holder as CustomViewHolder).itemView
             //id > 여기가 총체적 난국이여... 게시글을 등록할 때 해당하는 유저가 들어가려면 그냥 닉네임으로 넣는게 아닌 것 같음.. 모르겠음
-            viewholder.detailviewitem_profile_textview.text = contentDTOs!![position].userId
+            viewholder.detailviewitem_profile_textview.text = contentDTOs!![position].nickname
 
-            //viewholder.detailviewitem_profile_textview.text = contentDTOs!![position].nickname
+            viewholder.detailviewitem_profile_textview.text = contentDTOs!![position].nickname
 
             //Image (Glide)
             Glide.with(holder.itemView.context).load(contentDTOs!![position].imageUrl).into(viewholder.detailviewitem_imageview_content)
@@ -158,35 +152,9 @@ class DetailViewForMyPostFragment : Fragment() {
                 //intent.putExtra("destinationUid",contentDTOs[position].uid)
                 startActivity(intent)
             }
-
-
-            /*//나중거
-
-            // 좋아요 버튼에 이벤트 추가
-            viewholder.detailviewitem_favorite_imageView.setOnClickListener {
-                favoriteEvent(position)
-            }
-
-            // 계정 이미지 눌렀을 때 (프로필로 이동)
-            viewholder.detailviewitem_profile_image.setOnClickListener {
-                profilemove(position)
-            }
-
-            // 계정 이름 눌렀을 때 (프로필로 이동)
-            viewholder.detailviewitem_profile_textView.setOnClickListener {
-                profilemove(position)
-            }
-
-            // 댓글 버튼 눌렀을 때
-            viewholder.detailviewitem_comment_imageView.setOnClickListener { view ->
-                var intent = Intent(view.context,CommentActivity::class.java)
-                intent.putExtra("contentUid",contentUidList[position])
-                intent.putExtra("destinationUid",contentDTOs[position].uid)
-                startActivity(intent)
-            }*/
-
-
         }
+
+
         fun favoriteEvent(position: Int){
             var tsDoc = firestore?.collection("images")?.document(contentUidList[position])
 

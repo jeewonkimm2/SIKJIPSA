@@ -39,6 +39,10 @@ class AddPhotoActivity: AppCompatActivity() {
     //    DB객체
     private lateinit var mDBRef: DatabaseReference
 
+    var nickname:String? = null
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +54,11 @@ class AddPhotoActivity: AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         //        DB 초기화
         mDBRef = Firebase.database.reference
+
+        mDBRef.child("user").child(auth?.currentUser?.uid.toString()).child("nickname").get().addOnSuccessListener {
+            nickname = it.value.toString()
+            Log.d("debugnickname","$nickname")
+        }
 
 
         //open the album
@@ -108,14 +117,10 @@ class AddPhotoActivity: AppCompatActivity() {
             // 유저가 입력한 설명(글) 넣어주기
             contentDTO.explain = addphoto_edit_explain.text.toString()
 
-            var nickname:String
+//            var nickname:String
 //            닉네임 추가 수정중
-            mDBRef.child("user").child(auth?.currentUser?.uid.toString()).child("nickname").get().addOnSuccessListener {
-                nickname = it.value.toString()
-                Log.d("debugnickname","$nickname")
-                contentDTO.nickname = nickname
-                Log.d("debugnickname","${contentDTO.nickname}")
-            }
+            contentDTO.nickname = nickname
+
 
             // 타임스태프 넣어주기
             contentDTO.timestamp = System.currentTimeMillis()
