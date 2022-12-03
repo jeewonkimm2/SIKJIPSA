@@ -105,27 +105,6 @@ class SearchActivity : AppCompatActivity() {
             binding.GOOGLEImg.visibility = VISIBLE
             binding.SIKJIPSAImg.visibility = VISIBLE
         }
-
-
-
-
-//        binding.keywordBtn.setOnClickListener {
-//            binding.keywordBtn.visibility = GONE
-//            binding.keywordTxt.visibility = VISIBLE
-//            binding.searchBtn.visibility = VISIBLE
-//        }
-//        binding.searchBtn.setOnClickListener {
-//            binding.keywordTxt.visibility = INVISIBLE
-//            binding.searchBtn.visibility = INVISIBLE
-//            binding.GOOGLE.visibility = VISIBLE
-//            binding.SIKJIPSA.visibility = VISIBLE
-//        }
-//
-//        binding.GOOGLE.setOnClickListener {
-//            var intent = Intent(Intent.ACTION_WEB_SEARCH)
-//            intent.putExtra(SearchManager.QUERY,"${binding.keywordTxt.text}")
-//            startActivity(intent)
-//        }
     }
 
 //    Function for initializing fragment
