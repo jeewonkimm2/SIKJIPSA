@@ -131,12 +131,24 @@ class UserFragment : Fragment(){
             val newnick:String = edittextnickname?.text.toString()
             mDBRef.child("user/${uid.toString()}/nickname").setValue("$newnick")
             var nickname : String? = null
+//            Extracting current user's nickname from realtime database
             mDBRef.child("user").child(uid.toString()).child("nickname").get().addOnSuccessListener {
                 nickname = it.value.toString()
                 Log.d("nickname","$nickname")
                 fragmentView?.name?.text = nickname
                 fragmentView?.hellouser?.text = "Hello, $nickname!"
+//                If you change your nickname, your nicknames on all posts are changed. Also the values of field in firestore are changed.
+                firestore?.collection("images")?.get()?.addOnSuccessListener {
+                        documents ->
+                    for(document in documents){
+                        var tmp:String = document.id.toString()
+                        if(tmp.contains("$uid")){
+                            firestore?.collection("images")?.document("$tmp")?.update("nickname", "$nickname")
+                        }
+                    }
+                }
             }
+
             edittextnickname?.visibility = INVISIBLE
             donebtn?.visibility = INVISIBLE
             editnickname?.visibility = VISIBLE
