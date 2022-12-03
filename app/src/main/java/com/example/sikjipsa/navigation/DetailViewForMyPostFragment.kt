@@ -19,25 +19,21 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.fragment_detail.view.*
 import kotlinx.android.synthetic.main.item_detail.view.*
 
 
 class DetailViewForMyPostFragment : Fragment() {
-
     var user: FirebaseUser? = null
     var firestore: FirebaseFirestore? = null
     var mainView: View? = null
-    //    DB객체
+//    Realtime DB object
     private lateinit var mDBRef: DatabaseReference
-
-    //수오가 추가(유저 아이디)
+//    User's uid
     var uid : String? = null
+//    User's nickname
     var nickname : String? = null
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,43 +43,42 @@ class DetailViewForMyPostFragment : Fragment() {
         var view = LayoutInflater.from(activity).inflate(R.layout.fragment_detail, container, false)
         firestore = FirebaseFirestore.getInstance()
         mDBRef = FirebaseDatabase.getInstance().reference
+//        Obtaining current user
         user = FirebaseAuth.getInstance().currentUser
+//        Obtaining current user's uid
         uid = FirebaseAuth.getInstance().currentUser?.uid
 
-//        nickname 지원추가
+//        Initializing current user's nickname
         mDBRef.child("user").child(uid.toString()).child("nickname").get().addOnSuccessListener {
             nickname = it.value.toString()
-            Log.d("nickname","$nickname")
         }
 
-
-        //RecyclerView와 어댑터 연결
+//        Connecting RecyclerView and adapter
         mainView = LayoutInflater.from(activity).inflate(R.layout.fragment_detail, container, false)
-
         view.detailviewfragment_recyclerview.adapter = DetailViewRecyclerViewAdapter()
         view.detailviewfragment_recyclerview.layoutManager = LinearLayoutManager(activity)
 
-        //게시글 역순으로 출력
+        //Setting value for order of recyclerView
         (view.detailviewfragment_recyclerview.layoutManager as LinearLayoutManager).reverseLayout = true
         (view.detailviewfragment_recyclerview.layoutManager as LinearLayoutManager).stackFromEnd = true
-        //최상단으로 출력
         view.detailviewfragment_recyclerview?.smoothScrollToPosition(0)
         return view
     }
 
     inner class DetailViewRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-        var contentDTOs: ArrayList<ContentDTO> = arrayListOf() //게시글 담음
-        var contentUidList: ArrayList<String> = arrayListOf()  //사용자 uid 담음
+//        Contents of post values
+        var contentDTOs: ArrayList<ContentDTO> = arrayListOf()
+//        Current user's uid values
+        var contentUidList: ArrayList<String> = arrayListOf()
 
+//        Initializing and bring data from firestore
         init {
-            Log.d("uidcheck","${uid.toString()}")
             firestore?.collection("images")?.whereEqualTo("uid","${uid}")
                 ?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                     Log.d("uidcheck","$querySnapshot")
                     contentDTOs.clear()
                     contentUidList.clear()
                     if (querySnapshot == null) return@addSnapshotListener
-
                     for (snapshot in querySnapshot!!.documents) {
                         var item = snapshot.toObject(ContentDTO::class.java)
                         contentDTOs.add(item!!)
@@ -93,7 +88,6 @@ class DetailViewForMyPostFragment : Fragment() {
                     notifyDataSetChanged()
                 }
         }
-
 
         override fun onCreateViewHolder(p0: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             var view = LayoutInflater.from(p0.context).inflate(R.layout.item_detail, p0, false)
@@ -107,74 +101,61 @@ class DetailViewForMyPostFragment : Fragment() {
         }
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
-            //holder 값을 CustomViewHolder에 캐스팅
+            //Casting holder value to CustomViewHolder
             var viewholder = (holder as CustomViewHolder).itemView
-            //id > 여기가 총체적 난국이여... 게시글을 등록할 때 해당하는 유저가 들어가려면 그냥 닉네임으로 넣는게 아닌 것 같음.. 모르겠음
+            //Setting current user's current Nickname
             viewholder.detailviewitem_profile_textview.text = contentDTOs!![position].nickname
-
-            viewholder.detailviewitem_profile_textview.text = contentDTOs!![position].nickname
-
-            //Image (Glide)
+            //Setting Image (Glide)
             Glide.with(holder.itemView.context).load(contentDTOs!![position].imageUrl).into(viewholder.detailviewitem_imageview_content)
-
-            //Explain
+            //Setting Explain(Contents of post)
             viewholder.detailviewitem_explain_textview.text = contentDTOs!![position].explain
-
-            //Likes
+            //Setting Likes
             viewholder.detailviewitem_favoritecounter_textview.text = "Likes "+ contentDTOs!![position].favoriteCount
-
-            //ProfileImage
+            //Setting ProfileImage
             val fs = FirebaseStorage.getInstance()
             fs.getReference().child("profilepic").child(contentDTOs!![position].uid.toString()).downloadUrl.addOnSuccessListener {
                 var imageUrl = it
                 Glide.with(holder.itemView.context).load(imageUrl).apply(RequestOptions().circleCrop()).into(viewholder.detailviewitem_profile_image)
             }
-
-            //code when the button is clicked
+            //Event when like button is clicked
             viewholder.detailviewitem_favorite_imageview.setOnClickListener{
                 favoriteEvent(position)
             }
-
-            //code when page load
+            //Page loading
             if(contentDTOs!![position].favorites.containsKey(uid)){
-                //좋아요 클릭된 경우
+                //When clicking likes
                 viewholder.detailviewitem_favorite_imageview.setImageResource(R.drawable.ic_baseline_favorite_24)
-
             }else{
-                //좋아요 클릭 안된 경우
+                //When not clicking likes
                 viewholder.detailviewitem_favorite_imageview.setImageResource(R.drawable.ic_baseline_favorite_border_24)
             }
-
+            //Comment for each post
             viewholder.detailviewitem_comment_imageview.setOnClickListener { view ->
                 var intent = Intent(view.context, CommentActivity::class.java)
                 intent.putExtra("contentUid",contentUidList[position])
-                //intent.putExtra("destinationUid",contentDTOs[position].uid)
                 startActivity(intent)
             }
         }
 
-
+//        Function regarding "Liking post" event
         fun favoriteEvent(position: Int){
             var tsDoc = firestore?.collection("images")?.document(contentUidList[position])
-
             firestore?.runTransaction { transaction->
                 var uid = FirebaseAuth.getInstance().currentUser?.uid
                 var contentDTO = transaction.get(tsDoc!!).toObject(ContentDTO::class.java)
-
                 if(contentDTO!!.favorites.containsKey(uid)){
-                    //이미 좋아요가 되어있을 때 좋아요 취소
+                    //Cancelling liking when the post is already liked
                     contentDTO?.favoriteCount = contentDTO?.favoriteCount - 1
                     contentDTO?.favorites.remove(uid)
-
                 }else {
-                    //좋아요 넣기
+                    //Putting Liking
                     contentDTO?.favoriteCount = contentDTO?.favoriteCount + 1
                     contentDTO?.favorites[uid!!] = true
                 }
                 transaction.set(tsDoc,contentDTO)
             }
-
         }
-    }
+    } //inner class is finished
+
+
 }

@@ -121,7 +121,6 @@ class AddPhotoActivity: AppCompatActivity() {
 //            닉네임 추가 수정중
             contentDTO.nickname = nickname
 
-
             // 타임스태프 넣어주기
             contentDTO.timestamp = System.currentTimeMillis()
 

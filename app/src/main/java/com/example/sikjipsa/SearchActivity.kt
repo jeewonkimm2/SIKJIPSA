@@ -9,15 +9,10 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.fragment.app.Fragment
-import com.example.sikjipsa.databinding.ActivityMyPostBinding
 import com.example.sikjipsa.databinding.ActivitySearchBinding
-import com.example.sikjipsa.navigation.AddPhotoActivity
-import com.example.sikjipsa.navigation.DetailViewForMyPostFragment
 import com.example.sikjipsa.navigation.SearchResultFragment
 import com.google.firebase.ml.modeldownloader.CustomModel
 import com.google.firebase.ml.modeldownloader.CustomModelDownloadConditions
@@ -33,78 +28,31 @@ class SearchActivity : AppCompatActivity() {
     var photoURI: Uri? = null
     var keywordFromModel:String? = null
     var probFromModel:kotlin.Float = 0.0f
-
-    //    사진부분
     private lateinit var binding: ActivitySearchBinding
-
+//    Permission for accessing camera album
     val PERMISSIONS = arrayOf(
         Manifest.permission.CAMERA,
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
         Manifest.permission.READ_EXTERNAL_STORAGE
     )
-
+//    Permission code
     val PERMISSIONS_REQUEST = 100
-
 
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
-
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-        binding.SIKJIPSA.setOnClickListener {
-
-            binding.GOOGLE.visibility = GONE
-            binding.SIKJIPSA.visibility = GONE
-            binding.imageBtn.visibility = GONE
-            binding.search.visibility = GONE
-
-            initView()
-
-            var fragment = SearchResultFragment()
-            var bundle = Bundle()
-            bundle.putString("keyword","${binding.keywordTxt.text}")
-            fragment.arguments = bundle //fragment의 arguments에 데이터를 담은 bundle을 넘겨줌
-            supportFragmentManager!!.beginTransaction()
-                .replace(R.id.main_content,fragment)
-                .commit()
-
-
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
-            1
-        )
-
-        }
-
-
-
-
-        binding.imageBtn.setOnClickListener {
-
-            var photoPickerIntent = Intent(Intent.ACTION_PICK)
-            photoPickerIntent.type = "image/*"
-            startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
-
-            binding.imageBtn.visibility = INVISIBLE
-            binding.GOOGLEImg.visibility = VISIBLE
-            binding.SIKJIPSAImg.visibility = VISIBLE
-
-
-        }
-
-
-
-
+//        If you want to search about something in keyword, click keyword button
         binding.keywordBtn.setOnClickListener {
             binding.keywordBtn.visibility = GONE
             binding.keywordTxt.visibility = VISIBLE
             binding.searchBtn.visibility = VISIBLE
         }
+
+//        If you click search button
         binding.searchBtn.setOnClickListener {
             binding.keywordTxt.visibility = INVISIBLE
             binding.searchBtn.visibility = INVISIBLE
@@ -112,25 +60,79 @@ class SearchActivity : AppCompatActivity() {
             binding.SIKJIPSA.visibility = VISIBLE
         }
 
+//        If you wanna get result from google
         binding.GOOGLE.setOnClickListener {
             var intent = Intent(Intent.ACTION_WEB_SEARCH)
             intent.putExtra(SearchManager.QUERY,"${binding.keywordTxt.text}")
             startActivity(intent)
         }
 
+//        Event for clicking SIKJIPSA button after setting keyword
+        binding.SIKJIPSA.setOnClickListener {
+            binding.GOOGLE.visibility = GONE
+            binding.SIKJIPSA.visibility = GONE
+            binding.imageBtn.visibility = GONE
+            binding.search.visibility = GONE
 
+//            Initializing view
+            initView()
 
+            var fragment = SearchResultFragment()
+            var bundle = Bundle()
+            bundle.putString("keyword","${binding.keywordTxt.text}")
+//            Passing bundle with keyword data to arguments in fragment
+//            Result is comes up in SearchResultFragmet
+            fragment.arguments = bundle
+            supportFragmentManager!!.beginTransaction()
+                .replace(R.id.main_content,fragment)
+                .commit()
 
-
-
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
+            1
+        )
     }
 
+//        If you wanna search with image recognition
+        binding.imageBtn.setOnClickListener {
+//            Bringing image from album
+            var photoPickerIntent = Intent(Intent.ACTION_PICK)
+            photoPickerIntent.type = "image/*"
+            startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
 
+            binding.imageBtn.visibility = INVISIBLE
+            binding.GOOGLEImg.visibility = VISIBLE
+            binding.SIKJIPSAImg.visibility = VISIBLE
+        }
+
+
+
+
+//        binding.keywordBtn.setOnClickListener {
+//            binding.keywordBtn.visibility = GONE
+//            binding.keywordTxt.visibility = VISIBLE
+//            binding.searchBtn.visibility = VISIBLE
+//        }
+//        binding.searchBtn.setOnClickListener {
+//            binding.keywordTxt.visibility = INVISIBLE
+//            binding.searchBtn.visibility = INVISIBLE
+//            binding.GOOGLE.visibility = VISIBLE
+//            binding.SIKJIPSA.visibility = VISIBLE
+//        }
+//
+//        binding.GOOGLE.setOnClickListener {
+//            var intent = Intent(Intent.ACTION_WEB_SEARCH)
+//            intent.putExtra(SearchManager.QUERY,"${binding.keywordTxt.text}")
+//            startActivity(intent)
+//        }
+    }
+
+//    Function for initializing fragment
     private fun initView() {
         supportFragmentManager.beginTransaction().add(R.id.main_content, SearchResultFragment())
             .commit()
     }
-
 
 //    Importing image from album -> ML
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -139,59 +141,47 @@ class SearchActivity : AppCompatActivity() {
         if (resultCode == AppCompatActivity.RESULT_OK) {
             photoURI = data?.data
             var bitmapFinal:Bitmap?=null
-
             try{
                 photoURI?.let{
+//                    If SDK version is less than 28
                     if(Build.VERSION.SDK_INT<28){
                         val bitmap = MediaStore.Images.Media.getBitmap(
                             contentResolver,
                             photoURI
                         )
-//                            Log.d("probabilities","1 : $bitmap")
                         bitmapFinal = bitmap
-//                            Log.d("probabilities","result 1 : $bitmapFinal")
-
-                    }else{
+                    }
+//                    If SDK version is greater than 28
+                    else{
                         val source = ImageDecoder.createSource(contentResolver,
                             photoURI!!
                         )
                         val bitmap = ImageDecoder.decodeBitmap(source)
-//                            Log.d("probabilities","2 : $bitmap")
                         bitmapFinal = bitmap
-//                            Log.d("probabilities","result 2 : $bitmapFinal")
                     }
-
                 }
 
-
+//                Importing model called model_fp16 from Firebase Maching Learning server
                 val conditions = CustomModelDownloadConditions.Builder()
                     .requireWifi()
                     .build()
                 FirebaseModelDownloader.getInstance()
                     .getModel("model_fp16", DownloadType.LOCAL_MODEL_UPDATE_IN_BACKGROUND,
                         conditions)
-                    .addOnSuccessListener { model: CustomModel? ->
+                    .addOnSuccessListener {model: CustomModel? ->
+//                        Initializing interpreter
                         var interpreter: Interpreter? = null
                         val modelFile = model?.file
-
                         if (modelFile != null) {
                             interpreter = Interpreter(modelFile)
-                            Log.d("probabilities", "model import done")
-
-//                            val plant = getResources().getDrawable(R.drawable.monstera)
-//                            Log.d("probabilities","$plant")
-
-                            Log.d("probabilities","photoURI ${photoURI}")
-                            Log.d("probabilities","bitmapFinal ${bitmapFinal}")
-
-
+//                            As image from album is HardwareBitmap, I changed it into softwareBitmap
                             var softwareBitmap = bitmapFinal!!.copy(Bitmap.Config.ARGB_8888,true)
+//                            Scaling Bitmap 224*224
                             val bitmap = Bitmap.createScaledBitmap(softwareBitmap, 224, 224, true)
-
-                            Log.d("probabilities","picture import done")
+//                            Putting in buffer
                             val input = ByteBuffer.allocateDirect(224*224*3*4).order(ByteOrder.nativeOrder())
-                            Log.d("probabilities","picture import done with buffer")
 
+//                            To obtain rgb and to normalize the values
                             for (y in 0 until 224) {
                                 for (x in 0 until 224) {
                                     val px = bitmap.getPixel(x, y)
@@ -209,27 +199,24 @@ class SearchActivity : AppCompatActivity() {
                                     input.putFloat(rf)
                                     input.putFloat(gf)
                                     input.putFloat(bf)
-                                    Log.d("probabilities","rgb working")
                                 }
                             }
 
                             val bufferSize = 18 * java.lang.Float.SIZE / java.lang.Byte.SIZE
                             val modelOutput = ByteBuffer.allocateDirect(bufferSize).order(ByteOrder.nativeOrder())
-                            Log.d("probabilities","model is running")
+//                            Interpreter is interpreting input and extract output in modelOutput
                             interpreter?.run(input, modelOutput)
-                            Log.d("probabilities","model running done")
-
-
                             modelOutput.rewind()
+//                            Getting probabilities for each labels
                             val probabilities = modelOutput.asFloatBuffer()
 
-
                             try {
-                                Log.d("probabilities","ready to show result")
+//                                label opens to match
                                 val reader = BufferedReader(
                                     InputStreamReader(assets.open("labels.txt")))
                                 var bestLabel: String? = null
                                 var bestProb: kotlin.Float = 0.0f
+//                                Getting the highest probabilty
                                 for (i in 0 until probabilities.capacity()) {
                                     val label: String = reader.readLine()
                                     val probability = probabilities.get(i)
@@ -237,29 +224,15 @@ class SearchActivity : AppCompatActivity() {
                                         bestProb = probability
                                         bestLabel = label
                                     }
-//                                Log.d("probabilities","$label: $probability")
                                 }
-                            Log.d("probabilities","It is $bestLabel")
+//                                Final result(label and probability) from model
                                 probFromModel = bestProb
                                 keywordFromModel = bestLabel
 
-//                        val snack = Snackbar.make(it, "$keywordFromModel with $probFromModel%.", Snackbar.LENGTH_SHORT)
-//                        snack.show()
-
-//                                binding.GOOGLEImg.setOnClickListener {
-//                                    var intent = Intent(Intent.ACTION_WEB_SEARCH)
-//                                    intent.putExtra(SearchManager.QUERY, keywordFromModel)
-//                                    startActivity(intent)
-//                                }
                             } catch (e: IOException) {
-                                // File not found?
                             }
-
-
                         }
                     }
-
-
             }catch(e:Exception){
                 e.printStackTrace()
             }
@@ -268,14 +241,16 @@ class SearchActivity : AppCompatActivity() {
         }
 
     }
+
+//    If you click GOOGLE after getting result from model
     binding.GOOGLEImg.setOnClickListener {
         var intent = Intent(Intent.ACTION_WEB_SEARCH)
         intent.putExtra(SearchManager.QUERY,"$keywordFromModel")
         startActivity(intent)
     }
 
+//    If you click SIKJIPSA after getting result from model
     binding.SIKJIPSAImg.setOnClickListener {
-
         binding.search.visibility = GONE
         binding.SIKJIPSAImg.visibility = GONE
         binding.GOOGLEImg.visibility = GONE
@@ -284,22 +259,21 @@ class SearchActivity : AppCompatActivity() {
         binding.searchBtn.visibility = GONE
         binding.keywordBtn.visibility = GONE
 
+//        Initializing view
         initView()
 
         var fragment = SearchResultFragment()
         var bundle = Bundle()
         bundle.putString("keyword","$keywordFromModel")
-        fragment.arguments = bundle //fragment의 arguments에 데이터를 담은 bundle을 넘겨줌
+        //Passing bundle with keyword data to arguments in fragment
+        //Result is comes up in SearchResultFragmet
+        fragment.arguments = bundle
         supportFragmentManager!!.beginTransaction()
             .replace(R.id.main_content,fragment)
             .commit()
     }
 
-
     }
-
-
-
 
 
 }
