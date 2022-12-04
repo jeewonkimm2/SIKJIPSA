@@ -17,6 +17,7 @@ data class ContentDTO(
     data class Comment(var uid : String? = null, //uid를 관리하는
                        var userId : String? = null, //이메일을 관리하는 유저 아이디
                        var comment : String? = null, //코멘트를 관리해주는
-                       var timestamp: Long? = null) //몇시 몇분에 코멘트를 달았는지
+                       var timestamp: Long? = null,
+                        var nickname: String? = null) //몇시 몇분에 코멘트를 달았는지
 
 }
