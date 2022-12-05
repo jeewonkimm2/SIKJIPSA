@@ -11,7 +11,6 @@ data class ContentDTO(
     var timestamp : Long? = null, // time when the user uploaded the content
     var favoriteCount : Int = 0, // the number of likes
     var nickname : String? = null, // user's nickname
-    var profile : String? = null, //Profile Image
     var favorites : MutableMap<String, Boolean> = HashMap()){ //Prevents duplicate likes
     //댓글 관리용
     data class Comment(var uid : String? = null, // managing uid

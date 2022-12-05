@@ -109,10 +109,7 @@ class SignUpActivity : AppCompatActivity() {
         storageRef?.putFile(photoURI!!)?.continueWithTask { task:Task<UploadTask.TaskSnapshot> ->
             return@continueWithTask storageRef.downloadUrl
         }?.addOnSuccessListener { uri->
-//                    Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
-            //putting profile image into ContentDTO
-            var contentDTO = ContentDTO()
-            contentDTO.profile = uri.toString()
+
             setResult(RESULT_OK)
         }
     }
