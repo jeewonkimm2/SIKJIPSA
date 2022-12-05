@@ -34,11 +34,11 @@ class CommentActivity : AppCompatActivity(){
         FirebaseDatabase.getInstance().reference.child("user").child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child("nickname").get().addOnSuccessListener {
             nickname = it.value.toString()
         }
-
+        // Connecting RecyclerView to Adapter, LaoutManager
         comment_recyclerview.adapter = CommentRecyclerviewAdapter()
         comment_recyclerview.layoutManager = LinearLayoutManager(this)
 
-        //댓글 send 버튼을 누르면 데이터 들어감 ContentDTO
+        // If user press the comment send button, data enters ContentDTO
         comment_btn_send?.setOnClickListener {
 
             var comment = ContentDTO.Comment()
@@ -48,7 +48,7 @@ class CommentActivity : AppCompatActivity(){
             comment.timestamp = System.currentTimeMillis()
             comment.nickname = nickname
 
-            //채팅메시지 데이터 쌓이게
+            // To accumulate comment message data in firestore
             FirebaseFirestore.getInstance().collection("images").document(contentUid!!).collection("comments").document().set(comment)
 
             comment_edit_message.setText("")
@@ -56,9 +56,9 @@ class CommentActivity : AppCompatActivity(){
         }
     }
 
-    //출력하는 화면
+    // Screen to print out
     inner class CommentRecyclerviewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
-
+        // Initializing and bring data from firestore
         var contents : ArrayList<ContentDTO.Comment> = arrayListOf()
         init{
             FirebaseFirestore.getInstance()
@@ -67,14 +67,14 @@ class CommentActivity : AppCompatActivity(){
                 .collection("comments")
                 .orderBy("timestamp")
                 .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-                    //값들을 읽어오기(중복되는거 제거)
+                    // Read values (remove duplicates)
                     contents.clear()
                     if(querySnapshot == null)return@addSnapshotListener
 
                     for(snapshot in querySnapshot.documents!!){
                         contents.add(snapshot.toObject(ContentDTO.Comment::class.java)!!)
                     }
-                    //Recyclerview 새로고침
+                    // Refresh
                     notifyDataSetChanged()
                 }
         }
@@ -95,7 +95,7 @@ class CommentActivity : AppCompatActivity(){
             view.commentviewitem_textview_comment.text = contents[p1].comment
             view.commentviewitem_textview_profile.text = contents[p1].nickname
 
-            //ProfileImage
+            // ProfileImage
             val fs = FirebaseStorage.getInstance()
             fs.getReference().child("profilepic").child(contents[p1].uid.toString()).downloadUrl.addOnSuccessListener {
                 var imageUrl = it

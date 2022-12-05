@@ -20,10 +20,7 @@ import java.lang.Exception
 import java.net.URL
 import java.util.*
 
-//수오 브랜치 재확인
-//지원
-//후니test
-//지원브랜치테스트
+
 class MainActivity : AppCompatActivity() {
 
     val CITY: String = "seoul,kr"
@@ -46,28 +43,19 @@ class MainActivity : AppCompatActivity() {
             1
         )
 
-        //set default screen (메인 화면에 DetailViewFragment 뜨도록)
+        // set default screen (the DetailViewFragment appears on the main screen)
         bottom_navigation.selectedItemId = R.id.action_home
     }
 
 
-    //초기 화면 action_home
+    //Initial screen
     private fun initView() {
         supportFragmentManager.beginTransaction().add(R.id.main_content, DetailViewFragment())
             .commit()
 
     }
 
-
-
-
-
-
-
-
-
-
-
+    // Click on the bottom navigation bar to run the activity or fragment
     private fun initBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener { p0 ->
             when (p0.itemId) {
