@@ -16,21 +16,10 @@ class GridFragment : Fragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-
-
-
         val binding = FragmentGridBinding.inflate(layoutInflater)
 
-
         return binding.root
-
-
-
-
     }
-
-
-
 
 }
 

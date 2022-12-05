@@ -12,7 +12,7 @@ data class ContentDTO(
     var favoriteCount : Int = 0, // the number of likes
     var nickname : String? = null, // user's nickname
     var favorites : MutableMap<String, Boolean> = HashMap()){ //Prevents duplicate likes
-    //댓글 관리용
+    // Data classes for comment
     data class Comment(var uid : String? = null, // managing uid
                        var userId : String? = null, // managing e-mail
                        var comment : String? = null, // managing comments
