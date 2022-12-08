@@ -1,10 +1,10 @@
 # Mobile Programing Term Project
 
+## Overview
+- It is a term project for the year 3 module, Mobile Programming.
 
-Team 3
+- Application Name : SIKJIPSA
 
-17102044 Jeewon Kim
+- Summary of our application : An online community for those who love to have plants.
 
-17102047 Jihoon Moon
-
-18102081 Soooh An
+### 1. Background
