@@ -12,6 +12,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import java.util.*
 
+//Alarm for watering Service
+
 class WateringActivity: AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +25,6 @@ class WateringActivity: AppCompatActivity(){
         val model = fetchDataFromSharedPreferences()
         renderView(model)
 
-
     }
 
     private fun initOnOffButton() {
@@ -33,19 +34,17 @@ class WateringActivity: AppCompatActivity(){
             val model = it.tag as? AlarmDisplayModel ?: return@setOnClickListener
             val newModel = saveAlarmModel(model.hour, model.minute, model.onOff.not())
             renderView(newModel)
-            Log.d("ITM", "renderView")
             if (newModel.onOff) {
-                //온 -> 알람기록
+                //If the alarm is turned on, save the alarm
                 val calendar = Calendar.getInstance().apply {
                     set(Calendar.HOUR_OF_DAY, newModel.hour)
                     set(Calendar.MINUTE, newModel.minute)
-                    Log.d("ITM", "newModel ON")
-
                     if(before(Calendar.getInstance())) {
                         add(Calendar.DATE, 1)
                     }
                 }
 
+                //Get the alarm service for execution
                 val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
                 val intent = Intent(this, AlarmReceiver::class.java)
                 val pendingIntent = PendingIntent.getBroadcast(this, ALARM_REQUEST_CODE,
@@ -57,40 +56,36 @@ class WateringActivity: AppCompatActivity(){
                     AlarmManager.INTERVAL_DAY,
                     pendingIntent
                 )
-                Log.d("ITM", "Pending Intent")
-
-
             } else {
+                //If the alarm is turned off, delete the alarm
                 cancelAlarm()
-                Log.d("ITM", "newModel OFF")
             }
 
         }
     }
 
+
     private fun initChangeAlarmTimeButton() {
         val changeAlarmButton = findViewById<Button>(R.id.changeAlarmTimeButton)
         changeAlarmButton.setOnClickListener {
-            Log.d("ITM", "initChangeAlarmTimeButton")
 
-            //현재 시간 가져오기 위한 캘린더 인스턴스
+            //Calendar instance to get the present time
             val calendar = Calendar.getInstance()
-
 
             TimePickerDialog(this, { picker, hour, minute ->
 
                 val model = saveAlarmModel(hour, minute, false)
-                //뷰 업데이트
+                //Update a View
                 renderView(model)
 
-                //기존 알람 삭제
+                //Delete existing alarm
                 cancelAlarm()
 
             }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false)
                 .show()
         }
     }
-
+    //Save alarm based on the AlarmDisplayModel
     private fun saveAlarmModel(
         hour: Int,
         minute: Int,
@@ -102,6 +97,7 @@ class WateringActivity: AppCompatActivity(){
             onOff = onOff
         )
 
+        //To save when the application is destroyed
         val sharedPreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
 
         with(sharedPreferences.edit()) {
@@ -113,6 +109,7 @@ class WateringActivity: AppCompatActivity(){
         return model
     }
 
+    //To bring the data
     private fun fetchDataFromSharedPreferences(): AlarmDisplayModel {
         val sharedPreferences = getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
 
@@ -136,11 +133,11 @@ class WateringActivity: AppCompatActivity(){
         )
 
         if ((pendingIntent == null) and alarmModel.onOff) {
-            //알람은 꺼져있는데, 데이터는 켜져있는 경우
+            // The alarm is turned off, however, data exists
             alarmModel.onOff = false
         } else if ((pendingIntent != null) and alarmModel.onOff.not()) {
-            //알람은 켜져있는데, 데이터는 꺼져있는 경우
-            //알람을 취소함
+            // The alarm is turned on, however, data does not exist
+            // Cancel the alarm
             pendingIntent.cancel()
         }
 
@@ -148,7 +145,6 @@ class WateringActivity: AppCompatActivity(){
     }
 
     private fun renderView(model: AlarmDisplayModel) {
-        Log.d("ITM", "renderView")
         findViewById<TextView>(R.id.ampmTextView).apply {
             text = model.ampmText
         }
@@ -161,8 +157,8 @@ class WateringActivity: AppCompatActivity(){
         }
     }
 
+    //Cancel the alarm
     private fun cancelAlarm() {
-        Log.d("ITM", "CancelAlarm")
         val pendingIntent = PendingIntent.getBroadcast(
             this,
             ALARM_REQUEST_CODE,
