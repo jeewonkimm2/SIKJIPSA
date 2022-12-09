@@ -42,7 +42,7 @@
   - [Logout][link2] : Log-out pressing logout button
   - [Register][link3] : Registering an account
   - [Main page][link4] : Showing all posts and user information
-  - [Search][link5] : Importing tflite model trained. Searching about plants through image or keyword and the result can be shown either through in-app or connection to google.
+  - [Search][link5] : Importing [tflite model][link14] trained. Searching about plants through image or keyword and the result can be shown either through in-app or connection to google.
   - [Writing post][link6] : Adding image and contents
   - [FCM][link7] : Receiving a push alarm
   - [Weather][link8] : Showing weather information
@@ -65,6 +65,8 @@
   [link11]: https://github.com/jeewonkimm2/SIKJIPSA/blob/master/app/src/main/java/com/example/sikjipsa/MyPostActivity.kt
   [link12]: https://github.com/jeewonkimm2/SIKJIPSA/blob/master/app/src/main/java/com/example/sikjipsa/CommentActivity.kt
   [link13]: https://github.com/jeewonkimm2/SIKJIPSA/blob/master/app/src/main/java/com/example/sikjipsa/navigation/DetailViewFragment.kt
+  [link14]: https://github.com/jeewonkimm2/SIKJIPSA/blob/master/model_fp16.tflite
+  [link15]: https://github.com/jeewonkimm2/SIKJIPSA/blob/master/FlowerClassifier.ipynb
   
 - UI/UX
   - Navigation bar
@@ -76,7 +78,7 @@
   - View
   
 ### 4. Limitation
-- Due to hardware performance, for the image classification training, training various kinds of images was difficult.
+- Due to hardware performance, for the [image classification training][link15], training various kinds of images was difficult.
 
 
 
