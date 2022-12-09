@@ -38,7 +38,7 @@
 
 ### 3. Components
 - Functions
-  - [Login][link] : Two way of login, authentication through Firebase or using google account
+  - [Login][link] : Two ways of login, authentication through Firebase or using google account
   - [Logout][link2] : Log-out pressing logout button
   - [Register][link3] : Registering an account
   - [Main page][link4] : Showing all posts and user information
