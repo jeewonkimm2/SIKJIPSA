@@ -15,3 +15,10 @@
 - Growing plants has emerged as a popular hobby since COVID-19, and sales in related industries are also increasing rapidly.
 
 2. 
+
+
+
+
+reference
+
+https://www.nongsaro.go.kr/portal/ps/psv/psvr/psvre/curationDtl.ps?menuId=PS03352&srchCurationNo=1696
