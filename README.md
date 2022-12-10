@@ -1,7 +1,9 @@
 # Mobile Programing Term Project
 
 ## Overview
-- It is a term project for the year 3 module, Mobile Programming using Android Studio.
+- It is a term project for the year 3 module, Mobile Programming.
+
+- Goal of the term project : Developing a mobile application.
 
 - Application Name : **SIKJIPSA**; SIK(First syllable of plant in Korean) + JIPSA(A butler in Korean)
 
